@@ -1,0 +1,536 @@
+% R Bootcamp, Module 5: Useful Stuff
+% August 2015, UC Berkeley
+% Chris Krogslund (ckrogslund@berkeley.edu)
+
+```{r chunksetup, include=FALSE} 
+# include any code here you don't want to show up in the document,
+# e.g. package and dataset loading
+library(plyr)
+library(reshape2)
+library(ggplot2)
+library(lmtest)
+library(sandwich)
+if(!('modules' %in% unlist(strsplit(getwd(), split = '/')))) setwd('modules')
+```
+
+# What exactly is "useful stuff" in R?
+
+- For some, it might just be basic calculations
+```{r}
+63.24*pi # Multiply 63.24 by pi
+exp(x=4.39) # Raise e to the power of 4.39
+log(x=1.7) # Take the log of 1.7
+tan(x=58) # Compute the tangent of 58
+```
+
+- For others, it might be large or complex mathematical operations
+```{r}
+# Take one million samples from the standard normal distribution
+data.sample<-rnorm(n=1000000, mean=0, sd=1) 
+
+# Build a 1000 x 1000 matrix from the sample data
+big.matrix<-matrix(data=data.sample, ncol=1000) 
+
+dim(x=big.matrix) # Confirm that "big.matrix" is 1000 x 1000
+big.matrix.inverse<-solve(a=big.matrix) # Compute the inverse of "big.matrix"
+system.time(expr=solve(a=big.matrix)) # Compute time required to invert "big.matrix"
+```
+
+# Useful Stuff: Applied Research Edition
+
+- For most applied researchers, "useful stuff" that can be done in R boils down to a few core items: 
+
+a) Carrying out operations and calculations across ***groups*** 
+b) ***Reshaping*** data to and from various formats
+c) Attempting to ***describe relationships*** or conduct ***causal inference*** 
+
+# Group-wise Operations/example dataset
+
+- The "tips" dataset was originally constructed by a waiter who recorded information about the tips he received over a period of several months
+
+- The dataset can be found in the *reshape2* package and originally appeared in:
+
+Bryant, P. G. and Smith, M (1995), *Practical Data Analysis: Case Studies in Business Statistics.* Homewood, IL: Richard D. Irwin Publishing
+
+```{r}
+library(reshape2)
+data("tips", package = "reshape2")
+# Get the object class
+class(x = tips)
+# Get the object dimensionality 
+dim(x = tips) # Note this is rows by columns
+# Get the column names
+colnames(x = tips)
+# View first six rows and all columns
+head(x = tips)
+# Get detailed column-by-column information
+str(object = tips)
+```
+
+# Group-wise Operations/Common Calculations
+
+- A good place to start with our data is to calculate summary statistics
+
+- Some notes on computing summary statistics:
+1) Note that these functions are sensitive to missing values (NA); you should be sure to specify na.rm=T to avoid errors 
+
+```{r}
+# Sample 100 times from the standard normal distribution 
+sample.data<-rnorm(n=100, mean=0, sd=1)
+
+# Attempt to calculate the sample mean (absence of NAs)
+mean(x=sample.data)
+
+# Add some missing values to the sample
+sample.data[c(1,4,16,64)]<-NA
+
+# Attempt to calculate the sample mean (presence of NAs)
+mean(x=sample.data) # Action for NAs is not specified
+mean(x=sample.data, na.rm = TRUE) # Action for NAs is not specified
+```
+
+2) These functions are also sensitive to the presence of factor variables; remove the factor levels to avoid errors (usually use one of as.vector(), as.character(), or as.numeric())
+
+```{r}
+# Get a random sample of zeroes and ones 
+sample.data<-sample(x = c(0,1), size = 100, replace = T)
+
+# Add factor levels to the sample
+sample.data<-factor(x = sample.data)
+
+# Attempt to calculate the sample mean (with factor levels)
+mean(x = sample.data)
+
+# Remove factor levels
+sample.data<-as.numeric(x = sample.data)
+
+# Check that there are no more factor levels in the sample data
+is.factor(x=sample.data)
+
+# Attempt to calculate the sample mean (without factor levels)
+mean(x=sample.data, na.rm = T)
+```
+
+- Computing some typical summary statistics:
+```{r}
+# Mean
+mean(x=tips$tip, na.rm=T)
+# Median
+median(x=tips$tip, na.rm=T)
+# Standard Deviation
+sd(x=tips$tip, na.rm=T)
+# Quartiles
+quantile(x=tips$tip, na.rm=T, probs=seq(from=0, to=1, by=0.25))
+# Quintiles
+quantile(x=tips$tip, na.rm=T, probs=seq(from=0, to=1, by=0.2))
+# Deciles
+quantile(x=tips$tip, na.rm=T, probs=seq(from=0, to=1, by=0.1))
+# Percentiles
+quantile(x=tips$tip, na.rm=T, probs=seq(from=0, to=1, by=0.01))
+```
+
+- We could do the same thing for lots of variables, but there is an easier way!
+```{r}
+# Compute standard summary statistics for object "red.blue"
+summary(object=tips)
+```
+
+- Unfortunately, the built-in summary methods don't always pickup every statistic of interest (for example, certain frequencies)
+- For this, the table function is very helpful
+```{r}
+# Isolate the gender column
+gender<-tips$sex
+
+# Get a vector of counts for unique values, divide by total count
+table(gender)
+table(gender)/length(gender)
+table(gender)/length(gender)*100
+
+# Isolate the gender and smoker columns
+gender.smoker<-tips[,c("sex", "smoker")]
+
+# Get a vector of counts for unique values, divide by total count
+table(gender.smoker)
+table(gender.smoker)/nrow(gender.smoker)
+table(gender.smoker)/nrow(gender.smoker)*100
+```
+
+- But it isn't always the case that a) R has a built-in method suting our needs, or b) the number of groups is small and the operations very simple.  Things can get really complicated really quickly.
+
+- How to tackle these tabulations?
+
+# Group-wise Operations
+
+All techniques for this problem rely on the ***split-apply-combine*** strategy
+
+**First,** take the data (or some object) and *split* it into smaller datasets on the basis of some variable
+
+Dataset A
+
+x|y|z
+-----|------|-----
+1|1|1
+2|2|1
+3|3|1
+4|1|2
+5|2|2
+6|3|2
+
+Datasets B and C (Dataset A split according to "z") 
+
+x|y|z| | | | | |x|y|z
+-----|------|-----|-----|-----|-----|-----|-----|-----|-----|-----
+1|1|1| | | | | |4|1|2
+2|2|1| | | | | |5|2|2
+3|3|1| || | | |6|3|2
+
+**Second,** apply some function to each one of the smaller datasets/objects 
+
+Example function: *mean* of variables "x" and "y"
+
+Datasets B' and C'
+
+mean(x)|mean(y)|z| | | | | |mean(x)|mean(y)|z
+-----|------|-----|-----|-----|-----|-----|-----|-----|-----|-----
+2|2|1| | | | | |5|2|2
+
+**Third,** combine the results into a larger dataset/object
+
+Datasets B' and C'
+
+mean(x)|mean(y)|z| | | | | |mean(x)|mean(y)|z
+-----|------|-----|-----|-----|-----|-----|-----|-----|-----|-----
+2|2|1| | | | | |5|2|2
+
+Dataset A'
+
+mean(x)|mean(y)|z
+-----|------|-----
+2|2|1
+5|2|2
+
+# Group-wise Operations/plyr
+
+- *plyr* is the go-to package for all your splitting-applying-combining needs
+- Among its many benefits (above base R capabilities):
+a) Don't have to worry about different name, argument, or output consistencies
+b) Can be parallelized 
+c) Input from, and output to, data frames, matricies, and lists
+d) Progress bars for lengthy computation
+e) Informative error messages
+
+```{r}
+# Install the "plyr" package (only necessary one time)
+# install.packages("plyr") # Not Run
+
+# Load the "plyr" package (necessary every new R session)
+library(plyr)
+```
+
+# Group-wise Operations/plyr/selecting functions
+
+- Two essential questions:
+1) What is the class of your input object?
+2) What is the class of your desired output object?
+- If you want to split a **d**ata frame, and return results as a **d**ata frame, you use **dd**ply
+- If you want to split a **d**ata frame, and return results as a **l**ist, you use **dl**ply
+- If you want to split a **l**ist, and return results as a **d**ata frame, you use **ld**ply
+
+# Group-wise Operations/plyr/writing commands
+
+All of the major plyr functions have the same basic syntax
+
+```{r, eval=FALSE}
+xxply(.data=, .variables=, .fun=, ...)
+```
+
+Consider the case where we want to calculate tipping behavior across gender, smoking status, and day-of-the-week from a data.frame, then return them as a data.frame:
+
+```{r}
+# Calculate tip amount as percent of total bill
+tips$tip.pct<-tips$tip/tips$total_bill*100
+
+# Using the appropriate plyr function (ddply), compute average tip percentages
+ddply(.data=tips, .variables=.(gender, smoker, day), .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+```
+
+Consider the case where we want to calculate tipping behavior across gender, smoking status, and day-of-the-week from a data.frame, then return them as a list:
+
+```{r}
+dlply(.data=tips, .variables=.(gender, smoker, day), .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+```
+
+Consider the case where we want to calculate vote choice statistics across race from a list, and return them as a data.frame:
+
+```{r}
+# Split the data.frame into a list on the basis of gender, smoker status, and day-of-the-week
+tips.split<-split(x=tips, f = list(tips$sex, tips$smoker, tips$day))
+head(x = tips.split, n = 3)
+
+# Compute summary statistics (note: no .variables argument)
+ldply(.data=tips.split, .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+```
+
+Consider the case where we want to calculate vote choice statistics across race from a list, and return them as a list:
+
+```{r}
+llply(.data=tips.split, .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+```
+
+# Group-wise Operations/plyr/functions
+
+- plyr can accomodate any user-defined function, but it also comes with some pre-defined functions that assist with the most common split-apply-combine tasks
+- We've already seen **summarize**, which creates user-specified vectors and combines them into a data.frame.  Here are some other helpful functions:
+
+**transform**: applies a function to a data.frame and adds new vectors (columns) to it
+
+```{r}
+# Add a column containing the average tip of the gender of the individual on that day
+tips.transformed<-ddply(.data=tips, .variables=.(sex, day), .fun=transform, sex.day.avg=mean(x=tip.pct))
+head(x = tips.transformed, n = 15)
+```
+
+Note that **transform** can't do transformations that involve the results of *other* transformations from the same call
+
+```{r}
+# Attempt to add new columns that draw on other (but still new) columns
+tips.transformed<-ddply(.data=tips, .variables=.(sex, day), .fun=transform, 
+                        sex.day.avg=mean(x=tip.pct),
+                        sex.day.avg.deviation=tip.pct-sex.day.avg)
+```
+
+For this, we need **mutate**: just like transform, but it executes the commands iteratively so transformations can be carried out that rely on previous transformations from the same call
+
+```{r}
+# Attempt to add new columns that draw on other (but still new) columns
+tips.transformed<-ddply(.data=tips, .variables=.(sex, day), .fun=mutate, 
+                        sex.day.avg=mean(x=tip.pct),
+                        sex.day.avg.deviation=tip.pct-sex.day.avg)
+head(x = tips.transformed, n = 15)
+```
+
+Another very useful function is **arrange**, which orders a data frame on the basis of column contents
+
+```{r}
+# Compute average tips across gender, smoker status, and day of the week
+tips.summary<-ddply(.data=tips, .variables=.(gender, smoker, day), .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+
+# Arrange summarized data from highest average tip to lowest average tip
+arrange(df = tips.summary, mean.tip.pct)
+
+# Arrange summarized data from lowest average tip to highest average tip
+arrange(df = tips.summary, desc(mean.tip.pct))
+```
+
+# Reshaping Data/reshape2
+
+- Often times, even before we're interested in doing all this group-wise stuff, we need to reshape our data.  For instance, datasets often arrive at your desk in wide (long) form and you need to convert them to long (wide) form.
+
+- Though base R does have commands for reshaping data (including **aggregate**, **by**, **tapply**, etc.), each of their input commands are slightly different and are only suited for specific reshaping tasks.
+
+- The **reshape2** package overcomes these argument and task inconsistencies to provide a simple, relatively fast way to alter the form of a data.frame.  The package contains effectively two commands, and their functions are in their names: **melt** and **cast**
+
+```{r}
+# Install the "reshape2" package (only necessary one time)
+# install.packages("reshape2") # Not Run
+
+# Load the "reshape2" package (necessary every new R session)
+library(reshape2)
+```
+
+# Reshaping Data/reshape2/melt
+
+- melt() is used to convert wide-form data to long-form.  The basic idea is to take your data.frame and melt it down to a minimal number of columns using two essential pieces of information:
+1) **Unit-of-Analysis identifiers**, or columns you *don't* want to melt down
+2) **Characteristic variables**, or columns you *do* want to melt down
+
+```{r, eval=FALSE}
+# Basic Call
+melt(data=, id.vars=, measure.vars=, variable.name=, value.name=)
+```
+
+To see how this works in practice, suppose we wanted to convert this data from its current wide format to an entirely long format.  How to proceed?
+
+**First**, select which columns you want to keep (i.e. not melt).  In this case, we're interested in having individual tips as the unit of analysis.  Unfortunately, there is no column containing an individual identification number in this data, so we'll just add one as "id":
+```{r}
+tips$id<-1:nrow(tips)
+head(tips)
+```
+
+**Second**, select which columns we want to melt.  In this case, we'd like to melt every column except "id".
+
+With these two pieces of information, we're ready to melt down the data.frame:
+```{r}
+tips.melted<-melt(data=tips, id.vars="id", 
+     measure.vars=c("total_bill", "tip", "sex", "smoker", "day", "time", "size", "tip.pct"))
+head(x = tips.melted)
+# If you want to melt ALL columns that aren't ID variables, you can also omit the "measure.vars" argument
+tips.melted<-melt(data=tips, id.vars="id")
+head(x = tips.melted)
+```
+
+Note that melt collapses all of the measure variables into two columns: one containing the column/measurement name, the other containing the column/measurement value for that row.  By default, these columns are named "variable" and "value", though they can be customized using the "variable.name" and "value.name" arguments.  For example:
+```{r}
+tips.melted<-melt(data=tips, id.vars="id", 
+     measure.vars=c("total_bill", "tip", "sex", "smoker", "day", "time", "size", "tip.pct"),
+     variable.name="characteristic",
+     value.name="response")
+head(x = tips.melted)
+```
+
+Note also that one need not melt down all columns that aren't serving as ID columns.  The melted data.frame will only contain the values of the measure variables you select.  For instance:
+```{r}
+tips.melted<-melt(data=tips, id.vars="id", 
+     measure.vars=c("sex", "day"))
+head(x = tips.melted)
+```
+
+# Reshaping Data/reshape2/cast
+
+- There are two main cast functions in the reshape2 package for converting data from a long format to a wide format: **a**cast() (for producing **a**rrays) and **d**cast() (for producing **d**ata frames)
+
+- The generic call for (d)cast looks like this:
+
+```{r eval=FALSE}
+dcast(data=, formula=xvar1+xvar2 ~ yvar1+yvar2, value.var=, fun.aggregate=)
+```
+
+Some example usages:
+```{r}
+# Original data
+head(x = tips)
+# Cast a data.frame containing the individual column and columns containing the expansion of "age9" on the basis of its unique values
+tips.cast<-dcast(data=tips, formula=id~sex, value.var="tip.pct")
+head(x = tips.cast)
+# Previously melted data
+tips.melted<-melt(data = tips, id.vars = "id")
+head(x = tips.melted)
+# Cast a new data.frame from melted data.frame containing the individual column and expanding the "variable" column
+tips.cast<-dcast(data=tips.melted, formula=id~variable, value.var="value")
+head(x = tips.cast)
+```
+
+# Describing Relationships & Causal Inference
+
+- Once we've carried out group-wise operations and perhaps reshaped it, we may also like to attempt describing the relationships in the data or conducting some causal inference
+
+- This often requires doing the following:
+1) Estimating Regressions
+2) Carryingout Regression Diagnostics
+
+# Inference/Regression
+
+- Running regressions in R is extremely simple, very straightforwd (though doing things with standard errors requires a little extra work)
+
+- Most basic, catch-all regression function in R is *glm*
+
+- *glm* fits a generalized linear model with your choice of family/link function (gaussian, logit, poisson, etc.)
+
+- *lm* is just a standard linear regression (equivalent to glm with family=gaussian(link="identity"))
+
+- The basic glm call looks something like this:
+
+```{r eval=FALSE}
+glm(formula=y~x1+x2+x3+..., family=familyname(link="linkname"), data=)
+```
+
+- There are a bunch of families and links to use (help(family) for a full list), but some essentials are **binomial(link = "logit")**, **gaussian(link = "identity")**, and **poisson(link = "log")**
+
+- Example: suppose we want to regress the tip percent on the total bill and the size of the party, as well as the gender and smoker status of the tipper.  The glm call would be something like this:
+
+```{r}
+# Regress tip percent on total bill and party size
+reg<-glm(formula=tip.pct~total_bill+size+sex+smoker, 
+                family=gaussian, data=tips)
+```
+
+- When we store this regression in an object, we get access to several items of interest
+
+```{r}
+# View objects contained in the regression output
+objects(reg)
+# Examine regression coefficients
+reg$coefficients
+# Examine regression DoF
+reg$df.residual
+# Examine regression fit (AIC)
+reg$aic
+```
+
+- R has a helpful summary method for regression objects
+```{r}
+summary(reg)
+```
+
+- Can also extract useful things from the summary object
+
+```{r}
+# Store summary method results
+sum.reg<-summary(reg)
+# View summary method results objects
+objects(sum.reg)
+# View table of coefficients
+sum.reg$coefficients
+```
+
+- Note that, in our results, R has broken up our variables into their different factor levels (as it will do whenever your regressors have factor levels)
+
+- If your data aren't factorized, you can tell glm to factorize a variable (i.e. create dummy variables on the fly) by writing
+
+```{r, eval=FALSE}
+glm(formula=y~x1+x2+factor(x3), family=family(link="link"), data=)
+```
+
+- There are also some useful shortcuts for regressing on interaction terms:
+
+**x1:x2** interacts all terms in x1 with all terms in x2
+```{r}
+summary(glm(formula=tip.pct~total_bill+size+sex:smoker, 
+                family=gaussian, data=tips))
+```
+
+**x1*x2** produces the cross of x1 and x2, or x1+x2+x1:x2
+```{r}
+summary(glm(formula=tip.pct~total_bill+size+sex*smoker, 
+                family=gaussian, data=tips))
+```
+
+
+# Inferences/Regression Diagnostics
+
+- The package *lmtest* has most of what you'll need to run basic regression diagnostics.
+
+- Breusch-Pagan Test for Heteroscedasticity 
+```{r}
+bptest(reg)
+```
+
+- Breusch-Godfrey Test for Higher-order Serial Correlation 
+```{r}
+bgtest(reg)
+```
+
+- Durbin-Watson Test for Autocorrelation of Disturbances
+```{r}
+dwtest(reg)
+```
+
+- Can also estimate heteroskedasticity/autocorrelation consistent standard errors via *coeftest* and the *sandwich* package
+```{r}
+coeftest(x=reg, vcov.=vcovHC)
+```
+
+# Breakout and overnight homework
+
+Consider the tipping data. Fit a logistic regression to the data for SUNDAY, modeling the probability of leaving a good tip (>=15%) as a function of the total bill and the size of the party, potentially including additional covariates such as sex, smoker status, and time. What do you find in terms of how the total bill associates with the probability of leaving a good tip?
+
+How do you predict the probability of leaving a good tip for a given set of covariate values? Consider the `predict.glm()` function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of leaving a good tip for a party of two with a party of four.
+
+If you're feeling ambitious...
+
+Using the tools for stratified analyses we have seen today, fit separate models of tipping behavior across different days. How do the effects of the total bill amount and size of party vary by day?
+
+For our purposes here, don't worry much about the uncertainty in the estimates you get in the logistic regression modeling, but of course in a real analysis you would need to do this. 
+
+# Breakout Answers!
+

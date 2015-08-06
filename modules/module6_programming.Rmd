@@ -1,6 +1,6 @@
 % R bootcamp, Module 6: Programming
 % August 2015, UC Berkeley
-% Chris Paciorek/Jarrod Millman
+% Chris Paciorek
 
 ```{r chunksetup, include=FALSE} 
 # include any code here you don't want to show up in the document,
@@ -27,7 +27,7 @@ airSmall$Month <- as.factor(airSmall$Month)
 airSmall$Month <- relevel(airSmall$Month, "5")
 airSmall$Dest <- as.character(airSmall$Dest)
 
-out <- list(); length(out) <- length(DestSubset))
+out <- list(); length(out) <- length(DestSubset)
 
 for( i in seq_along(DestSubset) ) { 
      # equivalently: for(i in 1:length(DestSubset))
@@ -49,14 +49,14 @@ The iterations do not have to explicitly be over sequential numbers.
 for( dest in DestSubset ) {
      cat(dest, '\n')
 }
-
+```
 
 # While loop
 
 It's not a particularly interesting example, but we can see the while loop syntax in the same example.
 
 ```{r, while}
-out <- list(); length(out) <- length(DestSubset))
+out <- list(); length(out) <- length(DestSubset)
 
 i <- 1
 while( i <= length(DestSubset) ) { 
@@ -133,7 +133,7 @@ Zero evaluates to `FALSE`, all other numbers evaluate to `TRUE`. In general stri
 
 `next` skips the current evaluation of the loop statements:
 ```{r, next}
-out <- list(); length(out) <- length(DestSubset))
+out <- list(); length(out) <- length(DestSubset)
 
 for( i in seq_along(DestSubset) ) { 
      # equivalently: for(i in 1:length(DestSubset))
@@ -149,7 +149,7 @@ for( i in seq_along(DestSubset) ) {
 
 `break` immediately ends loop evaluation:
 ```{r, break}
-out <- list(); length(out) <- length(DestSubset))
+out <- list(); length(out) <- length(DestSubset)
 
 for( i in seq_along(DestSubset) ) { 
      # equivalently: for(i in 1:length(DestSubset))
@@ -368,6 +368,8 @@ class(function(x) x^2)
 square = function(x) x^2
 class(square)
 ```
+
+# Breakout
 
 ### Basic
 

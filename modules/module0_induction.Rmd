@@ -6,7 +6,7 @@
 
 ## Where to find stuff
 
-The Piazza site ([https://piazza.com/berkeley/summer2015/rbootcamp2015/home](https://piazza.com/berkeley/summer2015/rbootcamp2015/home)) is the main site for the bootcamp. It has information on logistics, software installation, and the Q&A area for online questions.  It also has a link to a zip file with all the workshop materials.
+The Piazza site ([https://piazza.com/berkeley/summer2015/rbootcamp2015/home](https://piazza.com/berkeley/summer2015/rbootcamp2015/home)) is the main site for the bootcamp. It has information on logistics, software installation, and the Q&A area for online questions.  
 
 The Github site ([https://github.com/berkeley-scf/r-bootcamp-2015](https://github.com/berkeley-scf/r-bootcamp-2015)) is updated more frequently (sometimes in real time) and is the master repository for materials for the modules; you can also get the individual files from Github. Instructions for accessing the materials on Github are on the Piazza site.
 
@@ -28,7 +28,7 @@ Many of the modules will use a common dataset as an example on which to carry ou
 
 Counselors will be available to help answer any questions you have (just wave to one of them), or feel free to just ask the presenter during the presentation. The counselors will also be monitoring the [Piazza Q&A area](https://piazza.com/berkeley/summer2015/rbootcamp2015/home), so feel free to type in a question there and one of the counselors will answer the question. Or if you know the answer, help us out by answering it yourself or adding your thoughts. 
 
-Your counseloRs are: Chris K., and Jarrod [TBD]
+Your counseloRs are: Chris Krogslund, Chris Kennedy, Kellie Ottoboni, and Karl Kumbier.
 
 # Suggestions on how to get the most out of the bootcamp
 
@@ -51,7 +51,7 @@ A few additional thoughts on my pedagogical philosophy here:
 
 # RStudio and R Markdown
 
-We'll present most of the material from within RStudio, using R Markdown documents with embedded R code. R Markdown is an extension to the Markdown markup language that makes it easy to write HTML in a simple plain text format.  This allows us to both run the R code directly as well as compile on-the-fly to an HTML file that can be used for presentation. All files will be available on [as a zip file on Piazza](https://piazza.com/berkeley/summer2015/rbootcamp2015/home) and [Github](https://github.com/berkeley-scf/r-bootcamp-2015).  Note that Github is likely to have the most up-to-date documents while the zip file will only be updated periodically.
+We'll present most of the material from within RStudio, using R Markdown documents with embedded R code. R Markdown is an extension to the Markdown markup language that makes it easy to write HTML in a simple plain text format.  This allows us to both run the R code directly as well as compile on-the-fly to an HTML file that can be used for presentation. All files will be available on [Github](https://github.com/berkeley-scf/r-bootcamp-2015).  
 
 Note: The files named *moduleX_blah_slides.html* have individual slides, while the files named *moduleX_blah.html* have the same content but all on one page.
 
@@ -63,7 +63,7 @@ To download the files from Github, you can do the following.
 
 ## Within RStudio
 
-Within RStudio go to Project->New Project->Version Control->Git and enter:
+Within RStudio go to File->New Project->Version Control->Git and enter:
 
 - "Repository URL": https://github.com/berkeley-scf/r-bootcamp-2015
 - "Project Directory Name": r-bootcamp-2015 (or something else of your choosing)
@@ -72,8 +72,7 @@ Within RStudio go to Project->New Project->Version Control->Git and enter:
 Then to update from the repository to get any changes we've made, you can select (from within RStudio):
 Tools->Version Control->Pull Branches
 
-or from the Workspace/History/Git window:
-Git->More->Pull Branches
+or from the Environment/History/Git window, click on the Git tab and then on the blue down arrow.
 
 Be warned that you probably do not want to make your own notes or changes to the files we are providing. Because if you do, and you then do a "Git Pull" to update the materials, you'll have to deal with the conflict between your local version and our version. You probably will want to make a personal copy of such files in another directory or by making copies of files with new names.
 

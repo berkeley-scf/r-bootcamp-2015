@@ -278,7 +278,7 @@ Note the last usage where we give it a 2-column matrix of indices
 ```{r}
 cond <- vec > 0
 vec[cond]
-air[air$DepDelay > 60*12, ]
+air[air$DepDelay > 60*12 & !is.na(air$DepDelay), ]
 ```
 
 What happened in the last subsetting operation?
@@ -389,7 +389,7 @@ The *read.table()* family of functions just skims the surface of things...
 
 4) Set all of the extreme delays (more than 300 minutes) to NA.
 
-5) Consider the first row of the airline dataset, which has UA flight number 548. How do I create a string "UA-548" using air$UniqueCarrier[1] and air$FlightNum[1]? 
+5) Consider the first row of the airline dataset, which has UA flight number 548. How do I create a string "UA-548" using `air$UniqueCarrier[1]` and `air$FlightNum[1]`? 
 
 ### Using the ideas
 

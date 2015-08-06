@@ -25,12 +25,17 @@ ls.str() # list and describe variables
 Finally we can save the objects in our R session:
 ```{r}
 ls()
-save.image('module1.Rda')
+save.image('module2.Rda')
 rm(list = ls())
 ls()
-load('module1.Rda') 
+load('module2.Rda') 
 # the result of this may not be quite right in the slide version
 ls()
+```
+
+```{r, include=FALSE}
+# load airline data back in for use later
+air <- read.csv('../data/airline.csv', stringsAsFactors = FALSE)
 ```
 
 **Challenge**: how would I find all of my objects that have 'x' in their names?

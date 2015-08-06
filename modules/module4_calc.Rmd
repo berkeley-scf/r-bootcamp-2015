@@ -354,7 +354,11 @@ $$
 
 where $e_{ij} = \frac{y_{i\cdot} y_{\cdot j}}{y_{\cdot \cdot}}$, with $y_{i\cdot}$ the sum of the values in the i'th row, $y_{\cdot j}$ the sum of values in the j'th column, and $y_{\cdot\cdot}$ the sum of all the values. Suppose I give you a matrix in R with the $y_{ij}$ values. 
 
-You can generate a test matrix as: `y <- matrix(sample(1:10, 12, replace = TRUE), nrow = 3, ncol = 4)`.
+You can generate a test matrix as: 
+```{r, eval=FALSE}
+y <- matrix(sample(1:10, 12, replace = TRUE), 
+nrow = 3, ncol = 4)
+```
 
 Compute the statistic without *any* loops as follows:
 
@@ -366,13 +370,15 @@ Compute the statistic without *any* loops as follows:
 8) For each combination of UniqueCarrier, Month, and DayOfWeek, find the 95th percentile of delay. 
 
 9) This requires a bit of setup. Run the following code:
+```{r, eval=FALSE}
 h <- air$DepTime %/% 100
 m <- air$DepTime %% 100
 h <- as.character(h)
 h[nchar(h) == 1] <- paste('0', h[nchar(h) == 1], sep = '')
 air$DepTimeChar <- paste(h, m, sep = '-')
+```
 
-Now suppose this is the format the departure time field came in.
+Now suppose the `DepTimeChar` field is the format the departure time field came in.
 
 Create hour and minute fields using `strsplit()` and `sapply()`. What format is the result of `strsplit()`. Why do you need `sapply()`? 
 

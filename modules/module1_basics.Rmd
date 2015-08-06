@@ -2,7 +2,7 @@
 % August 2015, UC Berkeley
 % Chris Paciorek
 
-```{r chunksetup, include=FALSE} 
+```{r chunksetup, include=FALSE, cache=TRUE} 
 # include any code here you don't want to show up in the document,
 # e.g. package and dataset loading
 if(Sys.getenv('USER') == 'paciorek') rm(list = ls())
@@ -135,7 +135,9 @@ vals <- rnorm(100)
 vals[vals < 0] <- 0
 vals[1:8]
 
-crazymakers <- depDelay[depDelay > 300]
+crazymakers <- delay[delay > 300]
+crazymakers[1:10]
+crazymakers <- crazymakers[ !is.na(crazymakers) ]
 crazymakers[1:10]
 ```
 
@@ -160,7 +162,7 @@ vec1 != vec2
 vec1 = vec2
 identical(vec1, vec2)
 
-delayChange <- airline$DepDelay - airline$ArrDelay
+delayChange <- air$DepDelay - air$ArrDelay
 tmp <- delayChange[1:100]
 tmp >= 24*60 # full day
 ```
@@ -230,7 +232,6 @@ dim(mat)
 Collections of columns of potentially different types
 
 ```{r}
-air <- read.csv('../data/airline.csv', stringsAsFactors = FALSE)
 head(air)
 dim(air)
 nrow(air)
@@ -389,9 +390,9 @@ In general, your answers to any questions should involve writing code to manipul
 
 7) Subset the data to flights going to Chicago (ORD) and Houston (IAH). Plot delay against scheduled departure time (CRSDepTime). Add a title to the plot. Now plot so that flights to Chicago are in on color and  those to Houston in another, using the 'col' argument. 
 
-8) Consider the following regression model.  Figure out how to extract the R^2 and residual standard error and store in new R variables. 
+8) Consider the following regression model.  Figure out how to extract the $R^2$ and residual standard error and store in new R variables. 
 
-```{regr model prep}
+```{r}
 y <- rnorm(10)
 x <- rnorm(10)
 mod <- lm(y ~ x)

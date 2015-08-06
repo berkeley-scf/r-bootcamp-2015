@@ -139,7 +139,7 @@ RStudio provides an integrated development environment in which all of these pie
     E.g., [Python](http://imgs.xkcd.com/comics/python.png) is very good for text manipulation, interacting with the operating system, and as a glue for tying together various applications/software in a workflow
 * R can be much slower than compiled languages (but is often quite fast with good coding practices!)
 * R's packages are only as good as the person who wrote them; no explicit quality control
-* R is a sprawling and unstandardized
+* R is a sprawling and unstandardized ecosystem
 
 # What are my other options? Get me out of here!
 

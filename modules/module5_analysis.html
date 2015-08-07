@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>What exactly is &ldquo;useful stuff&rdquo; in R?</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>What exactly is &ldquo;useful stuff&rdquo; in R?</h1>
+
+<ul>
+<li>For some, it might just be basic calculations</li>
+</ul>
+
+<pre><code class="r">63.24*pi # Multiply 63.24 by pi
+</code></pre>
+
+<pre><code>## [1] 198.6743
+</code></pre>
+
+<pre><code class="r">exp(x=4.39) # Raise e to the power of 4.39
+</code></pre>
+
+<pre><code>## [1] 80.64042
+</code></pre>
+
+<pre><code class="r">log(x=1.7) # Take the log of 1.7
+</code></pre>
+
+<pre><code>## [1] 0.5306283
+</code></pre>
+
+<pre><code class="r">tan(x=58) # Compute the tangent of 58
+</code></pre>
+
+<pre><code>## [1] 8.330857
+</code></pre>
+
+<ul>
+<li>For others, it might be large or complex mathematical operations</li>
+</ul>
+
+<pre><code class="r"># Take one million samples from the standard normal distribution
+data.sample&lt;-rnorm(n=1000000, mean=0, sd=1) 
+
+# Build a 1000 x 1000 matrix from the sample data
+big.matrix&lt;-matrix(data=data.sample, ncol=1000) 
+
+dim(x=big.matrix) # Confirm that &quot;big.matrix&quot; is 1000 x 1000
+</code></pre>
+
+<pre><code>## [1] 1000 1000
+</code></pre>
+
+<pre><code class="r">big.matrix.inverse&lt;-solve(a=big.matrix) # Compute the inverse of &quot;big.matrix&quot;
+system.time(expr=solve(a=big.matrix)) # Compute time required to invert &quot;big.matrix&quot;
+</code></pre>
+
+<pre><code>##    user  system elapsed 
+##   0.446   0.186   0.081
+</code></pre>
+
+<h1>Useful Stuff: Applied Research Edition</h1>
+
+<ul>
+<li>For most applied researchers, &ldquo;useful stuff&rdquo; that can be done in R boils down to a few core items: </li>
+</ul>
+
+<p>a) Carrying out operations and calculations across <strong><em>groups</em></strong> 
+b) <strong><em>Reshaping</em></strong> data to and from various formats
+c) Attempting to <strong><em>describe relationships</em></strong> or conduct <strong><em>causal inference</em></strong> </p>
+
+<h1>Group-wise Operations/example dataset</h1>
+
+<ul>
+<li><p>The &ldquo;tips&rdquo; dataset was originally constructed by a waiter who recorded information about the tips he received over a period of several months</p></li>
+<li><p>The dataset can be found in the <em>reshape2</em> package and originally appeared in:</p></li>
+</ul>
+
+<p>Bryant, P. G. and Smith, M (1995), <em>Practical Data Analysis: Case Studies in Business Statistics.</em> Homewood, IL: Richard D. Irwin Publishing</p>
+
+<pre><code class="r">library(reshape2)
+data(&quot;tips&quot;, package = &quot;reshape2&quot;)
+# Get the object class
+class(x = tips)
+</code></pre>
+
+<pre><code>## [1] &quot;data.frame&quot;
+</code></pre>
+
+<pre><code class="r"># Get the object dimensionality 
+dim(x = tips) # Note this is rows by columns
+</code></pre>
+
+<pre><code>## [1] 244   7
+</code></pre>
+
+<pre><code class="r"># Get the column names
+colnames(x = tips)
+</code></pre>
+
+<pre><code>## [1] &quot;total_bill&quot; &quot;tip&quot;        &quot;sex&quot;        &quot;smoker&quot;     &quot;day&quot;       
+## [6] &quot;time&quot;       &quot;size&quot;
+</code></pre>
+
+<pre><code class="r"># View first six rows and all columns
+head(x = tips)
+</code></pre>
+
+<pre><code>##   total_bill  tip    sex smoker day   time size
+## 1      16.99 1.01 Female     No Sun Dinner    2
+## 2      10.34 1.66   Male     No Sun Dinner    3
+## 3      21.01 3.50   Male     No Sun Dinner    3
+## 4      23.68 3.31   Male     No Sun Dinner    2
+## 5      24.59 3.61 Female     No Sun Dinner    4
+## 6      25.29 4.71   Male     No Sun Dinner    4
+</code></pre>
+
+<pre><code class="r"># Get detailed column-by-column information
+str(object = tips)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    244 obs. of  7 variables:
+##  $ total_bill: num  17 10.3 21 23.7 24.6 ...
+##  $ tip       : num  1.01 1.66 3.5 3.31 3.61 4.71 2 3.12 1.96 3.23 ...
+##  $ sex       : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 1 2 2 2 1 2 2 2 2 2 ...
+##  $ smoker    : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ day       : Factor w/ 4 levels &quot;Fri&quot;,&quot;Sat&quot;,&quot;Sun&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ time      : Factor w/ 2 levels &quot;Dinner&quot;,&quot;Lunch&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ size      : int  2 3 3 2 4 4 2 4 2 2 ...
+</code></pre>
+
+<h1>Group-wise Operations/Common Calculations</h1>
+
+<ul>
+<li><p>A good place to start with our data is to calculate summary statistics</p></li>
+<li><p>Some notes on computing summary statistics:
+1) Note that these functions are sensitive to missing values (NA); you should be sure to specify na.rm=T to avoid errors </p></li>
+</ul>
+
+<pre><code class="r"># Sample 100 times from the standard normal distribution 
+sample.data&lt;-rnorm(n=100, mean=0, sd=1)
+
+# Attempt to calculate the sample mean (absence of NAs)
+mean(x=sample.data)
+</code></pre>
+
+<pre><code>## [1] -0.02165102
+</code></pre>
+
+<pre><code class="r"># Add some missing values to the sample
+sample.data[c(1,4,16,64)]&lt;-NA
+
+# Attempt to calculate the sample mean (presence of NAs)
+mean(x=sample.data) # Action for NAs is not specified
+</code></pre>
+
+<pre><code>## [1] NA
+</code></pre>
+
+<pre><code class="r">mean(x=sample.data, na.rm = TRUE) # Action for NAs is not specified
+</code></pre>
+
+<pre><code>## [1] -0.04896944
+</code></pre>
+
+<p>2) These functions are also sensitive to the presence of factor variables; remove the factor levels to avoid errors (usually use one of as.vector(), as.character(), or as.numeric())</p>
+
+<pre><code class="r"># Get a random sample of zeroes and ones 
+sample.data&lt;-sample(x = c(0,1), size = 100, replace = T)
+
+# Add factor levels to the sample
+sample.data&lt;-factor(x = sample.data)
+
+# Attempt to calculate the sample mean (with factor levels)
+mean(x = sample.data)
+</code></pre>
+
+<pre><code>## Warning in mean.default(x = sample.data): argument is not numeric or
+## logical: returning NA
+</code></pre>
+
+<pre><code>## [1] NA
+</code></pre>
+
+<pre><code class="r"># Remove factor levels
+sample.data&lt;-as.numeric(x = sample.data)
+
+# Check that there are no more factor levels in the sample data
+is.factor(x=sample.data)
+</code></pre>
+
+<pre><code>## [1] FALSE
+</code></pre>
+
+<pre><code class="r"># Attempt to calculate the sample mean (without factor levels)
+mean(x=sample.data, na.rm = T)
+</code></pre>
+
+<pre><code>## [1] 1.47
+</code></pre>
+
+<ul>
+<li>Computing some typical summary statistics:</li>
+</ul>
+
+<pre><code class="r"># Mean
+mean(x=tips$tip, na.rm=T)
+</code></pre>
+
+<pre><code>## [1] 2.998279
+</code></pre>
+
+<pre><code class="r"># Median
+median(x=tips$tip, na.rm=T)
+</code></pre>
+
+<pre><code>## [1] 2.9
+</code></pre>
+
+<pre><code class="r"># Standard Deviation
+sd(x=tips$tip, na.rm=T)
+</code></pre>
+
+<pre><code>## [1] 1.383638
+</code></pre>
+
+<pre><code class="r"># Quartiles
+quantile(x=tips$tip, na.rm=T, probs=seq(from=0, to=1, by=0.25))
+</code></pre>
+
+<pre><code>##      0%     25%     50%     75%    100% 
+##  1.0000  2.0000  2.9000  3.5625 10.0000
+</code></pre>
+
+<pre><code class="r"># Quintiles
+quantile(x=tips$tip, na.rm=T, probs=seq(from=0, to=1, by=0.2))
+</code></pre>
+
+<pre><code>##     0%    20%    40%    60%    80%   100% 
+##  1.000  2.000  2.476  3.016  4.000 10.000
+</code></pre>
+
+<pre><code class="r"># Deciles
+quantile(x=tips$tip, na.rm=T, probs=seq(from=0, to=1, by=0.1))
+</code></pre>
+
+<pre><code>##     0%    10%    20%    30%    40%    50%    60%    70%    80%    90% 
+##  1.000  1.500  2.000  2.000  2.476  2.900  3.016  3.480  4.000  5.000 
+##   100% 
+## 10.000
+</code></pre>
+
+<pre><code class="r"># Percentiles
+quantile(x=tips$tip, na.rm=T, probs=seq(from=0, to=1, by=0.01))
+</code></pre>
+
+<pre><code>##      0%      1%      2%      3%      4%      5%      6%      7%      8% 
+##  1.0000  1.0000  1.0874  1.2500  1.3004  1.4400  1.4616  1.5000  1.5000 
+##      9%     10%     11%     12%     13%     14%     15%     16%     17% 
+##  1.5000  1.5000  1.5673  1.6132  1.6518  1.6806  1.7390  1.7952  1.9324 
+##     18%     19%     20%     21%     22%     23%     24%     25%     26% 
+##  1.9774  2.0000  2.0000  2.0000  2.0000  2.0000  2.0000  2.0000  2.0000 
+##     27%     28%     29%     30%     31%     32%     33%     34%     35% 
+##  2.0000  2.0000  2.0000  2.0000  2.0000  2.0076  2.0219  2.0424  2.1810 
+##     36%     37%     38%     39%     40%     41%     42%     43%     44% 
+##  2.2144  2.2391  2.3034  2.3331  2.4760  2.5000  2.5000  2.5000  2.5000 
+##     45%     46%     47%     48%     49%     50%     51%     52%     53% 
+##  2.5435  2.5912  2.6547  2.7328  2.7556  2.9000  3.0000  3.0000  3.0000 
+##     54%     55%     56%     57%     58%     59%     60%     61%     62% 
+##  3.0000  3.0000  3.0000  3.0000  3.0000  3.0000  3.0160  3.0723  3.1032 
+##     63%     64%     65%     66%     67%     68%     69%     70%     71% 
+##  3.1409  3.1704  3.2085  3.2376  3.2662  3.3596  3.4067  3.4800  3.5000 
+##     72%     73%     74%     75%     76%     77%     78%     79%     80% 
+##  3.5000  3.5000  3.5000  3.5625  3.6576  3.7511  3.8464  4.0000  4.0000 
+##     81%     82%     83%     84%     85%     86%     87%     88%     89% 
+##  4.0000  4.0000  4.0000  4.0800  4.1955  4.2998  4.4056  4.7036  5.0000 
+##     90%     91%     92%     93%     94%     95%     96%     97%     98% 
+##  5.0000  5.0000  5.0000  5.0693  5.1542  5.1955  5.7060  5.9768  6.5280 
+##     99%    100% 
+##  7.2145 10.0000
+</code></pre>
+
+<ul>
+<li>We could do the same thing for lots of variables, but there is an easier way!</li>
+</ul>
+
+<pre><code class="r"># Compute standard summary statistics for object &quot;red.blue&quot;
+summary(object=tips)
+</code></pre>
+
+<pre><code>##    total_bill         tip             sex      smoker      day    
+##  Min.   : 3.07   Min.   : 1.000   Female: 87   No :151   Fri :19  
+##  1st Qu.:13.35   1st Qu.: 2.000   Male  :157   Yes: 93   Sat :87  
+##  Median :17.80   Median : 2.900                          Sun :76  
+##  Mean   :19.79   Mean   : 2.998                          Thur:62  
+##  3rd Qu.:24.13   3rd Qu.: 3.562                                   
+##  Max.   :50.81   Max.   :10.000                                   
+##      time          size     
+##  Dinner:176   Min.   :1.00  
+##  Lunch : 68   1st Qu.:2.00  
+##               Median :2.00  
+##               Mean   :2.57  
+##               3rd Qu.:3.00  
+##               Max.   :6.00
+</code></pre>
+
+<ul>
+<li>Unfortunately, the built-in summary methods don&#39;t always pickup every statistic of interest (for example, certain frequencies)</li>
+<li>For this, the table function is very helpful</li>
+</ul>
+
+<pre><code class="r"># Isolate the gender column
+gender&lt;-tips$sex
+
+# Get a vector of counts for unique values, divide by total count
+table(gender)
+</code></pre>
+
+<pre><code>## gender
+## Female   Male 
+##     87    157
+</code></pre>
+
+<pre><code class="r">table(gender)/length(gender)
+</code></pre>
+
+<pre><code>## gender
+##    Female      Male 
+## 0.3565574 0.6434426
+</code></pre>
+
+<pre><code class="r">table(gender)/length(gender)*100
+</code></pre>
+
+<pre><code>## gender
+##   Female     Male 
+## 35.65574 64.34426
+</code></pre>
+
+<pre><code class="r"># Isolate the gender and smoker columns
+gender.smoker&lt;-tips[,c(&quot;sex&quot;, &quot;smoker&quot;)]
+
+# Get a vector of counts for unique values, divide by total count
+table(gender.smoker)
+</code></pre>
+
+<pre><code>##         smoker
+## sex      No Yes
+##   Female 54  33
+##   Male   97  60
+</code></pre>
+
+<pre><code class="r">table(gender.smoker)/nrow(gender.smoker)
+</code></pre>
+
+<pre><code>##         smoker
+## sex             No       Yes
+##   Female 0.2213115 0.1352459
+##   Male   0.3975410 0.2459016
+</code></pre>
+
+<pre><code class="r">table(gender.smoker)/nrow(gender.smoker)*100
+</code></pre>
+
+<pre><code>##         smoker
+## sex            No      Yes
+##   Female 22.13115 13.52459
+##   Male   39.75410 24.59016
+</code></pre>
+
+<ul>
+<li><p>But it isn&#39;t always the case that a) R has a built-in method suting our needs, or b) the number of groups is small and the operations very simple.  Things can get really complicated really quickly.</p></li>
+<li><p>How to tackle these tabulations?</p></li>
+</ul>
+
+<h1>Group-wise Operations</h1>
+
+<p>All techniques for this problem rely on the <strong><em>split-apply-combine</em></strong> strategy</p>
+
+<p><strong>First,</strong> take the data (or some object) and <em>split</em> it into smaller datasets on the basis of some variable</p>
+
+<p>Dataset A</p>
+
+<table><thead>
+<tr>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody></table>
+
+<p>Datasets B and C (Dataset A split according to &ldquo;z&rdquo;) </p>
+
+<table><thead>
+<tr>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>6</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody></table>
+
+<p><strong>Second,</strong> apply some function to each one of the smaller datasets/objects </p>
+
+<p>Example function: <em>mean</em> of variables &ldquo;x&rdquo; and &ldquo;y&rdquo;</p>
+
+<p>Datasets B&#39; and C&#39;</p>
+
+<table><thead>
+<tr>
+<th>mean(x)</th>
+<th>mean(y)</th>
+<th>z</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th>mean(x)</th>
+<th>mean(y)</th>
+<th>z</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</tbody></table>
+
+<p><strong>Third,</strong> combine the results into a larger dataset/object</p>
+
+<p>Datasets B&#39; and C&#39;</p>
+
+<table><thead>
+<tr>
+<th>mean(x)</th>
+<th>mean(y)</th>
+<th>z</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th>mean(x)</th>
+<th>mean(y)</th>
+<th>z</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</tbody></table>
+
+<p>Dataset A&#39;</p>
+
+<table><thead>
+<tr>
+<th>mean(x)</th>
+<th>mean(y)</th>
+<th>z</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</tbody></table>
+
+<h1>Group-wise Operations/plyr</h1>
+
+<ul>
+<li><em>plyr</em> is the go-to package for all your splitting-applying-combining needs</li>
+<li>Among its many benefits (above base R capabilities):
+a) Don&#39;t have to worry about different name, argument, or output consistencies
+b) Can be parallelized 
+c) Input from, and output to, data frames, matricies, and lists
+d) Progress bars for lengthy computation
+e) Informative error messages</li>
+</ul>
+
+<pre><code class="r"># Install the &quot;plyr&quot; package (only necessary one time)
+# install.packages(&quot;plyr&quot;) # Not Run
+
+# Load the &quot;plyr&quot; package (necessary every new R session)
+library(plyr)
+</code></pre>
+
+<h1>Group-wise Operations/plyr/selecting functions</h1>
+
+<ul>
+<li>Two essential questions:
+1) What is the class of your input object?
+2) What is the class of your desired output object?</li>
+<li>If you want to split a <strong>d</strong>ata frame, and return results as a <strong>d</strong>ata frame, you use <strong>dd</strong>ply</li>
+<li>If you want to split a <strong>d</strong>ata frame, and return results as a <strong>l</strong>ist, you use <strong>dl</strong>ply</li>
+<li>If you want to split a <strong>l</strong>ist, and return results as a <strong>d</strong>ata frame, you use <strong>ld</strong>ply</li>
+</ul>
+
+<h1>Group-wise Operations/plyr/writing commands</h1>
+
+<p>All of the major plyr functions have the same basic syntax</p>
+
+<pre><code class="r">xxply(.data=, .variables=, .fun=, ...)
+</code></pre>
+
+<p>Consider the case where we want to calculate tipping behavior across gender, smoking status, and day-of-the-week from a data.frame, then return them as a data.frame:</p>
+
+<pre><code class="r"># Calculate tip amount as percent of total bill
+tips$tip.pct&lt;-tips$tip/tips$total_bill*100
+
+# Using the appropriate plyr function (ddply), compute average tip percentages
+ddply(.data=tips, .variables=.(gender, smoker, day), .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+</code></pre>
+
+<pre><code>##    gender smoker  day mean.tip.pct
+## 1  Female     No  Fri     16.52959
+## 2  Female     No  Sat     14.79935
+## 3  Female     No  Sun     16.57099
+## 4  Female     No Thur     15.59715
+## 5  Female    Yes  Fri     20.91291
+## 6  Female    Yes  Sat     16.38167
+## 7  Female    Yes  Sun     23.70747
+## 8  Female    Yes Thur     16.30726
+## 9    Male     No  Fri     13.80050
+## 10   Male     No  Sat     16.21322
+## 11   Male     No  Sun     15.82907
+## 12   Male     No Thur     16.57064
+## 13   Male    Yes  Fri     14.47302
+## 14   Male    Yes  Sat     13.90668
+## 15   Male    Yes  Sun     17.39638
+## 16   Male    Yes Thur     16.44168
+</code></pre>
+
+<p>Consider the case where we want to calculate tipping behavior across gender, smoking status, and day-of-the-week from a data.frame, then return them as a list:</p>
+
+<pre><code class="r">dlply(.data=tips, .variables=.(gender, smoker, day), .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+</code></pre>
+
+<pre><code>## $Female.No.Fri
+##   mean.tip.pct
+## 1     16.52959
+## 
+## $Female.No.Sat
+##   mean.tip.pct
+## 1     14.79935
+## 
+## $Female.No.Sun
+##   mean.tip.pct
+## 1     16.57099
+## 
+## $Female.No.Thur
+##   mean.tip.pct
+## 1     15.59715
+## 
+## $Female.Yes.Fri
+##   mean.tip.pct
+## 1     20.91291
+## 
+## $Female.Yes.Sat
+##   mean.tip.pct
+## 1     16.38167
+## 
+## $Female.Yes.Sun
+##   mean.tip.pct
+## 1     23.70747
+## 
+## $Female.Yes.Thur
+##   mean.tip.pct
+## 1     16.30726
+## 
+## $Male.No.Fri
+##   mean.tip.pct
+## 1      13.8005
+## 
+## $Male.No.Sat
+##   mean.tip.pct
+## 1     16.21322
+## 
+## $Male.No.Sun
+##   mean.tip.pct
+## 1     15.82907
+## 
+## $Male.No.Thur
+##   mean.tip.pct
+## 1     16.57064
+## 
+## $Male.Yes.Fri
+##   mean.tip.pct
+## 1     14.47302
+## 
+## $Male.Yes.Sat
+##   mean.tip.pct
+## 1     13.90668
+## 
+## $Male.Yes.Sun
+##   mean.tip.pct
+## 1     17.39638
+## 
+## $Male.Yes.Thur
+##   mean.tip.pct
+## 1     16.44168
+## 
+## attr(,&quot;split_type&quot;)
+## [1] &quot;data.frame&quot;
+## attr(,&quot;split_labels&quot;)
+##    gender smoker  day
+## 1  Female     No  Fri
+## 2  Female     No  Sat
+## 3  Female     No  Sun
+## 4  Female     No Thur
+## 5  Female    Yes  Fri
+## 6  Female    Yes  Sat
+## 7  Female    Yes  Sun
+## 8  Female    Yes Thur
+## 9    Male     No  Fri
+## 10   Male     No  Sat
+## 11   Male     No  Sun
+## 12   Male     No Thur
+## 13   Male    Yes  Fri
+## 14   Male    Yes  Sat
+## 15   Male    Yes  Sun
+## 16   Male    Yes Thur
+</code></pre>
+
+<p>Consider the case where we want to calculate vote choice statistics across race from a list, and return them as a data.frame:</p>
+
+<pre><code class="r"># Split the data.frame into a list on the basis of gender, smoker status, and day-of-the-week
+tips.split&lt;-split(x=tips, f = list(tips$sex, tips$smoker, tips$day))
+head(x = tips.split, n = 3)
+</code></pre>
+
+<pre><code>## $Female.No.Fri
+##     total_bill  tip    sex smoker day   time size  tip.pct
+## 95       22.75 3.25 Female     No Fri Dinner    2 14.28571
+## 224      15.98 3.00 Female     No Fri  Lunch    3 18.77347
+## 
+## $Male.No.Fri
+##     total_bill tip  sex smoker day   time size  tip.pct
+## 92       22.49 3.5 Male     No Fri Dinner    2 15.56247
+## 100      12.46 1.5 Male     No Fri Dinner    2 12.03852
+## 
+## $Female.Yes.Fri
+##     total_bill  tip    sex smoker day   time size  tip.pct
+## 93        5.75 1.00 Female    Yes Fri Dinner    2 17.39130
+## 94       16.32 4.30 Female    Yes Fri Dinner    2 26.34804
+## 101      11.35 2.50 Female    Yes Fri Dinner    2 22.02643
+## 102      15.38 3.00 Female    Yes Fri Dinner    2 19.50585
+## 222      13.42 3.48 Female    Yes Fri  Lunch    2 25.93145
+## 226      16.27 2.50 Female    Yes Fri  Lunch    2 15.36570
+## 227      10.09 2.00 Female    Yes Fri  Lunch    2 19.82161
+</code></pre>
+
+<pre><code class="r"># Compute summary statistics (note: no .variables argument)
+ldply(.data=tips.split, .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+</code></pre>
+
+<pre><code>##                .id mean.tip.pct
+## 1    Female.No.Fri     16.52959
+## 2      Male.No.Fri     13.80050
+## 3   Female.Yes.Fri     20.91291
+## 4     Male.Yes.Fri     14.47302
+## 5    Female.No.Sat     14.79935
+## 6      Male.No.Sat     16.21322
+## 7   Female.Yes.Sat     16.38167
+## 8     Male.Yes.Sat     13.90668
+## 9    Female.No.Sun     16.57099
+## 10     Male.No.Sun     15.82907
+## 11  Female.Yes.Sun     23.70747
+## 12    Male.Yes.Sun     17.39638
+## 13  Female.No.Thur     15.59715
+## 14    Male.No.Thur     16.57064
+## 15 Female.Yes.Thur     16.30726
+## 16   Male.Yes.Thur     16.44168
+</code></pre>
+
+<p>Consider the case where we want to calculate vote choice statistics across race from a list, and return them as a list:</p>
+
+<pre><code class="r">llply(.data=tips.split, .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+</code></pre>
+
+<pre><code>## $Female.No.Fri
+##   mean.tip.pct
+## 1     16.52959
+## 
+## $Male.No.Fri
+##   mean.tip.pct
+## 1      13.8005
+## 
+## $Female.Yes.Fri
+##   mean.tip.pct
+## 1     20.91291
+## 
+## $Male.Yes.Fri
+##   mean.tip.pct
+## 1     14.47302
+## 
+## $Female.No.Sat
+##   mean.tip.pct
+## 1     14.79935
+## 
+## $Male.No.Sat
+##   mean.tip.pct
+## 1     16.21322
+## 
+## $Female.Yes.Sat
+##   mean.tip.pct
+## 1     16.38167
+## 
+## $Male.Yes.Sat
+##   mean.tip.pct
+## 1     13.90668
+## 
+## $Female.No.Sun
+##   mean.tip.pct
+## 1     16.57099
+## 
+## $Male.No.Sun
+##   mean.tip.pct
+## 1     15.82907
+## 
+## $Female.Yes.Sun
+##   mean.tip.pct
+## 1     23.70747
+## 
+## $Male.Yes.Sun
+##   mean.tip.pct
+## 1     17.39638
+## 
+## $Female.No.Thur
+##   mean.tip.pct
+## 1     15.59715
+## 
+## $Male.No.Thur
+##   mean.tip.pct
+## 1     16.57064
+## 
+## $Female.Yes.Thur
+##   mean.tip.pct
+## 1     16.30726
+## 
+## $Male.Yes.Thur
+##   mean.tip.pct
+## 1     16.44168
+</code></pre>
+
+<h1>Group-wise Operations/plyr/functions</h1>
+
+<ul>
+<li>plyr can accomodate any user-defined function, but it also comes with some pre-defined functions that assist with the most common split-apply-combine tasks</li>
+<li>We&#39;ve already seen <strong>summarize</strong>, which creates user-specified vectors and combines them into a data.frame.  Here are some other helpful functions:</li>
+</ul>
+
+<p><strong>transform</strong>: applies a function to a data.frame and adds new vectors (columns) to it</p>
+
+<pre><code class="r"># Add a column containing the average tip of the gender of the individual on that day
+tips.transformed&lt;-ddply(.data=tips, .variables=.(sex, day), .fun=transform, sex.day.avg=mean(x=tip.pct))
+head(x = tips.transformed, n = 15)
+</code></pre>
+
+<pre><code>##    total_bill  tip    sex smoker day   time size  tip.pct sex.day.avg
+## 1        5.75 1.00 Female    Yes Fri Dinner    2 17.39130    19.93884
+## 2       16.32 4.30 Female    Yes Fri Dinner    2 26.34804    19.93884
+## 3       22.75 3.25 Female     No Fri Dinner    2 14.28571    19.93884
+## 4       11.35 2.50 Female    Yes Fri Dinner    2 22.02643    19.93884
+## 5       15.38 3.00 Female    Yes Fri Dinner    2 19.50585    19.93884
+## 6       13.42 3.48 Female    Yes Fri  Lunch    2 25.93145    19.93884
+## 7       15.98 3.00 Female     No Fri  Lunch    3 18.77347    19.93884
+## 8       16.27 2.50 Female    Yes Fri  Lunch    2 15.36570    19.93884
+## 9       10.09 2.00 Female    Yes Fri  Lunch    2 19.82161    19.93884
+## 10      20.29 2.75 Female     No Sat Dinner    2 13.55347    15.64702
+## 11      15.77 2.23 Female     No Sat Dinner    2 14.14077    15.64702
+## 12      19.65 3.00 Female     No Sat Dinner    2 15.26718    15.64702
+## 13      15.06 3.00 Female     No Sat Dinner    2 19.92032    15.64702
+## 14      20.69 2.45 Female     No Sat Dinner    4 11.84147    15.64702
+## 15      16.93 3.07 Female     No Sat Dinner    3 18.13349    15.64702
+</code></pre>
+
+<p>Note that <strong>transform</strong> can&#39;t do transformations that involve the results of <em>other</em> transformations from the same call</p>
+
+<pre><code class="r"># Attempt to add new columns that draw on other (but still new) columns
+tips.transformed&lt;-ddply(.data=tips, .variables=.(sex, day), .fun=transform, 
+                        sex.day.avg=mean(x=tip.pct),
+                        sex.day.avg.deviation=tip.pct-sex.day.avg)
+</code></pre>
+
+<pre><code>## Error: object &#39;sex.day.avg&#39; not found
+</code></pre>
+
+<p>For this, we need <strong>mutate</strong>: just like transform, but it executes the commands iteratively so transformations can be carried out that rely on previous transformations from the same call</p>
+
+<pre><code class="r"># Attempt to add new columns that draw on other (but still new) columns
+tips.transformed&lt;-ddply(.data=tips, .variables=.(sex, day), .fun=mutate, 
+                        sex.day.avg=mean(x=tip.pct),
+                        sex.day.avg.deviation=tip.pct-sex.day.avg)
+head(x = tips.transformed, n = 15)
+</code></pre>
+
+<pre><code>##    total_bill  tip    sex smoker day   time size  tip.pct sex.day.avg
+## 1        5.75 1.00 Female    Yes Fri Dinner    2 17.39130    19.93884
+## 2       16.32 4.30 Female    Yes Fri Dinner    2 26.34804    19.93884
+## 3       22.75 3.25 Female     No Fri Dinner    2 14.28571    19.93884
+## 4       11.35 2.50 Female    Yes Fri Dinner    2 22.02643    19.93884
+## 5       15.38 3.00 Female    Yes Fri Dinner    2 19.50585    19.93884
+## 6       13.42 3.48 Female    Yes Fri  Lunch    2 25.93145    19.93884
+## 7       15.98 3.00 Female     No Fri  Lunch    3 18.77347    19.93884
+## 8       16.27 2.50 Female    Yes Fri  Lunch    2 15.36570    19.93884
+## 9       10.09 2.00 Female    Yes Fri  Lunch    2 19.82161    19.93884
+## 10      20.29 2.75 Female     No Sat Dinner    2 13.55347    15.64702
+## 11      15.77 2.23 Female     No Sat Dinner    2 14.14077    15.64702
+## 12      19.65 3.00 Female     No Sat Dinner    2 15.26718    15.64702
+## 13      15.06 3.00 Female     No Sat Dinner    2 19.92032    15.64702
+## 14      20.69 2.45 Female     No Sat Dinner    4 11.84147    15.64702
+## 15      16.93 3.07 Female     No Sat Dinner    3 18.13349    15.64702
+##    sex.day.avg.deviation
+## 1             -2.5475360
+## 2              6.4091989
+## 3             -5.6531261
+## 4              2.0875914
+## 5             -0.4329886
+## 6              5.9926053
+## 7             -1.1653735
+## 8             -4.5731366
+## 9             -0.1172348
+## 10            -2.0935468
+## 11            -1.5062478
+## 12            -0.3798458
+## 13             4.2732973
+## 14            -3.8055521
+## 15             2.4864695
+</code></pre>
+
+<p>Another very useful function is <strong>arrange</strong>, which orders a data frame on the basis of column contents</p>
+
+<pre><code class="r"># Compute average tips across gender, smoker status, and day of the week
+tips.summary&lt;-ddply(.data=tips, .variables=.(gender, smoker, day), .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+
+# Arrange summarized data from highest average tip to lowest average tip
+arrange(df = tips.summary, mean.tip.pct)
+</code></pre>
+
+<pre><code>##    gender smoker  day mean.tip.pct
+## 1    Male     No  Fri     13.80050
+## 2    Male    Yes  Sat     13.90668
+## 3    Male    Yes  Fri     14.47302
+## 4  Female     No  Sat     14.79935
+## 5  Female     No Thur     15.59715
+## 6    Male     No  Sun     15.82907
+## 7    Male     No  Sat     16.21322
+## 8  Female    Yes Thur     16.30726
+## 9  Female    Yes  Sat     16.38167
+## 10   Male    Yes Thur     16.44168
+## 11 Female     No  Fri     16.52959
+## 12   Male     No Thur     16.57064
+## 13 Female     No  Sun     16.57099
+## 14   Male    Yes  Sun     17.39638
+## 15 Female    Yes  Fri     20.91291
+## 16 Female    Yes  Sun     23.70747
+</code></pre>
+
+<pre><code class="r"># Arrange summarized data from lowest average tip to highest average tip
+arrange(df = tips.summary, desc(mean.tip.pct))
+</code></pre>
+
+<pre><code>##    gender smoker  day mean.tip.pct
+## 1  Female    Yes  Sun     23.70747
+## 2  Female    Yes  Fri     20.91291
+## 3    Male    Yes  Sun     17.39638
+## 4  Female     No  Sun     16.57099
+## 5    Male     No Thur     16.57064
+## 6  Female     No  Fri     16.52959
+## 7    Male    Yes Thur     16.44168
+## 8  Female    Yes  Sat     16.38167
+## 9  Female    Yes Thur     16.30726
+## 10   Male     No  Sat     16.21322
+## 11   Male     No  Sun     15.82907
+## 12 Female     No Thur     15.59715
+## 13 Female     No  Sat     14.79935
+## 14   Male    Yes  Fri     14.47302
+## 15   Male    Yes  Sat     13.90668
+## 16   Male     No  Fri     13.80050
+</code></pre>
+
+<h1>Reshaping Data/reshape2</h1>
+
+<ul>
+<li><p>Often times, even before we&#39;re interested in doing all this group-wise stuff, we need to reshape our data.  For instance, datasets often arrive at your desk in wide (long) form and you need to convert them to long (wide) form.</p></li>
+<li><p>Though base R does have commands for reshaping data (including <strong>aggregate</strong>, <strong>by</strong>, <strong>tapply</strong>, etc.), each of their input commands are slightly different and are only suited for specific reshaping tasks.</p></li>
+<li><p>The <strong>reshape2</strong> package overcomes these argument and task inconsistencies to provide a simple, relatively fast way to alter the form of a data.frame.  The package contains effectively two commands, and their functions are in their names: <strong>melt</strong> and <strong>cast</strong></p></li>
+</ul>
+
+<pre><code class="r"># Install the &quot;reshape2&quot; package (only necessary one time)
+# install.packages(&quot;reshape2&quot;) # Not Run
+
+# Load the &quot;reshape2&quot; package (necessary every new R session)
+library(reshape2)
+</code></pre>
+
+<h1>Reshaping Data/reshape2/melt</h1>
+
+<ul>
+<li>melt() is used to convert wide-form data to long-form.  The basic idea is to take your data.frame and melt it down to a minimal number of columns using two essential pieces of information:
+1) <strong>Unit-of-Analysis identifiers</strong>, or columns you <em>don&#39;t</em> want to melt down
+2) <strong>Characteristic variables</strong>, or columns you <em>do</em> want to melt down</li>
+</ul>
+
+<pre><code class="r"># Basic Call
+melt(data=, id.vars=, measure.vars=, variable.name=, value.name=)
+</code></pre>
+
+<p>To see how this works in practice, suppose we wanted to convert this data from its current wide format to an entirely long format.  How to proceed?</p>
+
+<p><strong>First</strong>, select which columns you want to keep (i.e. not melt).  In this case, we&#39;re interested in having individual tips as the unit of analysis.  Unfortunately, there is no column containing an individual identification number in this data, so we&#39;ll just add one as &ldquo;id&rdquo;:</p>
+
+<pre><code class="r">tips$id&lt;-1:nrow(tips)
+head(tips)
+</code></pre>
+
+<pre><code>##   total_bill  tip    sex smoker day   time size   tip.pct id
+## 1      16.99 1.01 Female     No Sun Dinner    2  5.944673  1
+## 2      10.34 1.66   Male     No Sun Dinner    3 16.054159  2
+## 3      21.01 3.50   Male     No Sun Dinner    3 16.658734  3
+## 4      23.68 3.31   Male     No Sun Dinner    2 13.978041  4
+## 5      24.59 3.61 Female     No Sun Dinner    4 14.680765  5
+## 6      25.29 4.71   Male     No Sun Dinner    4 18.623962  6
+</code></pre>
+
+<p><strong>Second</strong>, select which columns we want to melt.  In this case, we&#39;d like to melt every column except &ldquo;id&rdquo;.</p>
+
+<p>With these two pieces of information, we&#39;re ready to melt down the data.frame:</p>
+
+<pre><code class="r">tips.melted&lt;-melt(data=tips, id.vars=&quot;id&quot;, 
+     measure.vars=c(&quot;total_bill&quot;, &quot;tip&quot;, &quot;sex&quot;, &quot;smoker&quot;, &quot;day&quot;, &quot;time&quot;, &quot;size&quot;, &quot;tip.pct&quot;))
+</code></pre>
+
+<pre><code>## Warning: attributes are not identical across measure variables; they will
+## be dropped
+</code></pre>
+
+<pre><code class="r">head(x = tips.melted)
+</code></pre>
+
+<pre><code>##   id   variable value
+## 1  1 total_bill 16.99
+## 2  2 total_bill 10.34
+## 3  3 total_bill 21.01
+## 4  4 total_bill 23.68
+## 5  5 total_bill 24.59
+## 6  6 total_bill 25.29
+</code></pre>
+
+<pre><code class="r"># If you want to melt ALL columns that aren&#39;t ID variables, you can also omit the &quot;measure.vars&quot; argument
+tips.melted&lt;-melt(data=tips, id.vars=&quot;id&quot;)
+</code></pre>
+
+<pre><code>## Warning: attributes are not identical across measure variables; they will
+## be dropped
+</code></pre>
+
+<pre><code class="r">head(x = tips.melted)
+</code></pre>
+
+<pre><code>##   id   variable value
+## 1  1 total_bill 16.99
+## 2  2 total_bill 10.34
+## 3  3 total_bill 21.01
+## 4  4 total_bill 23.68
+## 5  5 total_bill 24.59
+## 6  6 total_bill 25.29
+</code></pre>
+
+<p>Note that melt collapses all of the measure variables into two columns: one containing the column/measurement name, the other containing the column/measurement value for that row.  By default, these columns are named &ldquo;variable&rdquo; and &ldquo;value&rdquo;, though they can be customized using the &ldquo;variable.name&rdquo; and &ldquo;value.name&rdquo; arguments.  For example:</p>
+
+<pre><code class="r">tips.melted&lt;-melt(data=tips, id.vars=&quot;id&quot;, 
+     measure.vars=c(&quot;total_bill&quot;, &quot;tip&quot;, &quot;sex&quot;, &quot;smoker&quot;, &quot;day&quot;, &quot;time&quot;, &quot;size&quot;, &quot;tip.pct&quot;),
+     variable.name=&quot;characteristic&quot;,
+     value.name=&quot;response&quot;)
+</code></pre>
+
+<pre><code>## Warning: attributes are not identical across measure variables; they will
+## be dropped
+</code></pre>
+
+<pre><code class="r">head(x = tips.melted)
+</code></pre>
+
+<pre><code>##   id characteristic response
+## 1  1     total_bill    16.99
+## 2  2     total_bill    10.34
+## 3  3     total_bill    21.01
+## 4  4     total_bill    23.68
+## 5  5     total_bill    24.59
+## 6  6     total_bill    25.29
+</code></pre>
+
+<p>Note also that one need not melt down all columns that aren&#39;t serving as ID columns.  The melted data.frame will only contain the values of the measure variables you select.  For instance:</p>
+
+<pre><code class="r">tips.melted&lt;-melt(data=tips, id.vars=&quot;id&quot;, 
+     measure.vars=c(&quot;sex&quot;, &quot;day&quot;))
+</code></pre>
+
+<pre><code>## Warning: attributes are not identical across measure variables; they will
+## be dropped
+</code></pre>
+
+<pre><code class="r">head(x = tips.melted)
+</code></pre>
+
+<pre><code>##   id variable  value
+## 1  1      sex Female
+## 2  2      sex   Male
+## 3  3      sex   Male
+## 4  4      sex   Male
+## 5  5      sex Female
+## 6  6      sex   Male
+</code></pre>
+
+<h1>Reshaping Data/reshape2/cast</h1>
+
+<ul>
+<li><p>There are two main cast functions in the reshape2 package for converting data from a long format to a wide format: <strong>a</strong>cast() (for producing <strong>a</strong>rrays) and <strong>d</strong>cast() (for producing <strong>d</strong>ata frames)</p></li>
+<li><p>The generic call for (d)cast looks like this:</p></li>
+</ul>
+
+<pre><code class="r">dcast(data=, formula=xvar1+xvar2 ~ yvar1+yvar2, value.var=, fun.aggregate=)
+</code></pre>
+
+<p>Some example usages:</p>
+
+<pre><code class="r"># Original data
+head(x = tips)
+</code></pre>
+
+<pre><code>##   total_bill  tip    sex smoker day   time size   tip.pct id
+## 1      16.99 1.01 Female     No Sun Dinner    2  5.944673  1
+## 2      10.34 1.66   Male     No Sun Dinner    3 16.054159  2
+## 3      21.01 3.50   Male     No Sun Dinner    3 16.658734  3
+## 4      23.68 3.31   Male     No Sun Dinner    2 13.978041  4
+## 5      24.59 3.61 Female     No Sun Dinner    4 14.680765  5
+## 6      25.29 4.71   Male     No Sun Dinner    4 18.623962  6
+</code></pre>
+
+<pre><code class="r"># Cast a data.frame containing the individual column and columns containing the expansion of &quot;age9&quot; on the basis of its unique values
+tips.cast&lt;-dcast(data=tips, formula=id~sex, value.var=&quot;tip.pct&quot;)
+head(x = tips.cast)
+</code></pre>
+
+<pre><code>##   id    Female     Male
+## 1  1  5.944673       NA
+## 2  2        NA 16.05416
+## 3  3        NA 16.65873
+## 4  4        NA 13.97804
+## 5  5 14.680765       NA
+## 6  6        NA 18.62396
+</code></pre>
+
+<pre><code class="r"># Previously melted data
+tips.melted&lt;-melt(data = tips, id.vars = &quot;id&quot;)
+</code></pre>
+
+<pre><code>## Warning: attributes are not identical across measure variables; they will
+## be dropped
+</code></pre>
+
+<pre><code class="r">head(x = tips.melted)
+</code></pre>
+
+<pre><code>##   id   variable value
+## 1  1 total_bill 16.99
+## 2  2 total_bill 10.34
+## 3  3 total_bill 21.01
+## 4  4 total_bill 23.68
+## 5  5 total_bill 24.59
+## 6  6 total_bill 25.29
+</code></pre>
+
+<pre><code class="r"># Cast a new data.frame from melted data.frame containing the individual column and expanding the &quot;variable&quot; column
+tips.cast&lt;-dcast(data=tips.melted, formula=id~variable, value.var=&quot;value&quot;)
+head(x = tips.cast)
+</code></pre>
+
+<pre><code>##   id total_bill  tip    sex smoker day   time size          tip.pct
+## 1  1      16.99 1.01 Female     No Sun Dinner    2 5.94467333725721
+## 2  2      10.34 1.66   Male     No Sun Dinner    3 16.0541586073501
+## 3  3      21.01  3.5   Male     No Sun Dinner    3 16.6587339362208
+## 4  4      23.68 3.31   Male     No Sun Dinner    2 13.9780405405405
+## 5  5      24.59 3.61 Female     No Sun Dinner    4 14.6807645384303
+## 6  6      25.29 4.71   Male     No Sun Dinner    4 18.6239620403321
+</code></pre>
+
+<h1>Describing Relationships &amp; Causal Inference</h1>
+
+<ul>
+<li><p>Once we&#39;ve carried out group-wise operations and perhaps reshaped it, we may also like to attempt describing the relationships in the data or conducting some causal inference</p></li>
+<li><p>This often requires doing the following:
+1) Estimating Regressions
+2) Carryingout Regression Diagnostics</p></li>
+</ul>
+
+<h1>Inference/Regression</h1>
+
+<ul>
+<li><p>Running regressions in R is extremely simple, very straightforwd (though doing things with standard errors requires a little extra work)</p></li>
+<li><p>Most basic, catch-all regression function in R is <em>glm</em></p></li>
+<li><p><em>glm</em> fits a generalized linear model with your choice of family/link function (gaussian, logit, poisson, etc.)</p></li>
+<li><p><em>lm</em> is just a standard linear regression (equivalent to glm with family=gaussian(link=&ldquo;identity&rdquo;))</p></li>
+<li><p>The basic glm call looks something like this:</p></li>
+</ul>
+
+<pre><code class="r">glm(formula=y~x1+x2+x3+..., family=familyname(link=&quot;linkname&quot;), data=)
+</code></pre>
+
+<ul>
+<li><p>There are a bunch of families and links to use (help(family) for a full list), but some essentials are <strong>binomial(link = &ldquo;logit&rdquo;)</strong>, <strong>gaussian(link = &ldquo;identity&rdquo;)</strong>, and <strong>poisson(link = &ldquo;log&rdquo;)</strong></p></li>
+<li><p>Example: suppose we want to regress the tip percent on the total bill and the size of the party, as well as the gender and smoker status of the tipper.  The glm call would be something like this:</p></li>
+</ul>
+
+<pre><code class="r"># Regress tip percent on total bill and party size
+reg&lt;-glm(formula=tip.pct~total_bill+size+sex+smoker, 
+                family=gaussian, data=tips)
+</code></pre>
+
+<ul>
+<li>When we store this regression in an object, we get access to several items of interest</li>
+</ul>
+
+<pre><code class="r"># View objects contained in the regression output
+objects(reg)
+</code></pre>
+
+<pre><code>##  [1] &quot;aic&quot;               &quot;boundary&quot;          &quot;call&quot;             
+##  [4] &quot;coefficients&quot;      &quot;contrasts&quot;         &quot;control&quot;          
+##  [7] &quot;converged&quot;         &quot;data&quot;              &quot;deviance&quot;         
+## [10] &quot;df.null&quot;           &quot;df.residual&quot;       &quot;effects&quot;          
+## [13] &quot;family&quot;            &quot;fitted.values&quot;     &quot;formula&quot;          
+## [16] &quot;iter&quot;              &quot;linear.predictors&quot; &quot;method&quot;           
+## [19] &quot;model&quot;             &quot;null.deviance&quot;     &quot;offset&quot;           
+## [22] &quot;prior.weights&quot;     &quot;qr&quot;                &quot;R&quot;                
+## [25] &quot;rank&quot;              &quot;residuals&quot;         &quot;terms&quot;            
+## [28] &quot;weights&quot;           &quot;xlevels&quot;           &quot;y&quot;
+</code></pre>
+
+<pre><code class="r"># Examine regression coefficients
+reg$coefficients
+</code></pre>
+
+<pre><code>## (Intercept)  total_bill        size     sexMale   smokerYes 
+##  19.5286253  -0.2829535   0.7482702  -0.2544081   1.0259083
+</code></pre>
+
+<pre><code class="r"># Examine regression DoF
+reg$df.residual
+</code></pre>
+
+<pre><code>## [1] 239
+</code></pre>
+
+<pre><code class="r"># Examine regression fit (AIC)
+reg$aic
+</code></pre>
+
+<pre><code>## [1] 1553.342
+</code></pre>
+
+<ul>
+<li>R has a helpful summary method for regression objects</li>
+</ul>
+
+<pre><code class="r">summary(reg)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## glm(formula = tip.pct ~ total_bill + size + sex + smoker, family = gaussian, 
+##     data = tips)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -10.295   -3.362   -0.308    2.469   51.289  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 19.52863    1.22355  15.961  &lt; 2e-16 ***
+## total_bill  -0.28295    0.05327  -5.312 2.48e-07 ***
+## size         0.74827    0.49784   1.503    0.134    
+## sexMale     -0.25441    0.77730  -0.327    0.744    
+## smokerYes    1.02591    0.78249   1.311    0.191    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 33.10892)
+## 
+##     Null deviance: 9063.4  on 243  degrees of freedom
+## Residual deviance: 7913.0  on 239  degrees of freedom
+## AIC: 1553.3
+## 
+## Number of Fisher Scoring iterations: 2
+</code></pre>
+
+<ul>
+<li>Can also extract useful things from the summary object</li>
+</ul>
+
+<pre><code class="r"># Store summary method results
+sum.reg&lt;-summary(reg)
+# View summary method results objects
+objects(sum.reg)
+</code></pre>
+
+<pre><code>##  [1] &quot;aic&quot;            &quot;aliased&quot;        &quot;call&quot;           &quot;coefficients&quot;  
+##  [5] &quot;contrasts&quot;      &quot;cov.scaled&quot;     &quot;cov.unscaled&quot;   &quot;deviance&quot;      
+##  [9] &quot;deviance.resid&quot; &quot;df&quot;             &quot;df.null&quot;        &quot;df.residual&quot;   
+## [13] &quot;dispersion&quot;     &quot;family&quot;         &quot;iter&quot;           &quot;null.deviance&quot; 
+## [17] &quot;terms&quot;
+</code></pre>
+
+<pre><code class="r"># View table of coefficients
+sum.reg$coefficients
+</code></pre>
+
+<pre><code>##               Estimate Std. Error    t value     Pr(&gt;|t|)
+## (Intercept) 19.5286253 1.22354551 15.9606857 1.582871e-39
+## total_bill  -0.2829535 0.05326999 -5.3116871 2.484468e-07
+## size         0.7482702 0.49783631  1.5030446 1.341477e-01
+## sexMale     -0.2544081 0.77729665 -0.3272986 7.437285e-01
+## smokerYes    1.0259083 0.78248630  1.3110879 1.910863e-01
+</code></pre>
+
+<ul>
+<li><p>Note that, in our results, R has broken up our variables into their different factor levels (as it will do whenever your regressors have factor levels)</p></li>
+<li><p>If your data aren&#39;t factorized, you can tell glm to factorize a variable (i.e. create dummy variables on the fly) by writing</p></li>
+</ul>
+
+<pre><code class="r">glm(formula=y~x1+x2+factor(x3), family=family(link=&quot;link&quot;), data=)
+</code></pre>
+
+<ul>
+<li>There are also some useful shortcuts for regressing on interaction terms:</li>
+</ul>
+
+<p><strong>x1:x2</strong> interacts all terms in x1 with all terms in x2</p>
+
+<pre><code class="r">summary(glm(formula=tip.pct~total_bill+size+sex:smoker, 
+                family=gaussian, data=tips))
+</code></pre>
+
+<pre><code>## 
+## Call:
+## glm(formula = tip.pct ~ total_bill + size + sex:smoker, family = gaussian, 
+##     data = tips)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -10.917   -3.513   -0.562    2.751   51.956  
+## 
+## Coefficients: (1 not defined because of singularities)
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)         19.61039    1.29888  15.098  &lt; 2e-16 ***
+## total_bill          -0.27741    0.05316  -5.218 3.93e-07 ***
+## size                 0.73945    0.49591   1.491    0.137    
+## sexFemale:smokerNo  -0.81286    1.10444  -0.736    0.462    
+## sexMale:smokerNo    -0.05817    0.96526  -0.060    0.952    
+## sexFemale:smokerYes  1.93369    1.25531   1.540    0.125    
+## sexMale:smokerYes         NA         NA      NA       NA    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 32.84938)
+## 
+##     Null deviance: 9063.4  on 243  degrees of freedom
+## Residual deviance: 7818.2  on 238  degrees of freedom
+## AIC: 1552.4
+## 
+## Number of Fisher Scoring iterations: 2
+</code></pre>
+
+<p><strong>x1*x2</strong> produces the cross of x1 and x2, or x1+x2+x1:x2</p>
+
+<pre><code class="r">summary(glm(formula=tip.pct~total_bill+size+sex*smoker, 
+                family=gaussian, data=tips))
+</code></pre>
+
+<pre><code>## 
+## Call:
+## glm(formula = tip.pct ~ total_bill + size + sex * smoker, family = gaussian, 
+##     data = tips)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -10.917   -3.513   -0.562    2.751   51.956  
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       18.79753    1.29243  14.544  &lt; 2e-16 ***
+## total_bill        -0.27741    0.05316  -5.218 3.93e-07 ***
+## size               0.73945    0.49591   1.491   0.1373    
+## sexMale            0.75469    0.97571   0.773   0.4400    
+## smokerYes          2.74655    1.27770   2.150   0.0326 *  
+## sexMale:smokerYes -2.68838    1.58186  -1.700   0.0905 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 32.84938)
+## 
+##     Null deviance: 9063.4  on 243  degrees of freedom
+## Residual deviance: 7818.2  on 238  degrees of freedom
+## AIC: 1552.4
+## 
+## Number of Fisher Scoring iterations: 2
+</code></pre>
+
+<h1>Inferences/Regression Diagnostics</h1>
+
+<ul>
+<li><p>The package <em>lmtest</em> has most of what you&#39;ll need to run basic regression diagnostics.</p></li>
+<li><p>Breusch-Pagan Test for Heteroscedasticity </p></li>
+</ul>
+
+<pre><code class="r">bptest(reg)
+</code></pre>
+
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  reg
+## BP = 6.9682, df = 4, p-value = 0.1376
+</code></pre>
+
+<ul>
+<li>Breusch-Godfrey Test for Higher-order Serial Correlation </li>
+</ul>
+
+<pre><code class="r">bgtest(reg)
+</code></pre>
+
+<pre><code>## 
+##  Breusch-Godfrey test for serial correlation of order up to 1
+## 
+## data:  reg
+## LM test = 0.0012237, df = 1, p-value = 0.9721
+</code></pre>
+
+<ul>
+<li>Durbin-Watson Test for Autocorrelation of Disturbances</li>
+</ul>
+
+<pre><code class="r">dwtest(reg)
+</code></pre>
+
+<pre><code>## 
+##  Durbin-Watson test
+## 
+## data:  reg
+## DW = 1.991, p-value = 0.4502
+## alternative hypothesis: true autocorrelation is greater than 0
+</code></pre>
+
+<ul>
+<li>Can also estimate heteroskedasticity/autocorrelation consistent standard errors via <em>coeftest</em> and the <em>sandwich</em> package</li>
+</ul>
+
+<pre><code class="r">coeftest(x=reg, vcov.=vcovHC)
+</code></pre>
+
+<pre><code>## 
+## z test of coefficients:
+## 
+##              Estimate Std. Error z value  Pr(&gt;|z|)    
+## (Intercept) 19.528625   1.084870 18.0009 &lt; 2.2e-16 ***
+## total_bill  -0.282953   0.075621 -3.7417 0.0001828 ***
+## size         0.748270   0.468411  1.5975 0.1101622    
+## sexMale     -0.254408   0.763182 -0.3334 0.7388687    
+## smokerYes    1.025908   0.998524  1.0274 0.3042206    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+</code></pre>
+
+<h1>Breakout and overnight homework</h1>
+
+<p>Consider the tipping data. Fit a logistic regression to the data for SUNDAY, modeling the probability of leaving a good tip (&gt;=15%) as a function of the total bill and the size of the party, potentially including additional covariates such as sex, smoker status, and time. What do you find in terms of how the total bill associates with the probability of leaving a good tip?</p>
+
+<p>How do you predict the probability of leaving a good tip for a given set of covariate values? Consider the <code>predict.glm()</code> function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of leaving a good tip for a party of two with a party of four.</p>
+
+<p>If you&#39;re feeling ambitious&hellip;</p>
+
+<p>Using the tools for stratified analyses we have seen today, fit separate models of tipping behavior across different days. How do the effects of the total bill amount and size of party vary by day?</p>
+
+<p>For our purposes here, don&#39;t worry much about the uncertainty in the estimates you get in the logistic regression modeling, but of course in a real analysis you would need to do this. </p>
+
+<h1>Breakout Answers!</h1>
+
+</body>
+
+</html>

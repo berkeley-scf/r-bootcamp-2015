@@ -40,6 +40,8 @@ censor <- function(x, val, upper = TRUE) {
 }
 
 # reduce outlier influence
+DestSubset <- c('LAX','SEA','PHX','DEN','MSP','JFK','ATL','DFW','IAH', 'ORD') 
+airSmall <- subset(air, Dest %in% DestSubset)
 airSmall$DepDelayCens <- censor(airSmall$DepDelay, 180)
 airSmall$SchedDepCont <- airSmall$CRSDepTime %/% 100 + (airSmall$CRSDepTime %% 100) / 60
 mod_LAX <- gam(DepDelayCens ~ s(Month, k = 8) + s(SchedDepCont, k = 25), 
@@ -60,7 +62,7 @@ If we were willing to assume that the month and time effects are the same across
 ```{r gamExampleFull, cache=TRUE, fig.width=10}
 # this will take a minute or so
 mod_multiple <- gam(DepDelayCens ~ s(Month, k = 8) + s(SchedDepCont, k = 25) +
-        Dest, data = air, subset = air$Dest %in% DestSubset)
+        Dest, data = airSmall)
 summary(mod_multiple)
 par(mfrow = c(1,2))
 plot(mod_multiple)

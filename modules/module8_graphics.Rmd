@@ -161,7 +161,7 @@ ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays))+geom_line() # gg
 growth<-ddply(.data=data, .variables=.(country), summarize, mean=mean(realgdpgr, na.rm=T))
 
 barchart(mean~country, data=growth) # lattice
-ggplot(data=growth, aes(x=country, y=mean))+geom_bar() # ggplot2
+ggplot(data=growth, aes(x=country, y=mean))+geom_bar(stat="identity") # ggplot2
 ```
 
 # lattice v. ggplot2: box plots 

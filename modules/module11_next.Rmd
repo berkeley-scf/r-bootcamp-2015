@@ -33,6 +33,8 @@ Some of this material was borrowed/modified from [Jared Knowles' bootcamp](http:
 
 CRAN has [manuals](http://www.cran.r-project.org/manuals.html) and [contributed learning material](http://www.cran.r-project.org/other-docs.html).
 
+The SCF has a series of [hands-on tutorials](http://statistics.berkeley.edu/computing/training/tutorials) on related topics, some focused on topics in R, others on topics in UNIX/bash, and others on topics in managing workflows and reproducible research.
+
 [D-Lab](http://dlab.berkeley.edu) holds workshops on R and other topics, as well as having drop-in office hours. 
 
 For grad students and researchers in statistics, economics and biostatistics, Chris Paciorek provides consulting via consult@stat.berkeley.edu and consult@econ.berkeley.edu and drop-in discussions in Evans 495.
@@ -49,5 +51,5 @@ Various online tutorials/courses are offered by [DataCamp](https://www.datacamp.
 
 # Thanks!  
 
-* To Chris K. and Jarrod
+* To Chris K. (1), Chris K. (2), Kellie, Karl, and Jarrod
 * To Jon Stiles and D-Lab for co-sponsorship and logistical support

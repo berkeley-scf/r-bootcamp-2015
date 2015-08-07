@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Loops</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Loops</h1>
+
+<p>In many languages, looping (for loops, while loops, etc.) is one of the main constructs used to carry out computation. Loops are not emphasized as much in R, both because they can be slow and because other syntax is often cleaner. </p>
+
+<p>But there are lots of times when using a loop does make sense. </p>
+
+<p>Most of you are probably familiar at least with the basic idea of iterating through a series of steps. A for loop iterates through a pre-determined number of iterations, while a while loop iterates until some condition is met. For loops are more common in R, but while loops can be handy particularly for things like optimization.</p>
+
+<p>Let&#39;s take our use of <code>aggregate()</code> from Module 4 and use a for loop instead. </p>
+
+<pre><code class="r">DestSubset &lt;- c(&#39;LAX&#39;,&#39;SEA&#39;,&#39;PHX&#39;,&#39;DEN&#39;,&#39;MSP&#39;,&#39;JFK&#39;,&#39;ATL&#39;,&#39;DFW&#39;,&#39;IAH&#39;, &#39;ORD&#39;) 
+airSmall &lt;- subset(air, Dest %in% DestSubset)
+airSmall$late &lt;- airSmall$DepDelay &gt;= 15
+airSmall$Month &lt;- as.factor(airSmall$Month)
+airSmall$Month &lt;- relevel(airSmall$Month, &quot;5&quot;)
+airSmall$Dest &lt;- as.character(airSmall$Dest)
+
+out &lt;- list(); length(out) &lt;- length(DestSubset)
+
+for( i in seq_along(DestSubset) ) { 
+     # equivalently: for(i in 1:length(DestSubset))
+     sub &lt;- subset(airSmall, airSmall$Dest == DestSubset[i])
+     if(sum(!is.na(x$late))) { 
+     # fit logistic regression
+       out[i] &lt;- glm(late ~ Month, family = binomial, data = sub) 
+     } else {
+       out[i] &lt;- NA
+     }
+}
+</code></pre>
+
+<pre><code>## Error: object &#39;x&#39; not found
+</code></pre>
+
+<pre><code class="r">summary(out[[&#39;IAH&#39;]])
+</code></pre>
+
+<pre><code>## Length  Class   Mode 
+##      0   NULL   NULL
+</code></pre>
+
+<pre><code class="r">summary(out[[&#39;ORD&#39;]])
+</code></pre>
+
+<pre><code>## Length  Class   Mode 
+##      0   NULL   NULL
+</code></pre>
+
+<p>The iterations do not have to explicitly be over sequential numbers.</p>
+
+<pre><code class="r">for( dest in DestSubset ) {
+     cat(dest, &#39;\n&#39;)
+}
+</code></pre>
+
+<pre><code>## LAX 
+## SEA 
+## PHX 
+## DEN 
+## MSP 
+## JFK 
+## ATL 
+## DFW 
+## IAH 
+## ORD
+</code></pre>
+
+<h1>While loop</h1>
+
+<p>It&#39;s not a particularly interesting example, but we can see the while loop syntax in the same example.</p>
+
+<pre><code class="r">out &lt;- list(); length(out) &lt;- length(DestSubset)
+
+i &lt;- 1
+while( i &lt;= length(DestSubset) ) { 
+     sub &lt;- subset(airSmall, airSmall$Dest == DestSubset[i])
+     if(sum(!is.na(x$late))) { 
+     # fit logistic regression
+       out[i] &lt;- glm(late ~ Month, family = binomial, data = sub) 
+     } else {
+       out[i] &lt;- NA
+     }
+}
+</code></pre>
+
+<pre><code>## Error: object &#39;x&#39; not found
+</code></pre>
+
+<pre><code class="r">summary(out[[&#39;IAH&#39;]])
+</code></pre>
+
+<pre><code>## Length  Class   Mode 
+##      0   NULL   NULL
+</code></pre>
+
+<pre><code class="r">summary(out[[&#39;ORD&#39;]])
+</code></pre>
+
+<pre><code>## Length  Class   Mode 
+##      0   NULL   NULL
+</code></pre>
+
+<h1>Branching (if-then-else syntax)</h1>
+
+<p>We already saw an example of branching in the <em>for</em> loop example.</p>
+
+<p>Here&#39;s a simple example to illustrate the syntax. Note that the <em>then</em> is implicit.</p>
+
+<pre><code class="r">val &lt;- rnorm(1)
+val
+</code></pre>
+
+<pre><code>## [1] -0.6637433
+</code></pre>
+
+<pre><code class="r">if (val &lt; 0) {
+  print(&quot;val is negative&quot;)
+} else {
+  print(&quot;val is positive&quot;)
+}
+</code></pre>
+
+<pre><code>## [1] &quot;val is negative&quot;
+</code></pre>
+
+<p>We can chain together <code>if</code> statements as follows.</p>
+
+<pre><code class="r">val &lt;- rnorm(1)
+val
+</code></pre>
+
+<pre><code>## [1] -1.592515
+</code></pre>
+
+<pre><code class="r">if (val &lt; -1) {
+  print(&quot;val is more than one standard deviation below the mean.&quot;)
+} else if (abs(val) &lt;= 1) {
+  print(&quot;val is within one standard deviation of the mean.&quot;)
+} else {
+  print(&quot;val is more than one standard deviation above the mean.&quot;)
+}
+</code></pre>
+
+<pre><code>## [1] &quot;val is more than one standard deviation below the mean.&quot;
+</code></pre>
+
+<p>In general, the <code>{</code> brackets are only needed if you have multiple R expressions, but R will complain when an <code>else</code> starts a line of code, so generally using the <code>{</code> is good practice. That said, this looks fine:</p>
+
+<pre><code class="r">if( val &lt; 0) print(&quot;val is negative&quot;) else print(&quot;val is positive&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;val is negative&quot;
+</code></pre>
+
+<h1>The condition in an if statement</h1>
+
+<p>The condition in the if statement cannot be NA or R will give an error. This is a very common bug.</p>
+
+<p>Suppose we were (inefficiently) setting up a new field using an if statement.</p>
+
+<pre><code class="r">air$late &lt;- rep(0, nrow(air))
+for(i in 1:20) {
+      if(air$DepDelay[i] &gt; 15) 
+          air$late &lt;- 1 else air$late &lt;- 0
+}
+</code></pre>
+
+<pre><code>## Error in if (air$DepDelay[i] &gt; 15) air$late &lt;- 1 else air$late &lt;- 0: missing value where TRUE/FALSE needed
+</code></pre>
+
+<pre><code class="r">print(i)
+</code></pre>
+
+<pre><code>## [1] 4
+</code></pre>
+
+<pre><code class="r">if(air$DepDelay[4] &gt; 15) print(&#39;here&#39;)
+</code></pre>
+
+<pre><code>## Error in if (air$DepDelay[4] &gt; 15) print(&quot;here&quot;): missing value where TRUE/FALSE needed
+</code></pre>
+
+<pre><code class="r">air$DepDelay[4] &gt; 15
+</code></pre>
+
+<pre><code>## [1] NA
+</code></pre>
+
+<p>An NA/NaN is the main reason an if statement may fail, because R will generally convert other values to logical values. </p>
+
+<p>Zero evaluates to <code>FALSE</code>, all other numbers evaluate to <code>TRUE</code>. In general strings are not converted to booleans.</p>
+
+<h1>Flow control: <code>next</code> and <code>break</code> statements</h1>
+
+<p><code>next</code> skips the current evaluation of the loop statements:</p>
+
+<pre><code class="r">out &lt;- list(); length(out) &lt;- length(DestSubset)
+
+for( i in seq_along(DestSubset) ) { 
+     # equivalently: for(i in 1:length(DestSubset))
+     sub &lt;- subset(airSmall, airSmall$Dest == DestSubset[i])
+     if(sum(!is.na(x$late))) { 
+     # fit logistic regression
+       out[i] &lt;- glm(late ~ Month, family = binomial, data = sub) 
+     } else {
+       next
+     }
+}
+</code></pre>
+
+<pre><code>## Error: object &#39;x&#39; not found
+</code></pre>
+
+<p><code>break</code> immediately ends loop evaluation:</p>
+
+<pre><code class="r">out &lt;- list(); length(out) &lt;- length(DestSubset)
+
+for( i in seq_along(DestSubset) ) { 
+     # equivalently: for(i in 1:length(DestSubset))
+     sub &lt;- subset(airSmall, airSmall$Dest == DestSubset[i])
+     if(sum(!is.na(x$late))) { 
+     # fit logistic regression
+       out[i] &lt;- glm(late ~ Month, family = binomial, data = sub) 
+     } else {
+       break
+     }
+}
+</code></pre>
+
+<pre><code>## Error: object &#39;x&#39; not found
+</code></pre>
+
+<h1>Functions</h1>
+
+<p>Functions are one of the most important constructs in R (and many other languages).
+They allow you to modularize your code - encapsulating a set of repeatable operations as
+an individual function call.</p>
+
+<p>You should rely heavily on functions rather than having long sets of expressions in 
+R scripts.</p>
+
+<p>Functions have many important advantages:</p>
+
+<ul>
+<li>They reduce bugs by avoiding having multiple instances of the same functionality.</li>
+<li>They reduce time involved in coding by eliminating redundancy.</li>
+<li>They make for cleaner and more easily-readable code.</li>
+</ul>
+
+<p>A basic goal is writing functions is <em>modularity</em>.</p>
+
+<p>In general, a function should</p>
+
+<ul>
+<li>be fairly short, </li>
+<li>be focused and specific in what it does, and</li>
+<li>be designed so that it can be used in combination with other functions to carry out more complicated operations.</li>
+</ul>
+
+<h1>Writing functions</h1>
+
+<p>In module 4, we sorted the airline dataframe. </p>
+
+<pre><code class="r">ord &lt;- order(air$DepDelay, air$ArrDelay, decreasing = TRUE)
+ord[1:5]
+</code></pre>
+
+<pre><code>## [1] 115794 396990 337213 168750 415550
+</code></pre>
+
+<pre><code class="r">air_ordered &lt;- air[ord, ]
+</code></pre>
+
+<p>How would we encapsulate that functionality generically so that
+we can apply it to other dataframes (or matrices)?</p>
+
+<pre><code class="r">colSort &lt;- function(data, col1, col2) {
+    # Sorts a matrix or dataframe based on two  columns
+    #
+    # Args:
+    #     data: a dataframe or matrix with at least columns
+    #                  and any number of rows
+    #     col1: a reference to the column to sort on
+    #     col2: a reference to the column to use for ties
+    #
+    # Returns:
+    #     &lt;data&gt; sorted in increasing order by the values
+    #     in the first column. Any ties should be broken by values
+    #     in the second column. The row pairs should be maintained
+    #     in this result
+
+    ord &lt;- order(data[, col1], data[, col2], decreasing=TRUE)
+    sorted &lt;- data[ord, ]
+    return(sorted)
+}
+
+identical(air_ordered, colSort(air, &quot;DepDelay&quot;, &quot;ArrDelay&quot;))
+</code></pre>
+
+<pre><code>## [1] TRUE
+</code></pre>
+
+<p>Of course this is somewhat limited in that it is specific to sorting based on two columns. 
+We&#39;d usually want to extend this to be more general, but it&#39;s usually good to start with
+something concrete and more limited in generality and then generalize once you are sure it works.</p>
+
+<h1>Function arguments</h1>
+
+<p>R can match arguments by name (when provided) or by position (the fall-back). It also allows one to specify default values so that the user doesn&#39;t have to explicitly provide all the arguments.</p>
+
+<pre><code class="r">colSort &lt;- function(data, col1 = 1, col2 = 2) {
+    ord &lt;- order(data[, col1], data[, col2], decreasing=TRUE)
+    sorted &lt;- data[ord, ]
+    return(sorted)
+}
+identical(colSort(air, 1, 2), colSort(air))
+</code></pre>
+
+<pre><code>## [1] TRUE
+</code></pre>
+
+<pre><code class="r">identical(colSort(col2 = 2, data = air, col1 = 1), colSort(air, 1, 2))
+</code></pre>
+
+<pre><code>## [1] TRUE
+</code></pre>
+
+<h1>What is the &ldquo;&hellip;&rdquo; argument for?</h1>
+
+<p>Using <code>...</code> as one of the arguments to a function allows a function to pass along user-provided arguments without specifying explicitly what the user might provide.</p>
+
+<p>Here&#39;s an example of tailoring some plotting specifications that I use a lot. I generally define <code>pplot()</code> in my .Rprofile file so it is always available to me.</p>
+
+<pre><code class="r">pplot &lt;- function(x, y, ...) {
+      plot(x, y, pch = 16, cex = 0.6, ...)
+}
+
+sub &lt;- air[sample(1:nrow(air), 10000, replace = FALSE), ]
+sub$DepDelay[sub$DepDelay &gt; 120] &lt;- 120
+sub$DepDelay[sub$DepDelay &lt; -30] &lt;- -30
+pplot(sub$Dist, sub$DepDelay, xlab = &#39;distance (miles)&#39;, 
+   ylab = &#39;delay (minutes)&#39;, log = &#39;x&#39;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk usedots"/> </p>
+
+<h1>Important concepts with R functions</h1>
+
+<p>Functions in R return an object. In general, R functions are and should be designed
+such that the only effect of the function is through the return value. </p>
+
+<p><strong>Side effects</strong> are when a function affects the state of the world in
+addition to its return value.  Can you think of any side effects that
+you saw an R function produce from yesterday?  What about:</p>
+
+<ul>
+<li><code>library()</code></li>
+<li><code>setwd()</code></li>
+<li><code>plot()</code></li>
+</ul>
+
+<p>Functions in R are (roughly) <em>pass-by-value</em> and not <em>pass-by-reference</em>.
+This means that if you modify an argument inside the
+function it will not change the original value outside the function.  This protects you from
+a major potential source of side effects.  (There are exceptions to this
+rule.)</p>
+
+<p>In actuality, functions in R are <em>call-by-value</em>. What this means 
+for our purposes is that you can pass an input argument in without
+a copy being made of it. This saves time and memory.
+At the time that you modify the input
+within the function (if ever), then a copy is made and  the modified input is different 
+than the original value outside the function.</p>
+
+<h1>Variable scope and global variables</h1>
+
+<p>In general functions should not make use of variables from outside the function. (However, for quick-and-dirty work and in some other circumstances, one may do this.) This provides modularity and reduces bugs and surprises. </p>
+
+<p>If R can&#39;t find a variable that is used in a function based on the function arguments and variables defined locally in the function, it goes and looks elsewhere following a set of rules called <em>lexical scoping</em>. </p>
+
+<p>Basically this means that it looks for variables relative to where the function is defined (not relative to where the function is called).</p>
+
+<p>This can get involved, but a couple brief examples illustrate the basic idea. </p>
+
+<pre><code class="r">x &lt;- 2
+f &lt;- function(y) {
+    return(x + y)
+}
+f(1)
+</code></pre>
+
+<pre><code>## [1] 3
+</code></pre>
+
+<pre><code class="r">g &lt;- function(y) {
+  x &lt;- 10
+  return(f(y))
+}
+
+g(1)
+</code></pre>
+
+<pre><code>## [1] 3
+</code></pre>
+
+<pre><code class="r">g &lt;- function(y) {
+  f &lt;- function(y) {
+     return(x + y)
+  }
+  x &lt;- 10
+  return(f(y))
+}
+
+g(1)
+</code></pre>
+
+<pre><code>## [1] 11
+</code></pre>
+
+<p>Note that <code>x</code> is used as a global variable here, which in general is bad practice.</p>
+
+<h1>When do I start programming?</h1>
+
+<blockquote>
+<p>“[W]e wanted users to be able to begin in an interactive environment,
+where they did not consciously think of themselves as programming.
+Then as their needs became clearer and their sophistication increased,
+they should be able <strong>to slide gradually into programming, when the
+language and system aspects would become more important</strong>.”</p>
+</blockquote>
+
+<p><a href="http://www.stat.bell-labs.com/S/history.html">John Chambers, “Stages in the Evolution of S”</a></p>
+
+<h1>Key Principles of R</h1>
+
+<ul>
+<li>Everything that exists is an object.</li>
+<li><p>Everything that happens is a function call.</p>
+
+<p><a href="http://user2014.stat.ucla.edu/files/chambers.pdf">John Chambers&#39; useR!2014 talk</a></p></li>
+</ul>
+
+<h3>What does the 2nd principle mean?</h3>
+
+<p>Are arithmetic operations really just functions?</p>
+
+<pre><code class="r">3+2
+</code></pre>
+
+<pre><code>## [1] 5
+</code></pre>
+
+<pre><code class="r">&#39;+&#39;(3,2)
+</code></pre>
+
+<pre><code>## [1] 5
+</code></pre>
+
+<p>What about indexing?</p>
+
+<pre><code class="r">x=matrix(runif(100),10)
+x[,2]
+</code></pre>
+
+<pre><code>##  [1] 0.53814913 0.39783950 0.74038417 0.03441325 0.25922411 0.25658216
+##  [7] 0.08421051 0.58544514 0.45485818 0.87250780
+</code></pre>
+
+<pre><code class="r">&#39;[&#39;(x,,2)
+</code></pre>
+
+<pre><code>##  [1] 0.53814913 0.39783950 0.74038417 0.03441325 0.25922411 0.25658216
+##  [7] 0.08421051 0.58544514 0.45485818 0.87250780
+</code></pre>
+
+<p>This holds more generally - one can investigate and see the same thing in terms of a for loop.</p>
+
+<h3>What does the 1st principle mean?</h3>
+
+<pre><code class="r">class(1)
+</code></pre>
+
+<pre><code>## [1] &quot;numeric&quot;
+</code></pre>
+
+<pre><code class="r">class(runif)
+</code></pre>
+
+<pre><code>## [1] &quot;function&quot;
+</code></pre>
+
+<pre><code class="r">class(function(x) x^2)
+</code></pre>
+
+<pre><code>## [1] &quot;function&quot;
+</code></pre>
+
+<pre><code class="r">square = function(x) x^2
+class(square)
+</code></pre>
+
+<pre><code>## [1] &quot;function&quot;
+</code></pre>
+
+<h1>Breakout</h1>
+
+<h3>Basic</h3>
+
+<p>1) Write an R function that will take an input vector and set any negative values in the vector to zero.</p>
+
+<h3>Using the ideas</h3>
+
+<p>2) Write an R function that will take an input vector and set any value below a threshold to be the value of threshold. Optionally, the function should instead set values above a threshold to the value of the threshold.</p>
+
+<p>3) Augment your function so that it checks that the input is a numeric vector and return an error if not. (See the help information for <code>stop()</code>.)</p>
+
+<p>4) Figure out what <code>invisible()</code> does and why it is useful when writing functions. Use <code>invisible()</code> in your function from just above or in the <code>colSort()</code> function.</p>
+
+<h3>Advanced</h3>
+
+<p>5) Extend the <code>colSort()</code> function to handle an arbitrary number of columns on which to do the sorting. You may need to modify the functionality a bit to use full vectors for the sorting rather than column names.</p>
+
+<p>6) Extend the <code>colSort()</code> function so that it can take either numeric indices or character strings indicating columns of the input data or take entire vectors to use in the sorting of the input data. If information specifying columns is given, make sure your function carefully checks that the input refers to legitimate columns and returns an error or warning (see <code>warning()</code>) if not.</p>
+
+<p>7) Explore scoping in the following code. Explain why the result is 11 and not 3. Note that <code>funGenerator()</code> returns a function as the return object, consistent with the idea that functions are objects in R. This is an example of what is called a <em>closure</em> in R. Basically, the function contains object(s) enclosed with and accessible to the function.</p>
+
+<pre><code class="r">funGenerator &lt;- function(x) {
+   x &lt;- 10
+   f &lt;- function(y) {
+      return(x + y)
+   }
+   return(f)
+}
+
+x &lt;- 2
+f &lt;- funGenerator()
+f(1)
+</code></pre>
+
+<pre><code>## [1] 11
+</code></pre>
+
+</body>
+
+</html>

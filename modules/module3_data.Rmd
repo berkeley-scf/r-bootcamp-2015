@@ -80,7 +80,7 @@ This is a common cause of bugs!
 
 # Missing values and other special values
 
-Since it was designed by statisticians, R handles missing value very well relative to other languages.
+Since it was designed by statisticians, R handles missing values very well relative to other languages.
 
 * `NA` is a missing value
 ```{r}

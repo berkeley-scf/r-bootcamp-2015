@@ -252,7 +252,7 @@ system.time(expr=solve(a=big.matrix)) # Compute time required to invert &quot;bi
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.446   0.186   0.081
+##   0.377   0.249   0.080
 </code></pre>
 
 <h1>Useful Stuff: Applied Research Edition</h1>
@@ -340,7 +340,7 @@ sample.data&lt;-rnorm(n=100, mean=0, sd=1)
 mean(x=sample.data)
 </code></pre>
 
-<pre><code>## [1] -0.02165102
+<pre><code>## [1] 0.1325447
 </code></pre>
 
 <pre><code class="r"># Add some missing values to the sample
@@ -356,7 +356,7 @@ mean(x=sample.data) # Action for NAs is not specified
 <pre><code class="r">mean(x=sample.data, na.rm = TRUE) # Action for NAs is not specified
 </code></pre>
 
-<pre><code>## [1] -0.04896944
+<pre><code>## [1] 0.1294195
 </code></pre>
 
 <p>2) These functions are also sensitive to the presence of factor variables; remove the factor levels to avoid errors (usually use one of as.vector(), as.character(), or as.numeric())</p>
@@ -392,7 +392,7 @@ is.factor(x=sample.data)
 mean(x=sample.data, na.rm = T)
 </code></pre>
 
-<pre><code>## [1] 1.47
+<pre><code>## [1] 1.53
 </code></pre>
 
 <ul>
@@ -1675,17 +1675,27 @@ sum.reg$coefficients
 
 <h1>Breakout and overnight homework</h1>
 
-<p>Consider the tipping data. Fit a logistic regression to the data for SUNDAY, modeling the probability of leaving a good tip (&gt;=15%) as a function of the total bill and the size of the party, potentially including additional covariates such as sex, smoker status, and time. What do you find in terms of how the total bill associates with the probability of leaving a good tip?</p>
+<h3>Basics</h3>
 
-<p>How do you predict the probability of leaving a good tip for a given set of covariate values? Consider the <code>predict.glm()</code> function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of leaving a good tip for a party of two with a party of four.</p>
+<p>1) Use plyr to create a data frame containing the median departure delay for each destination.</p>
 
-<p>If you&#39;re feeling ambitious&hellip;</p>
+<p>2) Now do the 95th percentile of departure delay for each destination by month pair.</p>
 
-<p>Using the tools for stratified analyses we have seen today, fit separate models of tipping behavior across different days. How do the effects of the total bill amount and size of party vary by day?</p>
+<h3>Using the ideas</h3>
 
-<p>For our purposes here, don&#39;t worry much about the uncertainty in the estimates you get in the logistic regression modeling, but of course in a real analysis you would need to do this. </p>
+<p>3) Use plyr to add a column to the airline dataset that is the total number of flights to the destination of each flight.</p>
 
-<h1>Breakout Answers!</h1>
+<p>4) Use plyr to add a column to the airline dataset that is the hour of the scheduled departure.</p>
+
+<p>5) Use reshape to take the result from question #2 and put it in wide format so that destinations are rows and months are columns. </p>
+
+<p>6) Fit a logistic regression where the outcome is whether there is a departure delay of at least 30 minutes, based on month and day of week and hour of day (see #4). These should all be factor variables when used in the regression. Fit the model for Chicago (ORD) flights. Now fit aseparate model for San Diego (SAN) flights. </p>
+
+<p>7) Fit separate logistic regressions for a set of 5-10 destinations, including ORD and SAN, all in a single call to dlply.</p>
+
+<h3>Advanced</h3>
+
+<p>8) How do you predict the probability of a departure delay of more than 30 minutes for a given set of covariate values? Consider the <code>predict.glm()</code> function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of a departure delay of more than 30 minutes for a Friday flight to Chicago (ORD) in a day in December to that for a flight to San Diego (SAN) in April on a Saturday. Finally, see if the predictions vary much depending on whether the predictions are based on city-specific model fits or a single model where the destination is a predictor?</p>
 
 </body>
 

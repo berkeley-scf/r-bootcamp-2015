@@ -65,7 +65,7 @@ big.matrix&lt;-<span class="kw">matrix</span>(<span class="dt">data=</span>data.
 <pre class="sourceCode r"><code class="sourceCode r">big.matrix.inverse&lt;-<span class="kw">solve</span>(<span class="dt">a=</span>big.matrix) <span class="co"># Compute the inverse of &quot;big.matrix&quot;</span>
 <span class="kw">system.time</span>(<span class="dt">expr=</span><span class="kw">solve</span>(<span class="dt">a=</span>big.matrix)) <span class="co"># Compute time required to invert &quot;big.matrix&quot;</span></code></pre>
 <pre><code>##    user  system elapsed 
-##   0.504   0.337   0.112</code></pre>
+##   0.430   0.441   0.155</code></pre>
 </div>
 <div id="useful-stuff-applied-research-edition" class="slide section level1">
 <h1>Useful Stuff: Applied Research Edition</h1>
@@ -131,7 +131,7 @@ sample.data&lt;-<span class="kw">rnorm</span>(<span class="dt">n=</span><span cl
 
 <span class="co"># Attempt to calculate the sample mean (absence of NAs)</span>
 <span class="kw">mean</span>(<span class="dt">x=</span>sample.data)</code></pre>
-<pre><code>## [1] -0.00640582</code></pre>
+<pre><code>## [1] -0.03114299</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add some missing values to the sample</span>
 sample.data[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">16</span>,<span class="dv">64</span>)]&lt;-<span class="ot">NA</span>
 
@@ -139,7 +139,7 @@ sample.data[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv"
 <span class="kw">mean</span>(<span class="dt">x=</span>sample.data) <span class="co"># Action for NAs is not specified</span></code></pre>
 <pre><code>## [1] NA</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="dt">x=</span>sample.data, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># Action for NAs is not specified</span></code></pre>
-<pre><code>## [1] -0.01287049</code></pre>
+<pre><code>## [1] -0.04557591</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>These functions are also sensitive to the presence of factor variables; remove the factor levels to avoid errors (usually use one of as.vector(), as.character(), or as.numeric())</li>
 </ol>
@@ -162,7 +162,7 @@ sample.data&lt;-<span class="kw">as.numeric</span>(<span class="dt">x =</span> s
 <pre><code>## [1] FALSE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Attempt to calculate the sample mean (without factor levels)</span>
 <span class="kw">mean</span>(<span class="dt">x=</span>sample.data, <span class="dt">na.rm =</span> T)</code></pre>
-<pre><code>## [1] 1.61</code></pre>
+<pre><code>## [1] 1.34</code></pre>
 <ul>
 <li>Computing some typical summary statistics:</li>
 </ul>
@@ -1205,14 +1205,23 @@ sum.reg$coefficients</code></pre>
 </div>
 <div id="breakout-and-overnight-homework" class="slide section level1">
 <h1>Breakout and overnight homework</h1>
-<p>Consider the tipping data. Fit a logistic regression to the data for SUNDAY, modeling the probability of leaving a good tip (&gt;=15%) as a function of the total bill and the size of the party, potentially including additional covariates such as sex, smoker status, and time. What do you find in terms of how the total bill associates with the probability of leaving a good tip?</p>
-<p>How do you predict the probability of leaving a good tip for a given set of covariate values? Consider the <code>predict.glm()</code> function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of leaving a good tip for a party of two with a party of four.</p>
-<p>If you're feeling ambitious...</p>
-<p>Using the tools for stratified analyses we have seen today, fit separate models of tipping behavior across different days. How do the effects of the total bill amount and size of party vary by day?</p>
-<p>For our purposes here, don't worry much about the uncertainty in the estimates you get in the logistic regression modeling, but of course in a real analysis you would need to do this.</p>
-</div>
-<div id="breakout-answers" class="slide section level1">
-<h1>Breakout Answers!</h1>
+<h3 id="basics">Basics</h3>
+<ol style="list-style-type: decimal">
+<li><p>Use plyr to create a data frame containing the median departure delay for each destination.</p></li>
+<li><p>Now do the 95th percentile of departure delay for each destination by month pair.</p></li>
+</ol>
+<h3 id="using-the-ideas">Using the ideas</h3>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Use plyr to add a column to the airline dataset that is the total number of flights to the destination of each flight.</p></li>
+<li><p>Use plyr to add a column to the airline dataset that is the hour of the scheduled departure.</p></li>
+<li><p>Use reshape to take the result from question #2 and put it in wide format so that destinations are rows and months are columns.</p></li>
+<li><p>Fit a logistic regression where the outcome is whether there is a departure delay of at least 30 minutes, based on month and day of week and hour of day (see #4). These should all be factor variables when used in the regression. Fit the model for Chicago (ORD) flights. Now fit aseparate model for San Diego (SAN) flights.</p></li>
+<li><p>Fit separate logistic regressions for a set of 5-10 destinations, including ORD and SAN, all in a single call to dlply.</p></li>
+</ol>
+<h3 id="advanced">Advanced</h3>
+<ol start="8" style="list-style-type: decimal">
+<li>How do you predict the probability of a departure delay of more than 30 minutes for a given set of covariate values? Consider the <code>predict.glm()</code> function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of a departure delay of more than 30 minutes for a Friday flight to Chicago (ORD) in a day in December to that for a flight to San Diego (SAN) in April on a Saturday. Finally, see if the predictions vary much depending on whether the predictions are based on city-specific model fits or a single model where the destination is a predictor?</li>
+</ol>
 </div>
 </body>
 </html>

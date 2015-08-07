@@ -522,15 +522,29 @@ coeftest(x=reg, vcov.=vcovHC)
 
 # Breakout and overnight homework
 
-Consider the tipping data. Fit a logistic regression to the data for SUNDAY, modeling the probability of leaving a good tip (>=15%) as a function of the total bill and the size of the party, potentially including additional covariates such as sex, smoker status, and time. What do you find in terms of how the total bill associates with the probability of leaving a good tip?
+### Basics
 
-How do you predict the probability of leaving a good tip for a given set of covariate values? Consider the `predict.glm()` function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of leaving a good tip for a party of two with a party of four.
+1) Use plyr to create a data frame containing the median departure delay for each destination.
 
-If you're feeling ambitious...
+2) Now do the 95th percentile of departure delay for each destination by month pair.
 
-Using the tools for stratified analyses we have seen today, fit separate models of tipping behavior across different days. How do the effects of the total bill amount and size of party vary by day?
+### Using the ideas
 
-For our purposes here, don't worry much about the uncertainty in the estimates you get in the logistic regression modeling, but of course in a real analysis you would need to do this. 
+3) Use plyr to add a column to the airline dataset that is the total number of flights to the destination of each flight.
 
-# Breakout Answers!
+4) Use plyr to add a column to the airline dataset that is the hour of the scheduled departure.
+
+5) Use reshape to take the result from question #2 and put it in wide format so that destinations are rows and months are columns. 
+
+6) Fit a logistic regression where the outcome is whether there is a departure delay of at least 30 minutes, based on month and day of week and hour of day (see #4). These should all be factor variables when used in the regression. Fit the model for Chicago (ORD) flights. Now fit aseparate model for San Diego (SAN) flights. 
+
+7) Fit separate logistic regressions for a set of 5-10 destinations, including ORD and SAN, all in a single call to dlply.
+ 
+### Advanced
+
+8) How do you predict the probability of a departure delay of more than 30 minutes for a given set of covariate values? Consider the `predict.glm()` function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of a departure delay of more than 30 minutes for a Friday flight to Chicago (ORD) in a day in December to that for a flight to San Diego (SAN) in April on a Saturday. Finally, see if the predictions vary much depending on whether the predictions are based on city-specific model fits or a single model where the destination is a predictor?
+
+
+
+
 

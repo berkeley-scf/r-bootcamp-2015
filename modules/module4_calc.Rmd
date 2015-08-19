@@ -331,12 +331,11 @@ What's the deal with the `all.x` and `all.y` ?  We can tell R whether we want to
 
 1) Create a vector that concatenates the Dest and Origin to create a 'Route' variable in a vectorized way using the string processing functions.
 
-2) Compute the number of NAs in each column of the *air* dataset using `sapply()` and the `is.na()` function.
-
-3) Use `table()` to figure out the number of flights for each year.
-
+2) Use `table()` to figure out the number of flights for each year.
 
 ### Using the ideas
+
+3) Compute the number of NAs in each column of the *air* dataset using `sapply()` and making use of the `is.na()` function.
 
 4) Merge the info from data/carriers.csv with the airline dataset so that we have the full names of the airlines as a new column in the data frame.
 
@@ -344,7 +343,7 @@ What's the deal with the `all.x` and `all.y` ?  We can tell R whether we want to
 
 5) Create a boxplot of delay by binned distance.
 
-6) Consider the *numFlights* data frame that I created. Sort this by the number of flights and look to see which are the most frequent destinations.
+6) Sort the dataset and find the shortest flight. Now consider the use of `which.min()` and why using that should be much quicker with large datasets.
  
 7)  Suppose we have two categorical variables and we conduct a hypothesis test of independence. The chi-square statistic is: 
 

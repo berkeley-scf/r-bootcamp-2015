@@ -413,23 +413,19 @@ For some of these you may want to use a smaller version of the dataset, such as 
 
 2) Plot the arrival delay against the departure delay as a scatterplot.
 
-3) Clean up your scatterplot with a title and axis labels
+3) Clean up your scatterplot with a title and axis labels. Output it as a PDF and see if you'd be comfortable with including it in a report/paper.
 
 4) Make a boxplot of the departure delay as a function of the day of week.
 
 ### Using the ideas
 
-5) Monkey with the size of points and style of points in your scatterplot and export to a pdf. Try to get it so that you'd be comfortable putting your plot ina report/paper.
+5) Create a trellis plot of departure delay boxplots, one per destination for this subset of destinations, `DestSubset <- c('LAX','SEA','PHX','DEN','MSP','JFK','ATL','DFW','IAH', 'ORD')`. Use a 2x5 layout of panels in the plot.
 
-6) Create a trellis plot of departure delay boxplots, one per destination for this subset of destinations, `DestSubset <- c('LAX','SEA','PHX','DEN','MSP','JFK','ATL','DFW','IAH', 'ORD')`.
-
-7) Subset the data to flights going to Chicago (ORD) and Houston (IAH). Plot delay against scheduled departure time (CRSDepTime). Now plot so that flights to Chicago are in on color and  those to Houston in another. Use `scale_x_continuous()` and `scale_y_continuous()` to set the x-axis limits to be in the range from 6 am to midnight and the y-axis limits to be in the range (-10, 120).
+6) Subset the data to flights going to Chicago (ORD) and Houston (IAH). Plot arrival delay against scheduled departure time (CRSDepTime). Now plot so that flights to Chicago are in one color and  those to Houston in another. Use `scale_x_continuous()` and `scale_y_continuous()` to set the x-axis limits to be in the range from 6 am to midnight and the y-axis limits to be in the range (-10, 120).
 
 
 ### Advanced 
 
-8) Try to create a single plot that shows the smoothed densities of departure delay with a different color or line type for each of the subset of destinations above. See if this allows you to better understand the effect of destination on delay. 
-
-9) Using ggplot2, create a trellis plot where, for a given destination, each panel uses a) HOLLOW CIRCLES to plot departure delay as a function of time of day, and b) a red LOESS smoother without standard errors to plot the trend in departure delay over time of day.  BONUS: limit the time of day shown to 6 am to midnight, and turn off the grey background.
+7) Create a trellis plot where, for a given destination (see the subset in question 5), each panel uses a) hollow circles to plot departure delay as a function of time of day, and b) a red loess smoother without standard errors to plot the trend in departure delay over time of day.  Limit the time of day shown to 6 am to midnight, and turn off the grey background. Figure out how to use partially-transparent points to reduce the effect of the overplotting of points.
 
 

@@ -371,7 +371,7 @@ class(square)
 
 # Breakout
 
-### Basic
+### Basics
 
 1) Write an R function that will take an input vector and set any negative values in the vector to zero.
 
@@ -393,10 +393,10 @@ class(square)
 ```{r, closure-scoping}
 funGenerator <- function(x) {
    x <- 10
-   f <- function(y) {
+   g <- function(y) {
       return(x + y)
    }
-   return(f)
+   return(g)
 }
 
 x <- 2

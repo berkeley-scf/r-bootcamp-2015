@@ -534,7 +534,7 @@ coeftest(x=reg, vcov.=vcovHC)
 
 4) Use plyr to add a column to the airline dataset that is the hour of the scheduled departure.
 
-5) Use reshape to take the result from question #2 and put it in wide format so that destinations are rows and months are columns. 
+5) Use reshape2 to take the result from question #2 and put it in wide format so that destinations are rows and months are columns. 
 
 6) Fit a logistic regression where the outcome is whether there is a departure delay of at least 30 minutes, based on month and day of week and hour of day (see #4). These should all be factor variables when used in the regression. Fit the model for Chicago (ORD) flights. Now fit aseparate model for San Diego (SAN) flights. 
 
@@ -542,7 +542,7 @@ coeftest(x=reg, vcov.=vcovHC)
  
 ### Advanced
 
-8) How do you predict the probability of a departure delay of more than 30 minutes for a given set of covariate values? Consider the `predict.glm()` function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of a departure delay of more than 30 minutes for a Friday flight to Chicago (ORD) in a day in December to that for a flight to San Diego (SAN) in April on a Saturday. Finally, see if the predictions vary much depending on whether the predictions are based on city-specific model fits or a single model where the destination is a predictor?
+8) How do you predict the probability of a departure delay of more than 30 minutes for a given set of covariate values? Consider the `predict.glm()` function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of a departure delay of more than 30 minutes for a Friday flight in a day in December to that for a Saturday flight in April, both at 2 pm. Finally, see if the predictions vary much depending on whether the predictions are based on city-specific model fits or a single model where the destination is a predictor?
 
 
 

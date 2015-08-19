@@ -252,7 +252,7 @@ system.time(expr=solve(a=big.matrix)) # Compute time required to invert &quot;bi
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.377   0.249   0.080
+##   0.427   0.206   0.079
 </code></pre>
 
 <h1>Useful Stuff: Applied Research Edition</h1>
@@ -340,7 +340,7 @@ sample.data&lt;-rnorm(n=100, mean=0, sd=1)
 mean(x=sample.data)
 </code></pre>
 
-<pre><code>## [1] 0.1325447
+<pre><code>## [1] 0.1046481
 </code></pre>
 
 <pre><code class="r"># Add some missing values to the sample
@@ -356,7 +356,7 @@ mean(x=sample.data) # Action for NAs is not specified
 <pre><code class="r">mean(x=sample.data, na.rm = TRUE) # Action for NAs is not specified
 </code></pre>
 
-<pre><code>## [1] 0.1294195
+<pre><code>## [1] 0.1350502
 </code></pre>
 
 <p>2) These functions are also sensitive to the presence of factor variables; remove the factor levels to avoid errors (usually use one of as.vector(), as.character(), or as.numeric())</p>
@@ -392,7 +392,7 @@ is.factor(x=sample.data)
 mean(x=sample.data, na.rm = T)
 </code></pre>
 
-<pre><code>## [1] 1.53
+<pre><code>## [1] 1.5
 </code></pre>
 
 <ul>
@@ -1687,7 +1687,7 @@ sum.reg$coefficients
 
 <p>4) Use plyr to add a column to the airline dataset that is the hour of the scheduled departure.</p>
 
-<p>5) Use reshape to take the result from question #2 and put it in wide format so that destinations are rows and months are columns. </p>
+<p>5) Use reshape2 to take the result from question #2 and put it in wide format so that destinations are rows and months are columns. </p>
 
 <p>6) Fit a logistic regression where the outcome is whether there is a departure delay of at least 30 minutes, based on month and day of week and hour of day (see #4). These should all be factor variables when used in the regression. Fit the model for Chicago (ORD) flights. Now fit aseparate model for San Diego (SAN) flights. </p>
 
@@ -1695,7 +1695,7 @@ sum.reg$coefficients
 
 <h3>Advanced</h3>
 
-<p>8) How do you predict the probability of a departure delay of more than 30 minutes for a given set of covariate values? Consider the <code>predict.glm()</code> function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of a departure delay of more than 30 minutes for a Friday flight to Chicago (ORD) in a day in December to that for a flight to San Diego (SAN) in April on a Saturday. Finally, see if the predictions vary much depending on whether the predictions are based on city-specific model fits or a single model where the destination is a predictor?</p>
+<p>8) How do you predict the probability of a departure delay of more than 30 minutes for a given set of covariate values? Consider the <code>predict.glm()</code> function and what its help page says. Or write code that converts from the model coefficients to the probability scale. Compare the predicted probability of a departure delay of more than 30 minutes for a Friday flight in a day in December to that for a Saturday flight in April, both at 2 pm. Finally, see if the predictions vary much depending on whether the predictions are based on city-specific model fits or a single model where the destination is a predictor?</p>
 
 </body>
 

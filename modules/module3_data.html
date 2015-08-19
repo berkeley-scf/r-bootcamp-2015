@@ -218,30 +218,30 @@ hr {
 mat
 </code></pre>
 
-<pre><code>##            [,1]       [,2]      [,3]       [,4]
-## [1,]  0.2454498 -0.1768202  1.638920 -0.6046467
-## [2,] -0.4988623 -1.8878075 -1.729341 -0.8550457
-## [3,] -1.0990156 -0.4863287 -1.895633 -1.3020983
+<pre><code>##            [,1]       [,2]        [,3]       [,4]
+## [1,] -1.1278173  0.1654673 -0.22726323 -0.7059181
+## [2,] -0.1477348 -1.6841789  0.08051624 -0.3434043
+## [3,] -2.0096825  1.3647894 -0.25827983 -0.5381903
 </code></pre>
 
 <pre><code class="r"># vectorized calcs work with matrices too
 mat*4
 </code></pre>
 
-<pre><code>##            [,1]       [,2]      [,3]      [,4]
-## [1,]  0.9817993 -0.7072808  6.555678 -2.418587
-## [2,] -1.9954494 -7.5512301 -6.917363 -3.420183
-## [3,] -4.3960626 -1.9453147 -7.582534 -5.208393
+<pre><code>##            [,1]       [,2]       [,3]      [,4]
+## [1,] -4.5112694  0.6618691 -0.9090529 -2.823673
+## [2,] -0.5909393 -6.7367154  0.3220650 -1.373617
+## [3,] -8.0387298  5.4591576 -1.0331193 -2.152761
 </code></pre>
 
 <pre><code class="r">mat &lt;- cbind(mat, 1:3)
 mat
 </code></pre>
 
-<pre><code>##            [,1]       [,2]      [,3]       [,4] [,5]
-## [1,]  0.2454498 -0.1768202  1.638920 -0.6046467    1
-## [2,] -0.4988623 -1.8878075 -1.729341 -0.8550457    2
-## [3,] -1.0990156 -0.4863287 -1.895633 -1.3020983    3
+<pre><code>##            [,1]       [,2]        [,3]       [,4] [,5]
+## [1,] -1.1278173  0.1654673 -0.22726323 -0.7059181    1
+## [2,] -0.1477348 -1.6841789  0.08051624 -0.3434043    2
+## [3,] -2.0096825  1.3647894 -0.25827983 -0.5381903    3
 </code></pre>
 
 <p>Arrays are like matrices but can have more or fewer than two dimensions.</p>
@@ -252,27 +252,27 @@ arr
 
 <pre><code>## , , 1
 ## 
-##            [,1]        [,2]      [,3]
-## [1,]  0.6581141  1.40128262 1.0296041
-## [2,] -0.3009699 -0.01416456 0.8405552
+##             [,1]      [,2]       [,3]
+## [1,] -0.71901838 -1.659076  1.6604092
+## [2,] -0.05245431  1.148322 -0.9034891
 ## 
 ## , , 2
 ## 
-##            [,1]       [,2]        [,3]
-## [1,] -0.5430859  0.3724104 -0.09559498
-## [2,]  0.7852108 -0.2741156 -1.05299005
+##          [,1]     [,2]       [,3]
+## [1,] 1.018458 1.971783 -1.0992436
+## [2,] 1.521995 1.005132 -0.3550371
 ## 
 ## , , 3
 ## 
-##            [,1]        [,2]      [,3]
-## [1,]  0.6581141  1.40128262 1.0296041
-## [2,] -0.3009699 -0.01416456 0.8405552
+##             [,1]      [,2]       [,3]
+## [1,] -0.71901838 -1.659076  1.6604092
+## [2,] -0.05245431  1.148322 -0.9034891
 ## 
 ## , , 4
 ## 
-##            [,1]       [,2]        [,3]
-## [1,] -0.5430859  0.3724104 -0.09559498
-## [2,]  0.7852108 -0.2741156 -1.05299005
+##          [,1]     [,2]       [,3]
+## [1,] 1.018458 1.971783 -1.0992436
+## [2,] 1.521995 1.005132 -0.3550371
 </code></pre>
 
 <h1>Attributes</h1>
@@ -290,10 +290,10 @@ arr
 mat
 </code></pre>
 
-<pre><code>##              [,1]       [,2]      [,3]       [,4] [,5]
-## first   0.2454498 -0.1768202  1.638920 -0.6046467    1
-## middle -0.4988623 -1.8878075 -1.729341 -0.8550457    2
-## last   -1.0990156 -0.4863287 -1.895633 -1.3020983    3
+<pre><code>##              [,1]       [,2]        [,3]       [,4] [,5]
+## first  -1.1278173  0.1654673 -0.22726323 -0.7059181    1
+## middle -0.1477348 -1.6841789  0.08051624 -0.3434043    2
+## last   -2.0096825  1.3647894 -0.25827983 -0.5381903    3
 </code></pre>
 
 <pre><code class="r">attributes(mat)
@@ -342,16 +342,16 @@ mat
 <pre><code class="r">mat[4]
 </code></pre>
 
-<pre><code>## [1] -0.1768202
+<pre><code>## [1] 0.1654673
 </code></pre>
 
 <pre><code class="r">attributes(mat) &lt;- NULL
 mat
 </code></pre>
 
-<pre><code>##  [1]  0.2454498 -0.4988623 -1.0990156 -0.1768202 -1.8878075 -0.4863287
-##  [7]  1.6389196 -1.7293407 -1.8956335 -0.6046467 -0.8550457 -1.3020983
-## [13]  1.0000000  2.0000000  3.0000000
+<pre><code>##  [1] -1.12781735 -0.14773483 -2.00968245  0.16546728 -1.68417886
+##  [6]  1.36478941 -0.22726323  0.08051624 -0.25827983 -0.70591814
+## [11] -0.34340426 -0.53819032  1.00000000  2.00000000  3.00000000
 </code></pre>
 
 <pre><code class="r">is.matrix(mat)
@@ -402,7 +402,7 @@ mat
 
 <h1>Missing values and other special values</h1>
 
-<p>Since it was designed by statisticians, R handles missing value very well relative to other languages.</p>
+<p>Since it was designed by statisticians, R handles missing values very well relative to other languages.</p>
 
 <ul>
 <li><code>NA</code> is a missing value</li>
@@ -413,9 +413,9 @@ vec[c(3, 5)] &lt;- NA
 vec
 </code></pre>
 
-<pre><code>##  [1] -0.83042263 -0.36551742          NA  0.13498766          NA
-##  [6] -1.04369358 -0.35253253  0.80802783 -0.24952751 -0.56987568
-## [11]  1.59624632 -0.05301357
+<pre><code>##  [1] -0.64716866 -0.72986998          NA -0.51593406          NA
+##  [6] -0.80664518  0.19025744  0.08845286  1.52612863  0.32696709
+## [11]  0.67751023  0.51445048
 </code></pre>
 
 <pre><code class="r">length(vec)
@@ -433,13 +433,13 @@ vec
 <pre><code class="r">sum(vec, na.rm = TRUE)
 </code></pre>
 
-<pre><code>## [1] -0.9253211
+<pre><code>## [1] 0.6241488
 </code></pre>
 
 <pre><code class="r">hist(vec)
 </code></pre>
 
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAC61BMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4PDw8QEBARERESEhITExMUFBQVFRUWFhYXFxcYGBgZGRkaGhobGxscHBwdHR0eHh4fHx8gICAhISEiIiIjIyMkJCQlJSUmJiYnJycoKCgpKSkqKiorKyssLCwtLS0uLi4vLy8wMDAxMTEyMjIzMzM0NDQ1NTU3Nzc4ODg5OTk6Ojo7Ozs8PDw9PT0+Pj4/Pz9AQEBBQUFCQkJDQ0NERERFRUVGRkZHR0dISEhJSUlLS0tMTExNTU1OTk5PT09QUFBRUVFSUlJTU1NUVFRVVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1vb29wcHBxcXFycnJzc3N0dHR1dXV2dnZ3d3d4eHh5eXl6enp7e3t8fHx9fX1+fn5/f3+AgICCgoKDg4OEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyNjY2Ojo6Pj4+QkJCRkZGSkpKTk5OVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKlpaWmpqanp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm6urq7u7u8vLy9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHS0tLT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///9qmh0MAAAACXBIWXMAAAsSAAALEgHS3X78AAAQLklEQVR4nO3de1xUZR7H8UexNUEEhdYEhfKS5Y2IUgsvFWZqeWlXu6yXsqUtM2tNu62m21Vby23LdbWrllvYxc1dvG4mtbRpN8l0cjWVFJQwSxHh+XMPw2FmZOhcnjPD8fD9fl6v4PU6nB/PM/PGwwyMJiSDTLi9AeZOhAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPWlODrxRih/ZuuHhMClEZqc/6327Nn4nU5zpNAoHPEgVOPut4kb3R6c5Os5ow/A8/VAcOO4QfLt5wurHTraYLf0zESLlpQHzyiM81dyGWySN3dY3NWKx9NRwa1zbz7yJLFoukzVkrZH6/1olXfCx3iM5/Sk17uiAzbpCv9pPVDdSMP1hzYIJ4VMrp4h7puyYpZfxBKQ9O7Ngm5xP3bq56TRD+/IyMjPha+JI2zUYOFCk/rjpHzN5VPVh0Gt5KzJfVl4rM0S398HGdxIo9rWIGXyI6Ve8Q4hfdtf+6xInR/s8VGFiVIe7aUnNklRggZYYoONI+ZkS26FVZdZHodZlIPuDqTVarCcLX5odfK7p9J6ddt8N/qV8vOh2RG0VC1QZxfoV82A8vHis9vmHoHFlxpjiowRfJgeKG6nWii/9zBQa0C0ie/0hF25jDB7SvkafFLSUlF4u81SKzUo4Tf3PzFivWBOFDLvWl7USzvg8X136PXyju0D6SKnY/I6ZJ+aUf/swq7dD2R0alCVG8Q6RKeZNYrF3z0/2fKzAQgJeTxWuvaFf6W2u/uP64QPxeW/LYCZdurJOaNrwsm3OhEG2+DoFPE74nxF118Enakc1nxN70fGINfHoN/Av14LWBIPy/xKRJ4kPtUf70fK3t87QvAo/WtOHfmPiy/N+l4hkNfpNcJ9KOyPdFm6qVostReW8AfrqYIb8RDcAHBoLwlWe1T02rlo+KO6V8f9nOt0XvE/Lu7itcu7nqNW34teLM0b+KFRu0b91jvqgeKNJGxIqnZEVn0Ul7oF4HP08kXPPLZmJvGHxgIAgvfydqru4HE5rfeH1M4v7KnqJHtjiLD+7cr96lfvklbWL7vCDlm+21p3PlUzvHZizRns75hsT3+GsA/uiY2AteHSwWhcEHB4Lw64V2pZfy8yEJba/9Qsr9N3RoM/Qzd26qs5oavJVKCz6VskAMdXsfroYI/3WLZrOW9hBL3N6HqyHCy/yBCXEXLq42P7EJBwnPCA8b4UEjPGiEB43woBEeNMKDRnjQCA8a4UEjPGiEB43woBEeNMKDRnjQCA8a4UEjPGiEB43woBEeNMKDRnjQCA8a4UEjPGiEB43woBEeNKvwBcejug3W2FmFT/o2qttgjZ05fFxMTaJ5TCPshjVa5vDb+v/aV1LS9tOSwJHVuf7GvhTNjZm0O1etL13c82mVhUv9yQXdV51yqS/3+Vu4IHrbMm3N3T6V5i5zcc+nVZa+x+8c/Jv48O/xrz0b8d1Yb80cpbHnCK9n7cFd1aJxpWEHCe/lHDyPJ7yXIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40KzCHw8/RHgvZw5/8I7se7/LEBfvqP8Bwns5c/hrr14+ucPjhx+8uv4HCO/lzOHjvpel4pA8Eh84sjrXX87MaG7MJMI7zBw+rVBWL5ey6OzAkXKfv4ULorgvswjvMHP4pQkjT0r5UreH6n+Al3ovZ+FR/Y6XqqRcnFdd/zjhvRyfx4NGeNAIDxrhQSM8aIQHjfCgER40woNGeNAIDxrhQSM8aIQHjfCgER40woNGeNAIDxrhQSM8aIQHjfCgER40woNGeNAIDxrhQSM8aIQHjfCgER40woNGeNAIDxrhQSM8aIQHjfCgER40woNGeNAIDxrhQSM8aIQHjfCgER40woNGeNAIDxrhQSM8aIQHTYefuvGk7VHCezkdflaf9revrbQ3SngvF7jU+54a0P63/zxhY5TwXi4AX/b6pLY9+6e8aX2U8F5Oh39yUNxVC7+Rcv3Z1kcJ7+V0+JvfOOJ/f5R/4kHS4SuezZd5847bGiW8l9PhJ1xUKLdm32xrlPBeTodv7dPe7E6wNUp4L6fDd/lQe1PQ2dYo4b2cDr8saer8ackv2holvJerex7/1ZzbZm21N0p4L8df0oCmw6/p370mW6OE93I6fNrMz4u0bI0S3svp8B1+sj9KeC+nw897zObvZCXhvZ0Of1lc/Hn8Ho+UDl9Um61Rwnu5wNO5k8XVNkcJ7+V0+H1XxiXu6uuzNUp4L6fDXzXlWHrVrCtsjRLey+nwrcpkujwca2uU8F5Oh+/zjga/tqetUcJ7OR1+Q9J18ROT37M1SngvV/eovvTFuYv3/8w5h2se758sqX+Y8F7O/Ldz23o26/yOlLvCziS8l9M5+9bW0BkD/1CxMbWQ8E0snbOgoGDz64Neb+iMVkekXJl1MgR+da6/nJmR2MDR23NVGm7vhaF1Eb6u0D/HhzIaOuO8d6WsHvVACHy5z9/CBZHYwO7RPpXus/czh7oIX1co/Nb4hs7Ia519QJZkXhilS/3uCUpj8wjvrJDv8VktpjV4SnGedrE/vnxG/eOE93LB7/EFBUX2fk1DeC/n+ostCe9OOnxqYoKe9VHCezkd/vnBm/YX5DxdVlZmfZTwXk6H77hXe/NdR1ujhPdyOnynf2tvPkixNUp4L6fDL2p33+L72z1ha5TwXq7uUf1H94y7M59P53By/cWWhHcn119sSXh3cv3FloR3J9dfbEl4d3L9xZaEdyfXX2xJeHey8mLLn4nwXk6H773F/ijhvZwOPze3wvYo4b2cDj8ooXVXd/5+POHdyfW/H094d/LDx5VJ+coPdkcJ7+X88EKDT9hld5TwXo7woBEetFr4dYWFcW8VFhbaGiW8l/PDJ9Vla5TwXo6vqweN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxo5vBFRT/z/xgnvJczhx8mYlP9BY6szvWXM/PUE6fnqnTjQKV9K8Lff6XSJoeNVxqbUqm0ySeVFsv9s61FLFzqb51S70C5z9/CBace7udTaUUXW/utSxH+xglKm+w9X2ks53ulTQ5QWsw3yNYiFuDXzGv4eP1L/WBbC9e1uXHhpyqNXfKy0thINXi1O9LmWAQf3BG+foQ3iPBhEd4gwjscI7yVCB8a4c0ivEGED4vwBhHe4RjhrUT40AhvFuENInxYhDeI8A7HCG8lwodGeLMIbxDhwyK8QYR3OEZ4KxE+NMKbRXiDCB8W4Q0ivMMxwluJ8KER3izCG0T4sAhvEOEdjhHeSoQPjfBmEd4gwodFeIMI73CM8FYifGiEN4vwBhE+LMIbRHiHY4S3EuFDI7xZhDeI8GER3iDCOxwjvJUIHxrhzSK8QYQPi/AGEd7hGOGtRPjQCG8W4Q0ifFiEN4jwDscIbyXCh0Z4swhvEOHDIrxBhHc4RngrET40wptFeIMIHxbhDSK8wzHCW4nwoRHeLMIbRPiwCG8Q4R2OEd5KhA+N8GYR3iDCh0V4gwjvcIzwViJ8aIQ3i/AGET4swhtEeIdjhLcS4UMjvFmEN4jwYRHeIMI7HCO8lQgfGuHNIrxBhA+L8AYR3uEY4a1E+NAIbxbhDSJ8WIQ3iPAOxwhvJcKHRnizCG8Q4cMivEGEdzhGeCuhwleVVzVwlPBmeRv+2KxuLURM19nH63+A8GZ5G378kA2lJw59MPqW+h8gvFnehk/Y73/3Y3LgyOpcfzn3nXpiWq5Ko9oojfVLVRrr1ktp7KzLlcaSJymNpShN5Q6IMHzGUv+7NzMDR8p9/opKTj1xj0+lnVuUxrZ/pjT2xTalsa1fK419ojTlU7tHfAciDF/YocfYyWN7p3xs6/Oy0zwLj+or8xc9vii/Mvp7YY2Yg+fxzMsRHjTCg0Z40AgPGuFBIzxohAeN8KARHrQIwp+XpVJGR6WxHucqjXXtrjSW3ktpLCVTaexspamsbLfg1X6NvHuC0tiaOUpjz7+qNDa9UGlsVJnS2Gny+/goLVwX4cMivEGEdzhGeCsRPnIL10X4sAhvEOEdjkUQfojS1N5JSmPrH1EaW/ya0tiMT5TGxpQrjandkTbHIggf9sL7aI5VVSiNVZ5UGjterTamNNU4Y/zJHWiEB43woBEeNMKDRnjQCA8a4UGLFPywotr3Q1q2bDnC/tjHmYkTLf8AIniy9dWCM1Ffyp/SDVO8G1d2jx28ze5qkYFfc6vQd5y2rqhoj+2xypQl+3JmWZwKOdnyasGZqC9Vk9oNU7wbi+PfLX+ol93VIgM/b0ps7Y5PtLTzt2oDY2sukHJDN4tTwZOtrxacifpSNandMMW7MS9byopmh22uFqlLfWrtjncmXtP5+m9tjy0aK2Vpi4b+haUGCp5sfbXgTNSXqk3lhkm1u/HIASk3nlttc7UIw286/92iCf1tjz0+WfsqFxZ/lxU82fpqwZmoL1Wbyg2Tqndj9crUt+2u5hh+YULCEhnYcU1Hmx+0O1bzpXooxsKXas3YqSdbWi1kActLhe/L2lK12b1hp47ZW610dFah7dUi/Cf+w/Xa19wZ1l9/oI/l95byA6v//FXwZOurBWeivlRtKjdMqt2Nxy96QP9ls53VIgq/Yu/6xPe/n3m57bHKlJU/jZltcabuZDurBWeivlRtKjdMqt2NyzN2aZ20uVpE4ePekU91iB+5z/7Yf/okTbL8dFc/2dZqwZmoL+VP6Yap3Y0zRE0lNlfjT+5AIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0Z40AgPGuFBIzxohAeN8KARHjTCg0b4oYukfHKc3JgRO3S/lMu7xk864faWGiPCP3etlJfmlbZ76/AdV8qvkgt2Zv7F7S01RoTf3/pYceKxF6+T8lhc1dypUhbmu72lxojwst97iybKufHp6emJxbfNd3s3jRXh5RN3DntPLp4oZdWu6ll3S7k1z+0dNUaEl9tTU07Ifcnry2b3lVuSP9qTPc/tHTVGhJeyx23am39c0OrynVIuPaeNnb/k6N0IDxrhQSM8aIQHjfCgER40woNGeNAIDxrhQSM8aIQHjfCgER40woNGeNAIDxrhQSM8aP8H1nJ+UMEqZlkAAAAASUVORK5CYII=" alt="plot of chunk unnamed-chunk-5"/> </p>
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-5"/> </p>
 
 <pre><code class="r">is.na(vec)
 </code></pre>
@@ -500,9 +500,9 @@ big
 vec
 </code></pre>
 
-<pre><code>##  [1] -0.83042263 -0.36551742          NA  0.13498766          NA
-##  [6] -1.04369358 -0.35253253  0.80802783 -0.24952751 -0.56987568
-## [11]  1.59624632 -0.05301357
+<pre><code>##  [1] -0.64716866 -0.72986998          NA -0.51593406          NA
+##  [6] -0.80664518  0.19025744  0.08845286  1.52612863  0.32696709
+## [11]  0.67751023  0.51445048
 </code></pre>
 
 <pre><code class="r">length(vec)
@@ -993,11 +993,11 @@ rownames(mat) &lt;- letters[1:4]
 mat
 </code></pre>
 
-<pre><code>##         [,1]        [,2]       [,3]       [,4]        [,5]
-## a  0.7910691  1.41459529 -0.2614089 -1.1839961 -0.05313094
-## b  0.9391514  0.31022571 -0.8309257  1.8538190 -0.35742859
-## c -0.3880826 -1.40373481  0.8851441  0.6165307 -0.44586354
-## d -0.5551420 -0.04518759 -0.7668896  1.7315745  0.52500042
+<pre><code>##         [,1]         [,2]        [,3]       [,4]        [,5]
+## a  1.2157056  0.015610425 -0.04928428 -0.1035153 -0.67339097
+## b -0.5273926  1.106753664 -0.22110561 -0.7262248 -0.43857820
+## c -0.7078351 -0.009267834 -1.76079475 -0.3446780 -0.06493895
+## d -0.6997246 -1.347277053  1.11376032  0.8200393  0.13665271
 </code></pre>
 
 <p>1) by direct indexing</p>
@@ -1005,23 +1005,23 @@ mat
 <pre><code class="r">vec[c(3, 5, 12:14)]
 </code></pre>
 
-<pre><code>## [1] -0.3880826  1.4145953 -0.7668896 -1.1839961  1.8538190
+<pre><code>## [1] -0.70783510  0.01561043  1.11376032 -0.10351527 -0.72622480
 </code></pre>
 
 <pre><code class="r">vec[-c(3,5)]
 </code></pre>
 
-<pre><code>##  [1]  0.79106908  0.93915142 -0.55514204  0.31022571 -1.40373481
-##  [6] -0.04518759 -0.26140894 -0.83092571  0.88514405 -0.76688957
-## [11] -1.18399613  1.85381902  0.61653069  1.73157446 -0.05313094
-## [16] -0.35742859 -0.44586354  0.52500042
+<pre><code>##  [1]  1.215705588 -0.527392590 -0.699724554  1.106753664 -0.009267834
+##  [6] -1.347277053 -0.049284276 -0.221105615 -1.760794747  1.113760323
+## [11] -0.103515267 -0.726224801 -0.344678020  0.820039299 -0.673390969
+## [16] -0.438578203 -0.064938947  0.136652707
 </code></pre>
 
 <pre><code class="r">mat[c(2,4), 5]
 </code></pre>
 
 <pre><code>##          b          d 
-## -0.3574286  0.5250004
+## -0.4385782  0.1366527
 </code></pre>
 
 <pre><code class="r">rowInd &lt;- c(1, 3, 4)
@@ -1039,7 +1039,7 @@ elemInd
 <pre><code class="r">mat[elemInd]
 </code></pre>
 
-<pre><code>## [1]  1.414595 -1.403735 -0.555142
+<pre><code>## [1]  0.015610425 -0.009267834 -0.699724554
 </code></pre>
 
 <p>Note the last usage where we give it a 2-column matrix of indices</p>
@@ -1050,8 +1050,7 @@ elemInd
 vec[cond]
 </code></pre>
 
-<pre><code>## [1] 0.7910691 0.9391514 1.4145953 0.3102257 0.8851441 1.8538190 0.6165307
-## [8] 1.7315745 0.5250004
+<pre><code>## [1] 1.21570559 0.01561043 1.10675366 1.11376032 0.82003930 0.13665271
 </code></pre>
 
 <pre><code class="r">air[air$DepDelay &gt; 60*12 &amp; !is.na(air$DepDelay), ]
@@ -1156,10 +1155,10 @@ vec[cond]
 <pre><code class="r">mat[c(&#39;a&#39;, &#39;d&#39;, &#39;a&#39;), ]
 </code></pre>
 
-<pre><code>##         [,1]        [,2]       [,3]      [,4]        [,5]
-## a  0.7910691  1.41459529 -0.2614089 -1.183996 -0.05313094
-## d -0.5551420 -0.04518759 -0.7668896  1.731574  0.52500042
-## a  0.7910691  1.41459529 -0.2614089 -1.183996 -0.05313094
+<pre><code>##         [,1]        [,2]        [,3]       [,4]       [,5]
+## a  1.2157056  0.01561043 -0.04928428 -0.1035153 -0.6733910
+## d -0.6997246 -1.34727705  1.11376032  0.8200393  0.1366527
+## a  1.2157056  0.01561043 -0.04928428 -0.1035153 -0.6733910
 </code></pre>
 
 <p>4) using <em>subset()</em></p>
@@ -1500,7 +1499,7 @@ missing[1:5]
 
 <p>6) If you didn&#39;t do it this way already, extract the last row from the airline dataset without typing the number &#39;539895&#39;.</p>
 
-<p>7) Create a boolean vector indicating if flight on the carrier WN (Southwest) and distance is less than 1000 miles and count how many such flights there are.</p>
+<p>7) Create a boolean vector indicating if flight on the carrier WN (Southwest) and distance is less than 1000 miles and calculate the proportion of all the flights these represent.</p>
 
 <p>8) Use that vector to create a new data frame that is a subset of the original data frame.</p>
 
@@ -1508,9 +1507,9 @@ missing[1:5]
 
 <h3>Advanced</h3>
 
-<p>12) Reorder levels of dat$Dest by number of arrivals from SFO at the destinations.</p>
+<p>12) Make the destination variable a factor variable and reorder the levels by the number of arrivals from SFO at the destinations. Now create a boxplot of departure delay by destination for January, 2005.</p>
 
-<p>13) Create row names for the data frame based on concatenating the Year, Month, DayOfMonth, UniqueCarrier and FlightNum fields.</p>
+<p>13) Create row names for the data frame based on concatenating the Year, Month, DayofMonth, UniqueCarrier and FlightNum fields.</p>
 
 </body>
 

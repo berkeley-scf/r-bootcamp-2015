@@ -252,7 +252,7 @@ system.time(expr=solve(a=big.matrix)) # Compute time required to invert &quot;bi
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.427   0.206   0.079
+##   0.358   0.246   0.080
 </code></pre>
 
 <h1>Useful Stuff: Applied Research Edition</h1>
@@ -340,7 +340,7 @@ sample.data&lt;-rnorm(n=100, mean=0, sd=1)
 mean(x=sample.data)
 </code></pre>
 
-<pre><code>## [1] 0.1046481
+<pre><code>## [1] 0.04909769
 </code></pre>
 
 <pre><code class="r"># Add some missing values to the sample
@@ -356,7 +356,7 @@ mean(x=sample.data) # Action for NAs is not specified
 <pre><code class="r">mean(x=sample.data, na.rm = TRUE) # Action for NAs is not specified
 </code></pre>
 
-<pre><code>## [1] 0.1350502
+<pre><code>## [1] 0.07163929
 </code></pre>
 
 <p>2) These functions are also sensitive to the presence of factor variables; remove the factor levels to avoid errors (usually use one of as.vector(), as.character(), or as.numeric())</p>
@@ -392,7 +392,7 @@ is.factor(x=sample.data)
 mean(x=sample.data, na.rm = T)
 </code></pre>
 
-<pre><code>## [1] 1.5
+<pre><code>## [1] 1.58
 </code></pre>
 
 <ul>

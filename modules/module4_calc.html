@@ -229,7 +229,7 @@ system.time(trunc &lt;- ifelse(vals &gt; 0, vals, 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##    0.14    0.00    0.14
+##   0.137   0.000   0.137
 </code></pre>
 
 <pre><code class="r">system.time(vals &lt;- vals * (vals &gt; 0))
@@ -385,7 +385,7 @@ for(i in 1:n)
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   2.447   0.052   2.498
+##   2.491   0.002   2.494
 </code></pre>
 
 <p>The same holds for using <code>rbind()</code>, <code>cbind()</code>, or adding to a list, one element at a time.</p>
@@ -401,7 +401,7 @@ for(i in 1:n)
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   1.357   0.068   1.425
+##   1.337   0.052   1.389
 </code></pre>
 
 <p><strong>Question</strong>: Thoughts on why these are so slow? Think about what R might be doing behind the scenes</p>
@@ -420,7 +420,7 @@ for(i in 1:n)
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.038   0.001   0.040
+##   0.039   0.000   0.040
 </code></pre>
 
 <p>Here&#39;s how to pre-allocate an empty list: </p>
@@ -472,19 +472,19 @@ lapply(myList, min)
 </code></pre>
 
 <pre><code>## [[1]]
-## [1] -0.6761719
+## [1] -1.085428
 ## 
 ## [[2]]
-## [1] -0.9377566
+## [1] -1.399971
 ## 
 ## [[3]]
-## [1] -1.384368
+## [1] -1.92591
 </code></pre>
 
 <pre><code class="r">sapply(myList, min)
 </code></pre>
 
-<pre><code>## [1] -0.6761719 -0.9377566 -1.3843680
+<pre><code>## [1] -1.085428 -1.399971 -1.925910
 </code></pre>
 
 <p>Note that we don&#39;t generally want to use <code>apply()</code> on a data frame. </p>
@@ -1088,11 +1088,11 @@ dim(air)
 
 <p>1) Create a vector that concatenates the Dest and Origin to create a &#39;Route&#39; variable in a vectorized way using the string processing functions.</p>
 
-<p>2) Compute the number of NAs in each column of the <em>air</em> dataset using <code>sapply()</code> and the <code>is.na()</code> function.</p>
-
-<p>3) Use <code>table()</code> to figure out the number of flights for each year.</p>
+<p>2) Use <code>table()</code> to figure out the number of flights for each year.</p>
 
 <h3>Using the ideas</h3>
+
+<p>3) Compute the number of NAs in each column of the <em>air</em> dataset using <code>sapply()</code> and making use of the <code>is.na()</code> function.</p>
 
 <p>4) Merge the info from data/carriers.csv with the airline dataset so that we have the full names of the airlines as a new column in the data frame.</p>
 
@@ -1100,7 +1100,7 @@ dim(air)
 
 <p>5) Create a boxplot of delay by binned distance.</p>
 
-<p>6) Consider the <em>numFlights</em> data frame that I created. Sort this by the number of flights and look to see which are the most frequent destinations.</p>
+<p>6) Sort the dataset and find the shortest flight. Now consider the use of <code>which.min()</code> and why using that should be much quicker with large datasets.</p>
 
 <p>7)  Suppose we have two categorical variables and we conduct a hypothesis test of independence. The chi-square statistic is: </p>
 

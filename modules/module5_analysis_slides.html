@@ -65,7 +65,7 @@ big.matrix&lt;-<span class="kw">matrix</span>(<span class="dt">data=</span>data.
 <pre class="sourceCode r"><code class="sourceCode r">big.matrix.inverse&lt;-<span class="kw">solve</span>(<span class="dt">a=</span>big.matrix) <span class="co"># Compute the inverse of &quot;big.matrix&quot;</span>
 <span class="kw">system.time</span>(<span class="dt">expr=</span><span class="kw">solve</span>(<span class="dt">a=</span>big.matrix)) <span class="co"># Compute time required to invert &quot;big.matrix&quot;</span></code></pre>
 <pre><code>##    user  system elapsed 
-##   0.543   0.336   0.115</code></pre>
+##   0.468   0.339   0.119</code></pre>
 </div>
 <div id="useful-stuff-applied-research-edition" class="slide section level1">
 <h1>Useful Stuff: Applied Research Edition</h1>
@@ -131,7 +131,7 @@ sample.data&lt;-<span class="kw">rnorm</span>(<span class="dt">n=</span><span cl
 
 <span class="co"># Attempt to calculate the sample mean (absence of NAs)</span>
 <span class="kw">mean</span>(<span class="dt">x=</span>sample.data)</code></pre>
-<pre><code>## [1] -0.05181153</code></pre>
+<pre><code>## [1] 0.05244123</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add some missing values to the sample</span>
 sample.data[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">16</span>,<span class="dv">64</span>)]&lt;-<span class="ot">NA</span>
 
@@ -139,7 +139,7 @@ sample.data[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv"
 <span class="kw">mean</span>(<span class="dt">x=</span>sample.data) <span class="co"># Action for NAs is not specified</span></code></pre>
 <pre><code>## [1] NA</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="dt">x=</span>sample.data, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># Action for NAs is not specified</span></code></pre>
-<pre><code>## [1] -0.04051401</code></pre>
+<pre><code>## [1] 0.04659921</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>These functions are also sensitive to the presence of factor variables; remove the factor levels to avoid errors (usually use one of as.vector(), as.character(), or as.numeric())</li>
 </ol>
@@ -162,7 +162,7 @@ sample.data&lt;-<span class="kw">as.numeric</span>(<span class="dt">x =</span> s
 <pre><code>## [1] FALSE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Attempt to calculate the sample mean (without factor levels)</span>
 <span class="kw">mean</span>(<span class="dt">x=</span>sample.data, <span class="dt">na.rm =</span> T)</code></pre>
-<pre><code>## [1] 1.53</code></pre>
+<pre><code>## [1] 1.46</code></pre>
 <ul>
 <li>Computing some typical summary statistics:</li>
 </ul>

@@ -128,7 +128,8 @@ z &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a 
 </ol>
 <p>To install a package, in RStudio, just do <code>Packages-&gt;Install Packages</code>.</p>
 <p>From the command line, you generally will just do</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'fields'</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'fields'</span>, <span class="dt">repos =</span> <span class="st">'http://cran.cnr.berkeley.edu'</span>)</code></pre>
+<p>That should work without specifying the repository from which to download the package but sometimes you'll get errors indicating a package is not available for your version of R if you don't include an explicit repository.</p>
 <p>If you're on a network and are not the administrator of the machine, you may need to explicitly tell R to install it in a directory you are able to write in:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'fields'</span>, <span class="dt">lib =</span> <span class="kw">file.path</span>(<span class="st">'~'</span>, <span class="st">'R'</span>))</code></pre>
 <p>If you're not using the VM, now (or at the break) would be a good point to install the various packages we need for the bootcamp, which can be done easily with the following command:</p>
@@ -164,7 +165,7 @@ z &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a 
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>); y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>)
 <span class="kw">lm</span>(y ~<span class="st"> </span>x)</code></pre>
 <pre><code>## y ~ x
-## &lt;environment: 0x1de4cd0&gt;</code></pre>
+## &lt;environment: 0x1654140&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">stats::<span class="kw">lm</span>(y ~<span class="st"> </span>x)</code></pre>
 <pre><code>## 
 ## Call:
@@ -172,7 +173,7 @@ z &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a 
 ## 
 ## Coefficients:
 ## (Intercept)            x  
-##     -0.1646      -0.1180</code></pre>
+##     0.23292      0.05326</code></pre>
 <p>Can you explain what is going on? Consider the results of <code>search()</code>.</p>
 <h3 id="looking-inside-a-package">Looking inside a package</h3>
 <p>Packages are available as &quot;Package source&quot;, namely the raw code and help files, and &quot;binaries&quot;, where stuff is packaged up for R to use efficiently.</p>
@@ -274,8 +275,8 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(xtable)</code></pre>
 <pre><code>## Loading required package: xtable</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">xtable</span>(<span class="kw">table</span>(air$UniqueCarrier, air$Cancelled)), <span class="dt">type =</span> <span class="st">&quot;html&quot;</span>)</code></pre>
-<pre><code>## &lt;!-- html table generated in R 3.2.0 by xtable 1.7-4 package --&gt;
-## &lt;!-- Thu Aug  6 17:05:44 2015 --&gt;
+<pre><code>## &lt;!-- html table generated in R 3.2.1 by xtable 1.7-4 package --&gt;
+## &lt;!-- Wed Aug 19 12:40:10 2015 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; 0 &lt;/th&gt; &lt;th&gt; 1 &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; AA &lt;/td&gt; &lt;td align=&quot;right&quot;&gt; 49222 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt; 1033 &lt;/td&gt; &lt;/tr&gt;
@@ -365,8 +366,8 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 </ol>
 <h3 id="using-the-ideas">Using the ideas</h3>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as <em>Downloads</em>. Use <code>setwd()</code> to set your working directory to be that directory. Read the file in using <code>read.csv()</code>. Now use <code>setwd()</code> to point to a different directory such as <em>Desktop</em>. Write the data frame out to a file but without any row names and without quotes on the character strings.</p></li>
-<li><p>Make a plot with the airline data. Save it as a PDF in <em>Desktop</em>. Now see what happens if you set the <em>wdith</em> and <em>height</em> arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.</p></li>
+<li><p>Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as <em>Downloads</em>. Use <code>setwd()</code> to set your working directory to be that directory. Read the file in using <code>read.csv()</code>. Now use <code>setwd()</code> to point to a different directory such as <em>Desktop</em>. Write the data frame out to a file without any row names and without quotes on the character strings.</p></li>
+<li><p>Make a plot with the airline data. Save it as a PDF in <em>Desktop</em>. Now see what happens if you set the <em>width</em> and <em>height</em> arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.</p></li>
 <li><p>Figure out where (what directory) the <em>graphics</em> package is stored on your machine. Is is the same as where the <em>fields</em> package is stored?</p></li>
 </ol>
 <h3 id="advanced">Advanced</h3>

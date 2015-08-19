@@ -55,10 +55,10 @@ chi2_df1000 &lt;-<span class="st"> </span><span class="kw">sum</span>(chi2vals)
 <pre class="sourceCode r"><code class="sourceCode r">vals &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="fl">1e6</span>)
 <span class="kw">system.time</span>(trunc &lt;-<span class="st"> </span><span class="kw">ifelse</span>(vals &gt;<span class="st"> </span><span class="dv">0</span>, vals, <span class="dv">0</span>))</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.135   0.012   0.146</code></pre>
+##   0.134   0.004   0.138</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(vals &lt;-<span class="st"> </span>vals *<span class="st"> </span>(vals &gt;<span class="st"> </span><span class="dv">0</span>))</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.009   0.000   0.008</code></pre>
+##   0.008   0.000   0.008</code></pre>
 <p><strong>Question</strong>: What am I doing with <code>vals * (vals &gt; 0)</code> ? What happens behind the scenes in R?</p>
 <p>If you use a trick like this, having a comment in your code is a good idea.</p>
 <p>Lots of functions in R are vectorized, such as some we've already used.</p>
@@ -155,7 +155,7 @@ for(i in <span class="dv">1</span>:n)
       vals &lt;-<span class="st"> </span><span class="kw">c</span>(vals, i)
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   2.447   0.052   2.498</code></pre>
+##   2.491   0.002   2.494</code></pre>
 <p>The same holds for using <code>rbind()</code>, <code>cbind()</code>, or adding to a list, one element at a time.</p>
 <p>This is both slow and unclear (in the sense that it appears the code has a bug, but it works):</p>
 <pre class="sourceCode r"><code class="sourceCode r">vals &lt;-<span class="st"> </span><span class="dv">0</span>
@@ -165,7 +165,7 @@ for(i in <span class="dv">1</span>:n)
       vals[i] &lt;-<span class="st"> </span>i
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   1.357   0.068   1.425</code></pre>
+##   1.337   0.052   1.389</code></pre>
 <p><strong>Question</strong>: Thoughts on why these are so slow? Think about what R might be doing behind the scenes</p>
 </div>
 <div id="the-answer-is-to-pre-allocate-memory" class="slide section level1">
@@ -179,7 +179,7 @@ for(i in <span class="dv">1</span>:n)
       vals[i] &lt;-<span class="st"> </span>i
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.057   0.000   0.057</code></pre>
+##   0.056   0.000   0.055</code></pre>
 <p>Here's how to pre-allocate an empty list:</p>
 <pre class="sourceCode r"><code class="sourceCode r">vals &lt;-<span class="st"> </span><span class="kw">list</span>(); <span class="kw">length</span>(vals) &lt;-<span class="st"> </span>n
 <span class="kw">head</span>(vals)</code></pre>
@@ -217,15 +217,15 @@ col_sum &lt;-<span class="st"> </span><span class="kw">colSums</span>(mat)</code
 <pre class="sourceCode r"><code class="sourceCode r">myList &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">rnorm</span>(<span class="dv">3</span>), <span class="kw">rnorm</span>(<span class="dv">3</span>), <span class="kw">rnorm</span>(<span class="dv">5</span>))
 <span class="kw">lapply</span>(myList, min)</code></pre>
 <pre><code>## [[1]]
-## [1] -0.6761719
+## [1] -1.085428
 ## 
 ## [[2]]
-## [1] -0.9377566
+## [1] -1.399971
 ## 
 ## [[3]]
-## [1] -1.384368</code></pre>
+## [1] -1.92591</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(myList, min)</code></pre>
-<pre><code>## [1] -0.6761719 -0.9377566 -1.3843680</code></pre>
+<pre><code>## [1] -1.085428 -1.399971 -1.925910</code></pre>
 <p>Note that we don't generally want to use <code>apply()</code> on a data frame.</p>
 <p>You can use <code>lapply()</code> and <code>sapply()</code> on regular vectors, such as vectors of indices, which can come in handy, though this is a silly example:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(<span class="dv">1</span>:<span class="dv">10</span>, function(x) x^<span class="dv">2</span>)</code></pre>
@@ -721,15 +721,15 @@ air2 &lt;-<span class="st"> </span><span class="kw">merge</span>(air, numFlights
 <h3 id="basics">Basics</h3>
 <ol style="list-style-type: decimal">
 <li><p>Create a vector that concatenates the Dest and Origin to create a 'Route' variable in a vectorized way using the string processing functions.</p></li>
-<li><p>Compute the number of NAs in each column of the <em>air</em> dataset using <code>sapply()</code> and the <code>is.na()</code> function.</p></li>
 <li><p>Use <code>table()</code> to figure out the number of flights for each year.</p></li>
 </ol>
 <h3 id="using-the-ideas">Using the ideas</h3>
-<ol start="4" style="list-style-type: decimal">
+<ol start="3" style="list-style-type: decimal">
+<li><p>Compute the number of NAs in each column of the <em>air</em> dataset using <code>sapply()</code> and making use of the <code>is.na()</code> function.</p></li>
 <li><p>Merge the info from data/carriers.csv with the airline dataset so that we have the full names of the airlines as a new column in the data frame.</p></li>
 <li><p>Discretize distance into some bins and create a Dist_binned variable. Count the number of flights in each bin.</p></li>
 <li><p>Create a boxplot of delay by binned distance.</p></li>
-<li><p>Consider the <em>numFlights</em> data frame that I created. Sort this by the number of flights and look to see which are the most frequent destinations.</p></li>
+<li><p>Sort the dataset and find the shortest flight. Now consider the use of <code>which.min()</code> and why using that should be much quicker with large datasets.</p></li>
 <li><p>Suppose we have two categorical variables and we conduct a hypothesis test of independence. The chi-square statistic is:</p></li>
 </ol>
 <p><br /><img style="vertical-align:middle" src="data:image/png;base64,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" alt="

@@ -325,8 +325,10 @@ ls()
 
 <p>From the command line, you generally will just do</p>
 
-<pre><code class="r">install.packages(&#39;fields&#39;)
+<pre><code class="r">install.packages(&#39;fields&#39;, repos = &#39;http://cran.cnr.berkeley.edu&#39;)
 </code></pre>
+
+<p>That should work without specifying the repository from which to download the package but sometimes you&#39;ll get errors indicating a package is not available for your version of R if you don&#39;t include an explicit repository.</p>
 
 <p>If you&#39;re on a network and are not the administrator of the machine, you may need to explicitly tell R to install it in a directory you are able to write in:</p>
 
@@ -391,7 +393,7 @@ lm(y ~ x)
 </code></pre>
 
 <pre><code>## y ~ x
-## &lt;environment: 0x1dfa838&gt;
+## &lt;environment: 0x17ff0f0&gt;
 </code></pre>
 
 <pre><code class="r">stats::lm(y ~ x)
@@ -403,7 +405,7 @@ lm(y ~ x)
 ## 
 ## Coefficients:
 ## (Intercept)            x  
-##     0.03245     -0.19541
+##     -0.3788      -0.3348
 </code></pre>
 
 <p>Can you explain what is going on? Consider the results of <code>search()</code>.</p>
@@ -541,8 +543,8 @@ dev.off()
 print(xtable(table(air$UniqueCarrier, air$Cancelled)), type = &quot;html&quot;)
 </code></pre>
 
-<pre><code>## &lt;!-- html table generated in R 3.2.0 by xtable 1.7-4 package --&gt;
-## &lt;!-- Thu Aug  6 17:05:57 2015 --&gt;
+<pre><code>## &lt;!-- html table generated in R 3.2.1 by xtable 1.7-4 package --&gt;
+## &lt;!-- Wed Aug 19 12:40:23 2015 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; 0 &lt;/th&gt; &lt;th&gt; 1 &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; AA &lt;/td&gt; &lt;td align=&quot;right&quot;&gt; 49222 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt; 1033 &lt;/td&gt; &lt;/tr&gt;
@@ -661,9 +663,9 @@ git push
 
 <h3>Using the ideas</h3>
 
-<p>2) Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as <em>Downloads</em>. Use <code>setwd()</code> to set your working directory to be that directory. Read the file in using <code>read.csv()</code>.  Now use <code>setwd()</code> to point to a different directory such as <em>Desktop</em>. Write the data frame out to a file but without any row names and without quotes on the character strings.</p>
+<p>2) Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as <em>Downloads</em>. Use <code>setwd()</code> to set your working directory to be that directory. Read the file in using <code>read.csv()</code>.  Now use <code>setwd()</code> to point to a different directory such as <em>Desktop</em>. Write the data frame out to a file without any row names and without quotes on the character strings.</p>
 
-<p>3) Make a plot with the airline data. Save it as a PDF in <em>Desktop</em>. Now see what happens if you set the <em>wdith</em> and <em>height</em> arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.</p>
+<p>3) Make a plot with the airline data. Save it as a PDF in <em>Desktop</em>. Now see what happens if you set the <em>width</em> and <em>height</em> arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.</p>
 
 <p>4) Figure out where (what directory) the <em>graphics</em> package is stored on your machine. Is is the same as where the <em>fields</em> package is stored?</p>
 

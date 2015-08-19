@@ -5,10 +5,7 @@
 ```{r chunksetup, include=FALSE, cache=TRUE} 
 # include any code here you don't want to show up in the document,
 # e.g. package and dataset loading
-if(Sys.getenv('USER') == 'paciorek') rm(list = ls())
 if(!('modules' %in% unlist(strsplit(getwd(), split = '/')))) setwd('modules')
-#library(foreign)
-#vote <- read.dta('../data/2004_labeled_processed_race.dta')
 air <- read.csv('../data/airline.csv', stringsAsFactors = FALSE)
 ```
 

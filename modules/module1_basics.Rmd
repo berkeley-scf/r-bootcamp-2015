@@ -156,6 +156,11 @@ vec1^vec2
 vec1 >= vec2
 vec1 <= 3
 
+# using 'or'
+vec1 <= 0 | vec1 >= 3
+# using 'and'
+vec1 <= 0 & vec1 >= vec2
+
 vec1 == vec2
 vec1 != vec2
 # careful: 
@@ -191,6 +196,12 @@ median
 class(median)
 median(delay)
 ```
+
+Functions generally take arguments, some of which are often optional:
+```{r}
+median(delay, na.rm = TRUE)
+```
+
 * We can embed function calls: 
 ```{r}
 hist(rnorm(1000))
@@ -374,21 +385,21 @@ In general, your answers to any questions should involve writing code to manipul
 
 ### Basics
 
-1) Create a variable called 'x' that contains the median flight delay.
+1) Create a variable called 'x' that contains the mean flight delay.
 
 2) Use functions in R to round 'x' to two decimal places and to two significant digits.
 
 3) Create a vector of flight distances in units of kilometers rather than miles.
 
-4) Create a boolean (TRUE/FALSE) vector indicating whether the departure delay is longer than the arrival delay.
+4) Create a boolean (TRUE/FALSE) vector indicating whether the departure delay is shorter than the arrival delay.
 
 ### Using the ideas
 
 5) Summarize the difference between the departure and arrival delays. Do flights tend to make up some of the delay time in flight?
 
-6) Plot a histogram of the flight delays with negative delays set to zero, censoring delay times at a maximum of 60 minutes. Explore the effect of changing the number of bins in the histogram using the 'breaks' argument.
+6) Plot a histogram of the flight departure delays with negative delays set to zero, censoring delay times at a maximum of 60 minutes. Explore the effect of changing the number of bins in the histogram using the 'breaks' argument.
 
-7) Subset the data to flights going to Chicago (ORD) and Houston (IAH). Plot delay against scheduled departure time (CRSDepTime). Add a title to the plot. Now plot so that flights to Chicago are in on color and  those to Houston in another, using the 'col' argument. 
+7) Subset the data to flights going to Chicago (ORD) and Houston (IAH). Plot delay against scheduled departure time (CRSDepTime). Add a title to the plot. Now plot so that flights to Chicago are in one color and  those to Houston in another, using the 'col' argument. What are some problems with the plot?
 
 8) Consider the following regression model.  Figure out how to extract the $R^2$ and residual standard error and store in new R variables. 
 
@@ -401,6 +412,6 @@ summ <- summary(mod)
 
 ### Advanced
 
-9) Plot departure delay against time in days where day 1 is Jan 1 2005 and the last day is Dec 31 2008.
+9) For flights to ORD and IAH, plot departure delay against time in days where day 1 is Jan 1 2005 and the last day is Dec 31 2008. As above, use different colors for the two different destinations.
 
 10) Now modify the size of the points. Add a legend. Rotate the numbers on the y-axis so they are printed horizontally. Recall that help(par) will provide a lot of information.

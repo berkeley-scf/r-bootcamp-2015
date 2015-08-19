@@ -59,8 +59,10 @@ To install a package, in RStudio, just do `Packages->Install Packages`.
 
 From the command line, you generally will just do
 ```{r eval = FALSE}
-install.packages('fields')
+install.packages('fields', repos = 'http://cran.cnr.berkeley.edu')
 ```
+That should work without specifying the repository from which to download the package but sometimes you'll get errors indicating a package is not available for your version of R if you don't include an explicit repository.
+
 If you're on a network and are not the administrator of the machine, you may need to explicitly tell R to install it in a directory you are able to write in:
 ```{r eval = FALSE}
 install.packages('fields', lib = file.path('~', 'R'))
@@ -305,9 +307,9 @@ You also want to include a short, focused, [reproducible](http://adv-r.had.co.nz
 
 ### Using the ideas
 
-2) Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as *Downloads*. Use `setwd()` to set your working directory to be that directory. Read the file in using `read.csv()`.  Now use `setwd()` to point to a different directory such as *Desktop*. Write the data frame out to a file but without any row names and without quotes on the character strings.
+2) Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as *Downloads*. Use `setwd()` to set your working directory to be that directory. Read the file in using `read.csv()`.  Now use `setwd()` to point to a different directory such as *Desktop*. Write the data frame out to a file without any row names and without quotes on the character strings.
 
-3) Make a plot with the airline data. Save it as a PDF in *Desktop*. Now see what happens if you set the *wdith* and *height* arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.
+3) Make a plot with the airline data. Save it as a PDF in *Desktop*. Now see what happens if you set the *width* and *height* arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.
 
 4) Figure out where (what directory) the *graphics* package is stored on your machine. Is is the same as where the *fields* package is stored?
 

@@ -211,10 +211,15 @@ air$DepDelayCens <- air$DepDelay
 air$DepDelayCens[air$DepDelayCens > 60] <- 60
 air$DepDelayCens[air$DepDelayCens < 0] <- 0
 air$DayOfWeek <- as.factor(air$DayOfWeek)
-air <- within(air, 
-     DayOfWeekSun <- ordered(DayOfWeek, 
-     levels = levels(DayOfWeek)[c(7,1,2,3,4,5,6)])
-)
+air$DayOfWeekSun <- ordered(air$DayOfWeek, 
+     levels = levels(air$DayOfWeek)[c(7,1,2,3,4,5,6)])
+
+# alternative coding
+# air <- within(air, 
+#     DayOfWeekSun <- ordered(DayOfWeek, 
+#        levels = levels(DayOfWeek)[c(7,1,2,3,4,5,6)])
+#)
+
 head(air$DayOfWeekSun)
 levels(air$DayOfWeekSun)
 levels(air$DayOfWeekSun) <- c("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
@@ -224,7 +229,7 @@ boxplot(DepDelayCens ~ DayOfWeekSun, data = air)
 **Challenge**: Try to decipher what I just did with that complicated single line of code starting with `within`.
 
 # Reclassifying Factors
-- Turning factors into other data types can be tricky. All factor levels have an underlying numeric structure.
+- Turning factors into other data types can be tricky. All factors have an underlying numeric structure.
 
 ```{r fac2}
 students <- factor(c('basic','proficient','advanced','basic', 
@@ -331,7 +336,7 @@ gsub("hi", "Hi", chars)
 
 Some of you may be familiar with using *regular expressions*, which is functionality for doing sophisticated pattern matching and replacement with strings. *Python* and *Perl* are both used extensively for such text manipulation. 
 
-R has a full set of regular expression capabilities available through the *grep()*, *gregexpr()*, and *gsub()* functions (among others - many R functions will work with regular expressions).
+R has a full set of regular expression capabilities available through the *grep()*, *gregexpr()*, and *gsub()* functions (among others - many R functions will work with regular expressions). A particularly nice way to make use of this functionality is to use the *stringr* package, which is more user-friendly than directly using the core R functions.
 
 You can basically do any regular expression/string manipulations in R, though the syntax may be a bit clunky at times.
 

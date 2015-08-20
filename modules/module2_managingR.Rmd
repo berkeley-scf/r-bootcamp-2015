@@ -5,6 +5,7 @@
 ```{r chunksetup, include=FALSE} 
 # include any code here you don't want to show up in the document,
 # e.g. package and dataset loading
+rm(list = ls())
 air <- read.csv('../data/airline.csv', stringsAsFactors = FALSE)
 ```
 
@@ -156,6 +157,10 @@ setwd('~/Desktop/r-bootcamp-2015') # change the working directory
 setwd('/Users/paciorek/Desktop/tmp') # absolute path
 getwd()
 setwd('../r-bootcamp-2015') # relative path
+
+# Windows - use either \\ or / to indicate directories
+# setwd('C:\\Users\\Your_username\\Desktop\\r-bootcamp-2015')
+# setwd('..\\r-bootcamp-2015')
 
 # platform-agnostic
 setwd(file.path('~', 'Desktop', 'r-bootcamp-2015')) # change the working directory

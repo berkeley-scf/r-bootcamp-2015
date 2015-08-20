@@ -898,10 +898,15 @@ air$DepDelayCens &lt;- air$DepDelay
 air$DepDelayCens[air$DepDelayCens &gt; 60] &lt;- 60
 air$DepDelayCens[air$DepDelayCens &lt; 0] &lt;- 0
 air$DayOfWeek &lt;- as.factor(air$DayOfWeek)
-air &lt;- within(air, 
-     DayOfWeekSun &lt;- ordered(DayOfWeek, 
-     levels = levels(DayOfWeek)[c(7,1,2,3,4,5,6)])
-)
+air$DayOfWeekSun &lt;- ordered(air$DayOfWeek, 
+     levels = levels(air$DayOfWeek)[c(7,1,2,3,4,5,6)])
+
+# alternative coding
+# air &lt;- within(air, 
+#     DayOfWeekSun &lt;- ordered(DayOfWeek, 
+#        levels = levels(DayOfWeek)[c(7,1,2,3,4,5,6)])
+#)
+
 head(air$DayOfWeekSun)
 </code></pre>
 
@@ -926,7 +931,7 @@ boxplot(DepDelayCens ~ DayOfWeekSun, data = air)
 <h1>Reclassifying Factors</h1>
 
 <ul>
-<li>Turning factors into other data types can be tricky. All factor levels have an underlying numeric structure.</li>
+<li>Turning factors into other data types can be tricky. All factors have an underlying numeric structure.</li>
 </ul>
 
 <pre><code class="r">students &lt;- factor(c(&#39;basic&#39;,&#39;proficient&#39;,&#39;advanced&#39;,&#39;basic&#39;, 
@@ -1337,7 +1342,7 @@ chars2
 
 <p>Some of you may be familiar with using <em>regular expressions</em>, which is functionality for doing sophisticated pattern matching and replacement with strings. <em>Python</em> and <em>Perl</em> are both used extensively for such text manipulation. </p>
 
-<p>R has a full set of regular expression capabilities available through the <em>grep()</em>, <em>gregexpr()</em>, and <em>gsub()</em> functions (among others - many R functions will work with regular expressions).</p>
+<p>R has a full set of regular expression capabilities available through the <em>grep()</em>, <em>gregexpr()</em>, and <em>gsub()</em> functions (among others - many R functions will work with regular expressions). A particularly nice way to make use of this functionality is to use the <em>stringr</em> package, which is more user-friendly than directly using the core R functions.</p>
 
 <p>You can basically do any regular expression/string manipulations in R, though the syntax may be a bit clunky at times.</p>
 

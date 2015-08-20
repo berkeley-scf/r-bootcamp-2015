@@ -200,7 +200,7 @@ median(delay, na.rm = TRUE)
 ```
 
 * We can embed function calls: 
-```{r}
+```{r, hist}
 hist(rnorm(1000))
 ```
 
@@ -370,7 +370,7 @@ boxplot(subset$DepDelay ~ subset$UniqueCarrier)
 # Graphics options
 
 Check out `help(par)` for various [graphics settings](http://xkcd.com/833/); these are set via `par()` or within the specific graphics command (some can be set in either place), e.g.,
-```{r}
+```{r, parstuff}
 par(pch = 2)
 plot(subset$DepDelay ~ subset$Distance, xlab = 'distance (miles)', 
    ylab = 'delay (minutes)', log = 'x')

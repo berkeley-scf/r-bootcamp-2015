@@ -24,7 +24,8 @@ This isn't really all that related to R, programming or statistics, but check ou
 
 The bootcamp will be organized in modules, each of which will be a combination of lecture/demo presentation concluded by a breakout session in which you'll work on a variety of problems of different levels of difficulty. The idea is for each person to find problems that challenge them but are not too hard. Solutions to the breakout problems will be presented before the start of the next module. 
 
-Many of the modules will use a common dataset as an example on which to carry out various operations. We'll focus on a dataset of on-time information for US airline flights, 1987-2008 provided by the US government's Bureau of Transportation Statistics. This dataset is available in its entirety [here](http://stat-computing.org/dataexpo/2009/the-data.html). However, it's about 3.5 Gb compressed, so we'll work with a subset of just flights departing from SFO for 2005-2008, available in the Github repository. (Note that this is the full population of such flights -- I'll fit some statistical models but the interpretation is tricky as we are not working with a sample from a well-defined population.)
+Many of the modules will use a common dataset as an example on which to carry out various operations. We'll focus on a dataset of on-time information for US airline flights, 1987-2008 provided by the US government's Bureau of Transportation Statistics. This dataset is available in its entirety [here](http://stat-computing.org/dataexpo/2009/the-data.html). However, it's about 3.5 Gb compressed, so we'll work with a subset of just flights departing from SFO for 2005-2008, available in the Github repository as *airline.csv*. (Note that this is the full population of such flights -- I'll fit some statistical models but the interpretation is tricky as we are not working with a sample from a well-defined population.)
+There's also a smaller subsample of the SFO flights in *airlineSubsample.csv* - you can use that in place of *airline.csv* if *airline.csv* is taking a while to load into R on your machine.
 
 Counselors will be available to help answer any questions you have (just wave to one of them), or feel free to just ask the presenter during the presentation. The counselors will also be monitoring the [Piazza Q&A area](https://piazza.com/berkeley/summer2015/rbootcamp2015/home), so feel free to type in a question there and one of the counselors will answer the question. Or if you know the answer, help us out by answering it yourself or adding your thoughts. 
 
@@ -85,7 +86,7 @@ Run the following commands:
 
 Then to update from the repository to get any changes we've made:
 
-- `cd /directory/where/you/put/the/repository/r-bootcamp-2015
+- `cd /directory/where/you/put/the/repository/r-bootcamp-2015`
 - `git pull`
 
 

@@ -30,7 +30,7 @@ Any hypotheses about the relationship of delays with month and time of day?
 
 ```{r gamExample, cache=TRUE, fig.width=10}
 library(mgcv)
-censor <- function(x, val, upper = TRUE) {
+thresh <- function(x, val, upper = TRUE) {
        if(upper) {
          x[x > val] <- val
        } else {
@@ -39,10 +39,11 @@ censor <- function(x, val, upper = TRUE) {
        return(x)
 }
 
-# reduce outlier influence
+
 DestSubset <- c('LAX','SEA','PHX','DEN','MSP','JFK','ATL','DFW','IAH', 'ORD') 
 airSmall <- subset(air, Dest %in% DestSubset)
-airSmall$DepDelayCens <- censor(airSmall$DepDelay, 180)
+# reduce outlier influence
+airSmall$DepDelayCens <- thresh(airSmall$DepDelay, 180)
 airSmall$SchedDepCont <- airSmall$CRSDepTime %/% 100 + (airSmall$CRSDepTime %% 100) / 60
 mod_LAX <- gam(DepDelayCens ~ s(Month, k = 8) + s(SchedDepCont, k = 25), 
          data = airSmall, subset = airSmall$Dest == "LAX")
@@ -238,9 +239,10 @@ There's lots more packages/functionality for dates/times: see *lubridate* and `?
 ### Using the ideas
 
 4) Consider the code where we used `sample()`.  Initialize a storage vector of 500 zeroes. Set up a bootstrap using a for loop, with 500 bootstrap datasets. Here are the steps within each iteration:
- - resample with replacement a new dataset of the same size as the actual dataset
- - assign the value of the mean of the delay for the bootstrap dataset into the storage vector
- - repeat
+- resample with replacement a new dataset of the same size as the actual dataset
+- assign the value of the mean of the delay for the bootstrap dataset into the storage vector
+- repeat
+
 Now plot a histogram of the 500 values - this is an estimate of the sampling distribution of the sample mean. 
 
 5) Modify the GAMs of delay on month and time to set `k` to a variety of values and see how the estimated relationships change. 

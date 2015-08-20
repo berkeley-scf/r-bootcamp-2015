@@ -49,10 +49,8 @@ August 2015, UC Berkeley
 <h1>GAM in action</h1>
 <p>Let's consider month in the airline dataset.</p>
 <p>Any hypotheses about the relationship of delays with month and time of day?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mgcv)</code></pre>
-<pre><code>## Loading required package: nlme
-## This is mgcv 1.8-6. For overview type 'help(&quot;mgcv-package&quot;)'.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">censor &lt;-<span class="st"> </span>function(x, val, <span class="dt">upper =</span> <span class="ot">TRUE</span>) {
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mgcv)
+thresh &lt;-<span class="st"> </span>function(x, val, <span class="dt">upper =</span> <span class="ot">TRUE</span>) {
        if(upper) {
          x[x &gt;<span class="st"> </span>val] &lt;-<span class="st"> </span>val
        } else {
@@ -64,7 +62,7 @@ August 2015, UC Berkeley
 <span class="co"># reduce outlier influence</span>
 DestSubset &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'LAX'</span>,<span class="st">'SEA'</span>,<span class="st">'PHX'</span>,<span class="st">'DEN'</span>,<span class="st">'MSP'</span>,<span class="st">'JFK'</span>,<span class="st">'ATL'</span>,<span class="st">'DFW'</span>,<span class="st">'IAH'</span>, <span class="st">'ORD'</span>) 
 airSmall &lt;-<span class="st"> </span><span class="kw">subset</span>(air, Dest %in%<span class="st"> </span>DestSubset)
-airSmall$DepDelayCens &lt;-<span class="st"> </span><span class="kw">censor</span>(airSmall$DepDelay, <span class="dv">180</span>)
+airSmall$DepDelayCens &lt;-<span class="st"> </span><span class="kw">thresh</span>(airSmall$DepDelay, <span class="dv">180</span>)
 airSmall$SchedDepCont &lt;-<span class="st"> </span>airSmall$CRSDepTime %/%<span class="st"> </span><span class="dv">100</span> +<span class="st"> </span>(airSmall$CRSDepTime %%<span class="st"> </span><span class="dv">100</span>) /<span class="st"> </span><span class="dv">60</span>
 mod_LAX &lt;-<span class="st"> </span><span class="kw">gam</span>(DepDelayCens ~<span class="st"> </span><span class="kw">s</span>(Month, <span class="dt">k =</span> <span class="dv">8</span>) +<span class="st"> </span><span class="kw">s</span>(SchedDepCont, <span class="dt">k =</span> <span class="dv">25</span>), 
          <span class="dt">data =</span> airSmall, <span class="dt">subset =</span> airSmall$Dest ==<span class="st"> &quot;LAX&quot;</span>)
@@ -201,12 +199,12 @@ mod_multiple &lt;-<span class="st"> </span><span class="kw">gam</span>(DepDelayC
 </div>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmultinom</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dt">prob =</span> <span class="kw">c</span>(.<span class="dv">1</span>, .<span class="dv">1</span>, .<span class="dv">2</span>, .<span class="dv">3</span>, .<span class="dv">25</span>, .<span class="dv">05</span>)) </code></pre>
 <pre><code>##      [,1]
-## [1,]    5
-## [2,]    9
-## [3,]   27
-## [4,]   33
-## [5,]   23
-## [6,]    3</code></pre>
+## [1,]    9
+## [2,]   12
+## [3,]   22
+## [4,]   31
+## [5,]   19
+## [6,]    7</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dt">length =</span> <span class="dv">100</span>)
 <span class="kw">plot</span>(x, <span class="kw">dchisq</span>(x, <span class="dt">df =</span> <span class="dv">1</span>), <span class="dt">type =</span> <span class="st">'l'</span>)
 <span class="kw">lines</span>(x, <span class="kw">dchisq</span>(x, <span class="dt">df =</span> <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">'red'</span>)</code></pre>
@@ -218,8 +216,8 @@ mod_multiple &lt;-<span class="st"> </span><span class="kw">gam</span>(DepDelayC
 <h1>Other types of simulation and sampling</h1>
 <p>We can draw a sample with or without replacement.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nrow</span>(air), <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</code></pre>
-<pre><code>##  [1] 273872 303692  89326 386328 257728 121764  59343 472037 335101 336557
-## [11] 106148 470950 380268 359963  31757  84945 269201 283405 103511  81470</code></pre>
+<pre><code>##  [1]  92240 359572 413764 313249 411973 243302 122177 185226 298628  79043
+## [11] 435008 301200 316564 404938 146897 129175 253416 228164 194221 313799</code></pre>
 <p>Here's an example of some code that would be part of coding up a bootstrap.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># actual mean</span>
 <span class="kw">mean</span>(air$DepDelay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
@@ -227,7 +225,7 @@ mod_multiple &lt;-<span class="st"> </span><span class="kw">gam</span>(DepDelayC
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># here's a bootstrap sample:</span>
 smp &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(air)), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
 <span class="kw">mean</span>(air$DepDelay[smp], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>## [1] 11.1365</code></pre>
+<pre><code>## [1] 11.20948</code></pre>
 <p>It's a good idea to use <code>seq_along()</code> and <code>seq_len()</code> and not syntax like <code>1:length(earnings)</code> in <code>sample()</code> because the outcome of <code>length()</code> might in some cases be unexpected (e.g., if you're taking subsets of a dataset). Similar reasoning holds when setting up for loops: e.g.,</p>
 <pre class="sourceCode r"><code class="sourceCode r">for(i in <span class="kw">seq_len</span>(<span class="kw">nrow</span>(earnings))) {
 <span class="co"># blah</span>
@@ -365,8 +363,9 @@ d2 &lt;-<span class="st"> </span><span class="kw">chron</span>(<span class="st">
 <ul>
 <li>resample with replacement a new dataset of the same size as the actual dataset</li>
 <li>assign the value of the mean of the delay for the bootstrap dataset into the storage vector</li>
-<li>repeat Now plot a histogram of the 500 values - this is an estimate of the sampling distribution of the sample mean.</li>
+<li>repeat</li>
 </ul>
+<p>Now plot a histogram of the 500 values - this is an estimate of the sampling distribution of the sample mean.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>Modify the GAMs of delay on month and time to set <code>k</code> to a variety of values and see how the estimated relationships change.</li>
 </ol>

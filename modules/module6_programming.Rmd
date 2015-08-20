@@ -20,25 +20,26 @@ Most of you are probably familiar at least with the basic idea of iterating thro
 Let's take our use of `aggregate()` from Module 4 and use a for loop instead. 
 
 ```{r, for-example}
-DestSubset <- c('LAX','SEA','PHX','DEN','MSP','JFK','ATL','DFW','IAH', 'ORD') 
+DestSubset <- c('LAX','SEA','PHX','DEN','MSP','OAK','JFK','ATL','DFW','IAH', 'ORD') 
 airSmall <- subset(air, Dest %in% DestSubset)
 airSmall$late <- airSmall$DepDelay >= 15
 airSmall$Month <- as.factor(airSmall$Month)
 airSmall$Month <- relevel(airSmall$Month, "5")
 airSmall$Dest <- as.character(airSmall$Dest)
 
-out <- list(); length(out) <- length(DestSubset)
+out <- list(); length(out) <- length(DestSubset); names(out) <- DestSubset
 
 for( i in seq_along(DestSubset) ) { 
      # equivalently: for(i in 1:length(DestSubset))
      sub <- subset(airSmall, airSmall$Dest == DestSubset[i])
-     if(sum(!is.na(x$late))) { 
+     if(sum(!is.na(sub$late)) && length(sub$late) > 1) { 
      # fit logistic regression
-       out[i] <- glm(late ~ Month, family = binomial, data = sub) 
+       out[[i]] <- glm(late ~ Month, family = binomial, data = sub) 
      } else {
-       out[i] <- NA
+       out[[i]] <- NA
      }
 }
+out[['OAK']]
 summary(out[['IAH']])
 summary(out[['ORD']])
 ```
@@ -56,20 +57,20 @@ for( dest in DestSubset ) {
 It's not a particularly interesting example, but we can see the while loop syntax in the same example.
 
 ```{r, while}
-out <- list(); length(out) <- length(DestSubset)
+out <- list(); length(out) <- length(DestSubset); names(out) <- DestSubset
 
 i <- 1
 while( i <= length(DestSubset) ) { 
      sub <- subset(airSmall, airSmall$Dest == DestSubset[i])
-     if(sum(!is.na(x$late))) { 
+     if(sum(!is.na(sub$late)) && length(sub$late) > 1) { 
      # fit logistic regression
-       out[i] <- glm(late ~ Month, family = binomial, data = sub) 
+       out[[i]] <- glm(late ~ Month, family = binomial, data = sub) 
      } else {
-       out[i] <- NA
+       out[[i]] <- NA
      }
+     i = i + 1
 }
 summary(out[['IAH']])
-summary(out[['ORD']])
 ```
 
 # Branching (if-then-else syntax)
@@ -117,12 +118,13 @@ Suppose we were (inefficiently) setting up a new field using an if statement.
 air$late <- rep(0, nrow(air))
 for(i in 1:20) {
       if(air$DepDelay[i] > 15) 
-          air$late <- 1 else air$late <- 0
+          air$late[i] <- 1 else air$late[i] <- 0
 }
 
 print(i)
 if(air$DepDelay[4] > 15) print('here')
 air$DepDelay[4] > 15
+air$DepDelay[4]
 ```
 
 An NA/NaN is the main reason an if statement may fail, because R will generally convert other values to logical values. 
@@ -133,34 +135,37 @@ Zero evaluates to `FALSE`, all other numbers evaluate to `TRUE`. In general stri
 
 `next` skips the current evaluation of the loop statements:
 ```{r, next}
-out <- list(); length(out) <- length(DestSubset)
+out <- list(); length(out) <- length(DestSubset); names(out) <- DestSubset
 
 for( i in seq_along(DestSubset) ) { 
      # equivalently: for(i in 1:length(DestSubset))
      sub <- subset(airSmall, airSmall$Dest == DestSubset[i])
-     if(sum(!is.na(x$late))) { 
+     if(sum(!is.na(sub$late)) && length(sub$late) > 1) { 
      # fit logistic regression
-       out[i] <- glm(late ~ Month, family = binomial, data = sub) 
+       out[[i]] <- glm(late ~ Month, family = binomial, data = sub) 
      } else {
        next
      }
 }
+cat("We got to iteration ", i, " of ", length(DestSubset), " items.", sep = "")
+out[['OAK']]
 ```
 
 `break` immediately ends loop evaluation:
 ```{r, break}
-out <- list(); length(out) <- length(DestSubset)
+out <- list(); length(out) <- length(DestSubset); names(out) <- DestSubset
 
 for( i in seq_along(DestSubset) ) { 
      # equivalently: for(i in 1:length(DestSubset))
      sub <- subset(airSmall, airSmall$Dest == DestSubset[i])
-     if(sum(!is.na(x$late))) { 
+     if(sum(!is.na(sub$late)) && length(sub$late) > 1) { 
      # fit logistic regression
-       out[i] <- glm(late ~ Month, family = binomial, data = sub) 
+       out[[i]] <- glm(late ~ Month, family = binomial, data = sub) 
      } else {
        break
      }
 }
+cat("We got to iteration ", i, " of ", length(DestSubset), " items.", sep = "")
 ```
 
 # Functions
@@ -173,16 +178,18 @@ You should rely heavily on functions rather than having long sets of expressions
 R scripts.
 
 Functions have many important advantages:
-* They reduce bugs by avoiding having multiple instances of the same functionality.
-* They reduce time involved in coding by eliminating redundancy.
-* They make for cleaner and more easily-readable code.
+
+- They reduce bugs by avoiding having multiple instances of the same functionality.
+- They reduce time involved in coding by eliminating redundancy.
+- They make for cleaner and more easily-readable code.
 
 A basic goal is writing functions is *modularity*.
 
 In general, a function should
-* be fairly short, 
-* be focused and specific in what it does, and
-* be designed so that it can be used in combination with other functions to carry out more complicated operations.
+
+- be fairly short, 
+- be focused and specific in what it does, and
+- be designed so that it can be used in combination with other functions to carry out more complicated operations.
 
 
 
@@ -245,7 +252,7 @@ identical(colSort(col2 = 2, data = air, col1 = 1), colSort(air, 1, 2))
 
 Using `...` as one of the arguments to a function allows a function to pass along user-provided arguments without specifying explicitly what the user might provide.
 
-Here's an example of tailoring some plotting specifications that I use a lot. I generally define `pplot()` in my .Rprofile file so it is always available to me.
+Here's an example of tailoring some plotting specifications that I use a lot. I generally define `pplot()` in my *.Rprofile* file so it is always available to me.
 
 ```{r, usedots}
 pplot <- function(x, y, ...) {
@@ -352,9 +359,9 @@ Are arithmetic operations really just functions?
 What about indexing?
 
 ```{r, indexingfun}
-x=matrix(runif(100),10)
-x[,2]
-'['(x,,2)
+x <- matrix(runif(100), 10)
+x[ , 2]
+'['(x , , 2)
 ```
 
 This holds more generally - one can investigate and see the same thing in terms of a for loop.
@@ -365,7 +372,7 @@ This holds more generally - one can investigate and see the same thing in terms 
 class(1)
 class(runif)
 class(function(x) x^2)
-square = function(x) x^2
+square <- function(x) x^2
 class(square)
 ```
 

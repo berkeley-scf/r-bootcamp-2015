@@ -312,12 +312,12 @@ You also want to include a short, focused, [reproducible](http://adv-r.had.co.nz
 
 ### Using the ideas
 
-2) Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as *Downloads*. Use `setwd()` to set your working directory to be that directory. Read the file in using `read.csv()`.  Now use `setwd()` to point to a different directory such as *Desktop*. Write the data frame out to a file without any row names and without quotes on the character strings.
+3) Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as *Downloads*. Use `setwd()` to set your working directory to be that directory. Read the file in using `read.csv()`.  Now use `setwd()` to point to a different directory such as *Desktop*. Write the data frame out to a file without any row names and without quotes on the character strings.
 
-3) Make a plot with the airline data. Save it as a PDF in *Desktop*. Now see what happens if you set the *width* and *height* arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.
+4) Make a plot with the airline data. Save it as a PDF in *Desktop*. Now see what happens if you set the *width* and *height* arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.
 
-4) Figure out where (what directory) the *graphics* package is stored on your machine. Is is the same as where the *fields* package is stored?
+5) Figure out where (what directory) the *graphics* package is stored on your machine. Is is the same as where the *fields* package is stored?
 
 ### Advanced
 
-5) Load the *spam* package. Note the message about `backsolve()` being masked from package:base. Now if you enter `backsolve`, you'll see the code associated with the version of `backsolve()` provided by the *spam* package. Now enter `base::backsolve` and you'll see the code for the version of `backsolve()` provided by base R. Explain why typing `backsolve` shows the *spam* version rather than the *base* version. 
+6) Load the *spam* package. Note the message about `backsolve()` being masked from package:base. Now if you enter `backsolve`, you'll see the code associated with the version of `backsolve()` provided by the *spam* package. Now enter `base::backsolve` and you'll see the code for the version of `backsolve()` provided by base R. Explain why typing `backsolve` shows the *spam* version rather than the *base* version. 

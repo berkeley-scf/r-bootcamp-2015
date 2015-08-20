@@ -43,29 +43,29 @@ August 2015, UC Berkeley
 <ul>
 <li>For some, it might just be basic calculations</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">63.24</span>*pi <span class="co"># Multiply 63.24 by pi</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">63.24</span> *<span class="st"> </span>pi <span class="co"># Multiply 63.24 by pi</span></code></pre>
 <pre><code>## [1] 198.6743</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="dt">x=</span><span class="fl">4.39</span>) <span class="co"># Raise e to the power of 4.39</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="dt">x =</span> <span class="fl">4.39</span>) <span class="co"># Raise e to the power of 4.39</span></code></pre>
 <pre><code>## [1] 80.64042</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="dt">x=</span><span class="fl">1.7</span>) <span class="co"># Take the log of 1.7</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="dt">x =</span> <span class="fl">1.7</span>) <span class="co"># Take the log of 1.7</span></code></pre>
 <pre><code>## [1] 0.5306283</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tan</span>(<span class="dt">x=</span><span class="dv">58</span>) <span class="co"># Compute the tangent of 58</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tan</span>(<span class="dt">x =</span> <span class="dv">58</span>) <span class="co"># Compute the tangent of 58</span></code></pre>
 <pre><code>## [1] 8.330857</code></pre>
 <ul>
 <li>For others, it might be large or complex mathematical operations</li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take one million samples from the standard normal distribution</span>
-data.sample&lt;-<span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">1000000</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>) 
+data.sample &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">1000000</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>) 
 
 <span class="co"># Build a 1000 x 1000 matrix from the sample data</span>
-big.matrix&lt;-<span class="kw">matrix</span>(<span class="dt">data=</span>data.sample, <span class="dt">ncol=</span><span class="dv">1000</span>) 
+big.matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data=</span>data.sample, <span class="dt">ncol=</span><span class="dv">1000</span>) 
 
-<span class="kw">dim</span>(<span class="dt">x=</span>big.matrix) <span class="co"># Confirm that &quot;big.matrix&quot; is 1000 x 1000</span></code></pre>
+<span class="kw">dim</span>(<span class="dt">x =</span> big.matrix) <span class="co"># Confirm that &quot;big.matrix&quot; is 1000 x 1000</span></code></pre>
 <pre><code>## [1] 1000 1000</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">big.matrix.inverse&lt;-<span class="kw">solve</span>(<span class="dt">a=</span>big.matrix) <span class="co"># Compute the inverse of &quot;big.matrix&quot;</span>
-<span class="kw">system.time</span>(<span class="dt">expr=</span><span class="kw">solve</span>(<span class="dt">a=</span>big.matrix)) <span class="co"># Compute time required to invert &quot;big.matrix&quot;</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">big.matrix.inverse &lt;-<span class="st"> </span><span class="kw">solve</span>(<span class="dt">a=</span>big.matrix) <span class="co"># Compute the inverse of &quot;big.matrix&quot;</span>
+<span class="kw">system.time</span>(<span class="dt">expr =</span> <span class="kw">solve</span>(<span class="dt">a=</span>big.matrix)) <span class="co"># Compute time required to invert &quot;big.matrix&quot;</span></code></pre>
 <pre><code>##    user  system elapsed 
-##   0.468   0.339   0.119</code></pre>
+##   0.478   0.357   0.113</code></pre>
 </div>
 <div id="useful-stuff-applied-research-edition" class="slide section level1">
 <h1>Useful Stuff: Applied Research Edition</h1>
@@ -127,27 +127,27 @@ big.matrix&lt;-<span class="kw">matrix</span>(<span class="dt">data=</span>data.
 <li>Note that these functions are sensitive to missing values (NA); you should be sure to specify na.rm=T to avoid errors</li>
 </ol>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sample 100 times from the standard normal distribution </span>
-sample.data&lt;-<span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)
+sample.data &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)
 
 <span class="co"># Attempt to calculate the sample mean (absence of NAs)</span>
-<span class="kw">mean</span>(<span class="dt">x=</span>sample.data)</code></pre>
-<pre><code>## [1] 0.05244123</code></pre>
+<span class="kw">mean</span>(<span class="dt">x =</span> sample.data)</code></pre>
+<pre><code>## [1] -0.09049741</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add some missing values to the sample</span>
-sample.data[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">16</span>,<span class="dv">64</span>)]&lt;-<span class="ot">NA</span>
+sample.data[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">16</span>,<span class="dv">64</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span>
 
 <span class="co"># Attempt to calculate the sample mean (presence of NAs)</span>
-<span class="kw">mean</span>(<span class="dt">x=</span>sample.data) <span class="co"># Action for NAs is not specified</span></code></pre>
+<span class="kw">mean</span>(<span class="dt">x =</span> sample.data) <span class="co"># Action for NAs is not specified</span></code></pre>
 <pre><code>## [1] NA</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="dt">x=</span>sample.data, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># Action for NAs is not specified</span></code></pre>
-<pre><code>## [1] 0.04659921</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="dt">x =</span> sample.data, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># Action for NAs is not specified</span></code></pre>
+<pre><code>## [1] -0.07675437</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>These functions are also sensitive to the presence of factor variables; remove the factor levels to avoid errors (usually use one of as.vector(), as.character(), or as.numeric())</li>
 </ol>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get a random sample of zeroes and ones </span>
-sample.data&lt;-<span class="kw">sample</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">replace =</span> T)
+sample.data &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">replace =</span> T)
 
 <span class="co"># Add factor levels to the sample</span>
-sample.data&lt;-<span class="kw">factor</span>(<span class="dt">x =</span> sample.data)
+sample.data &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="dt">x =</span> sample.data)
 
 <span class="co"># Attempt to calculate the sample mean (with factor levels)</span>
 <span class="kw">mean</span>(<span class="dt">x =</span> sample.data)</code></pre>
@@ -155,14 +155,14 @@ sample.data&lt;-<span class="kw">factor</span>(<span class="dt">x =</span> sampl
 ## logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remove factor levels</span>
-sample.data&lt;-<span class="kw">as.numeric</span>(<span class="dt">x =</span> sample.data)
+sample.data &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="dt">x =</span> sample.data)
 
 <span class="co"># Check that there are no more factor levels in the sample data</span>
 <span class="kw">is.factor</span>(<span class="dt">x=</span>sample.data)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Attempt to calculate the sample mean (without factor levels)</span>
 <span class="kw">mean</span>(<span class="dt">x=</span>sample.data, <span class="dt">na.rm =</span> T)</code></pre>
-<pre><code>## [1] 1.46</code></pre>
+<pre><code>## [1] 1.45</code></pre>
 <ul>
 <li>Computing some typical summary statistics:</li>
 </ul>
@@ -239,7 +239,7 @@ sample.data&lt;-<span class="kw">as.numeric</span>(<span class="dt">x =</span> s
 <li>For this, the table function is very helpful</li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Isolate the gender column</span>
-gender&lt;-tips$sex
+gender &lt;-<span class="st"> </span>tips$sex
 
 <span class="co"># Get a vector of counts for unique values, divide by total count</span>
 <span class="kw">table</span>(gender)</code></pre>
@@ -255,7 +255,7 @@ gender&lt;-tips$sex
 ##   Female     Male 
 ## 35.65574 64.34426</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Isolate the gender and smoker columns</span>
-gender.smoker&lt;-tips[,<span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;smoker&quot;</span>)]
+gender.smoker &lt;-<span class="st"> </span>tips[,<span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;smoker&quot;</span>)]
 
 <span class="co"># Get a vector of counts for unique values, divide by total count</span>
 <span class="kw">table</span>(gender.smoker)</code></pre>
@@ -488,6 +488,9 @@ gender.smoker&lt;-tips[,<span class="kw">c</span>(<span class="st">&quot;sex&quo
 <li>Progress bars for lengthy computation</li>
 <li>Informative error messages</li>
 </ol>
+<ul>
+<li>Note that <em>dplyr</em> is the next iteration of <em>plyr</em> that focuses on fast data frame manipulations. We won't cover it here, but recommend you take a look at it.</li>
+</ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the &quot;plyr&quot; package (only necessary one time)</span>
 <span class="co"># install.packages(&quot;plyr&quot;) # Not Run</span>
 
@@ -515,7 +518,7 @@ gender.smoker&lt;-tips[,<span class="kw">c</span>(<span class="st">&quot;sex&quo
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xxply</span>(<span class="dt">.data=</span>, <span class="dt">.variables=</span>, <span class="dt">.fun=</span>, ...)</code></pre>
 <p>Consider the case where we want to calculate tipping behavior across gender, smoking status, and day-of-the-week from a data.frame, then return them as a data.frame:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate tip amount as percent of total bill</span>
-tips$tip.pct&lt;-tips$tip/tips$total_bill*<span class="dv">100</span>
+tips$tip.pct &lt;-<span class="st"> </span>tips$tip/tips$total_bill*<span class="dv">100</span>
 
 <span class="co"># Using the appropriate plyr function (ddply), compute average tip percentages</span>
 <span class="kw">ddply</span>(<span class="dt">.data=</span>tips, <span class="dt">.variables=</span>.(gender, smoker, day), <span class="dt">.fun=</span>summarize, <span class="dt">mean.tip.pct=</span><span class="kw">mean</span>(<span class="dt">x =</span> tip.pct))</code></pre>
@@ -624,7 +627,7 @@ tips$tip.pct&lt;-tips$tip/tips$total_bill*<span class="dv">100</span>
 ## 16   Male    Yes Thur</code></pre>
 <p>Consider the case where we want to calculate vote choice statistics across race from a list, and return them as a data.frame:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Split the data.frame into a list on the basis of gender, smoker status, and day-of-the-week</span>
-tips.split&lt;-<span class="kw">split</span>(<span class="dt">x=</span>tips, <span class="dt">f =</span> <span class="kw">list</span>(tips$sex, tips$smoker, tips$day))
+tips.split &lt;-<span class="st"> </span><span class="kw">split</span>(<span class="dt">x=</span>tips, <span class="dt">f =</span> <span class="kw">list</span>(tips$sex, tips$smoker, tips$day))
 <span class="kw">head</span>(<span class="dt">x =</span> tips.split, <span class="dt">n =</span> <span class="dv">3</span>)</code></pre>
 <pre><code>## $Female.No.Fri
 ##     total_bill  tip    sex smoker day   time size  tip.pct
@@ -738,7 +741,7 @@ tips.split&lt;-<span class="kw">split</span>(<span class="dt">x=</span>tips, <sp
 </ul>
 <p><strong>transform</strong>: applies a function to a data.frame and adds new vectors (columns) to it</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add a column containing the average tip of the gender of the individual on that day</span>
-tips.transformed&lt;-<span class="kw">ddply</span>(<span class="dt">.data=</span>tips, <span class="dt">.variables=</span>.(sex, day), <span class="dt">.fun=</span>transform, <span class="dt">sex.day.avg=</span><span class="kw">mean</span>(<span class="dt">x=</span>tip.pct))
+tips.transformed &lt;-<span class="st"> </span><span class="kw">ddply</span>(<span class="dt">.data=</span>tips, <span class="dt">.variables=</span>.(sex, day), <span class="dt">.fun=</span>transform, <span class="dt">sex.day.avg=</span><span class="kw">mean</span>(<span class="dt">x=</span>tip.pct))
 <span class="kw">head</span>(<span class="dt">x =</span> tips.transformed, <span class="dt">n =</span> <span class="dv">15</span>)</code></pre>
 <pre><code>##    total_bill  tip    sex smoker day   time size  tip.pct sex.day.avg
 ## 1        5.75 1.00 Female    Yes Fri Dinner    2 17.39130    19.93884
@@ -758,13 +761,13 @@ tips.transformed&lt;-<span class="kw">ddply</span>(<span class="dt">.data=</span
 ## 15      16.93 3.07 Female     No Sat Dinner    3 18.13349    15.64702</code></pre>
 <p>Note that <strong>transform</strong> can't do transformations that involve the results of <em>other</em> transformations from the same call</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Attempt to add new columns that draw on other (but still new) columns</span>
-tips.transformed&lt;-<span class="kw">ddply</span>(<span class="dt">.data=</span>tips, <span class="dt">.variables=</span>.(sex, day), <span class="dt">.fun=</span>transform, 
+tips.transformed &lt;-<span class="st"> </span><span class="kw">ddply</span>(<span class="dt">.data=</span>tips, <span class="dt">.variables=</span>.(sex, day), <span class="dt">.fun=</span>transform, 
                         <span class="dt">sex.day.avg=</span><span class="kw">mean</span>(<span class="dt">x=</span>tip.pct),
                         <span class="dt">sex.day.avg.deviation=</span>tip.pct-sex.day.avg)</code></pre>
 <pre><code>## Error: object 'sex.day.avg' not found</code></pre>
 <p>For this, we need <strong>mutate</strong>: just like transform, but it executes the commands iteratively so transformations can be carried out that rely on previous transformations from the same call</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Attempt to add new columns that draw on other (but still new) columns</span>
-tips.transformed&lt;-<span class="kw">ddply</span>(<span class="dt">.data=</span>tips, <span class="dt">.variables=</span>.(sex, day), <span class="dt">.fun=</span>mutate, 
+tips.transformed &lt;-<span class="st"> </span><span class="kw">ddply</span>(<span class="dt">.data=</span>tips, <span class="dt">.variables=</span>.(sex, day), <span class="dt">.fun=</span>mutate, 
                         <span class="dt">sex.day.avg=</span><span class="kw">mean</span>(<span class="dt">x=</span>tip.pct),
                         <span class="dt">sex.day.avg.deviation=</span>tip.pct-sex.day.avg)
 <span class="kw">head</span>(<span class="dt">x =</span> tips.transformed, <span class="dt">n =</span> <span class="dv">15</span>)</code></pre>
@@ -802,7 +805,7 @@ tips.transformed&lt;-<span class="kw">ddply</span>(<span class="dt">.data=</span
 ## 15             2.4864695</code></pre>
 <p>Another very useful function is <strong>arrange</strong>, which orders a data frame on the basis of column contents</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compute average tips across gender, smoker status, and day of the week</span>
-tips.summary&lt;-<span class="kw">ddply</span>(<span class="dt">.data=</span>tips, <span class="dt">.variables=</span>.(gender, smoker, day), <span class="dt">.fun=</span>summarize, <span class="dt">mean.tip.pct=</span><span class="kw">mean</span>(<span class="dt">x =</span> tip.pct))
+tips.summary &lt;-<span class="st"> </span><span class="kw">ddply</span>(<span class="dt">.data=</span>tips, <span class="dt">.variables=</span>.(gender, smoker, day), <span class="dt">.fun=</span>summarize, <span class="dt">mean.tip.pct=</span><span class="kw">mean</span>(<span class="dt">x =</span> tip.pct))
 
 <span class="co"># Arrange summarized data from highest average tip to lowest average tip</span>
 <span class="kw">arrange</span>(<span class="dt">df =</span> tips.summary, mean.tip.pct)</code></pre>
@@ -867,9 +870,12 @@ tips.summary&lt;-<span class="kw">ddply</span>(<span class="dt">.data=</span>tip
 </ol>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Basic Call</span>
 <span class="kw">melt</span>(<span class="dt">data=</span>, <span class="dt">id.vars=</span>, <span class="dt">measure.vars=</span>, <span class="dt">variable.name=</span>, <span class="dt">value.name=</span>)</code></pre>
+<ul>
+<li>often data come in wide format and we need it in long format; for example, regression and plotting functions often need long format input</li>
+</ul>
 <p>To see how this works in practice, suppose we wanted to convert this data from its current wide format to an entirely long format. How to proceed?</p>
 <p><strong>First</strong>, select which columns you want to keep (i.e. not melt). In this case, we're interested in having individual tips as the unit of analysis. Unfortunately, there is no column containing an individual identification number in this data, so we'll just add one as &quot;id&quot;:</p>
-<pre class="sourceCode r"><code class="sourceCode r">tips$id&lt;-<span class="dv">1</span>:<span class="kw">nrow</span>(tips)
+<pre class="sourceCode r"><code class="sourceCode r">tips$id &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="kw">nrow</span>(tips)
 <span class="kw">head</span>(tips)</code></pre>
 <pre><code>##   total_bill  tip    sex smoker day   time size   tip.pct id
 ## 1      16.99 1.01 Female     No Sun Dinner    2  5.944673  1
@@ -880,7 +886,7 @@ tips.summary&lt;-<span class="kw">ddply</span>(<span class="dt">.data=</span>tip
 ## 6      25.29 4.71   Male     No Sun Dinner    4 18.623962  6</code></pre>
 <p><strong>Second</strong>, select which columns we want to melt. In this case, we'd like to melt every column except &quot;id&quot;.</p>
 <p>With these two pieces of information, we're ready to melt down the data.frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r">tips.melted&lt;-<span class="kw">melt</span>(<span class="dt">data=</span>tips, <span class="dt">id.vars=</span><span class="st">&quot;id&quot;</span>, 
+<pre class="sourceCode r"><code class="sourceCode r">tips.melted &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data=</span>tips, <span class="dt">id.vars=</span><span class="st">&quot;id&quot;</span>, 
      <span class="dt">measure.vars=</span><span class="kw">c</span>(<span class="st">&quot;total_bill&quot;</span>, <span class="st">&quot;tip&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;smoker&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;time&quot;</span>, <span class="st">&quot;size&quot;</span>, <span class="st">&quot;tip.pct&quot;</span>))</code></pre>
 <pre><code>## Warning: attributes are not identical across measure variables; they will
 ## be dropped</code></pre>
@@ -893,7 +899,7 @@ tips.summary&lt;-<span class="kw">ddply</span>(<span class="dt">.data=</span>tip
 ## 5  5 total_bill 24.59
 ## 6  6 total_bill 25.29</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># If you want to melt ALL columns that aren't ID variables, you can also omit the &quot;measure.vars&quot; argument</span>
-tips.melted&lt;-<span class="kw">melt</span>(<span class="dt">data=</span>tips, <span class="dt">id.vars=</span><span class="st">&quot;id&quot;</span>)</code></pre>
+tips.melted &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data=</span>tips, <span class="dt">id.vars=</span><span class="st">&quot;id&quot;</span>)</code></pre>
 <pre><code>## Warning: attributes are not identical across measure variables; they will
 ## be dropped</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="dt">x =</span> tips.melted)</code></pre>
@@ -905,7 +911,7 @@ tips.melted&lt;-<span class="kw">melt</span>(<span class="dt">data=</span>tips, 
 ## 5  5 total_bill 24.59
 ## 6  6 total_bill 25.29</code></pre>
 <p>Note that melt collapses all of the measure variables into two columns: one containing the column/measurement name, the other containing the column/measurement value for that row. By default, these columns are named &quot;variable&quot; and &quot;value&quot;, though they can be customized using the &quot;variable.name&quot; and &quot;value.name&quot; arguments. For example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">tips.melted&lt;-<span class="kw">melt</span>(<span class="dt">data=</span>tips, <span class="dt">id.vars=</span><span class="st">&quot;id&quot;</span>, 
+<pre class="sourceCode r"><code class="sourceCode r">tips.melted &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data=</span>tips, <span class="dt">id.vars=</span><span class="st">&quot;id&quot;</span>, 
      <span class="dt">measure.vars=</span><span class="kw">c</span>(<span class="st">&quot;total_bill&quot;</span>, <span class="st">&quot;tip&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;smoker&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;time&quot;</span>, <span class="st">&quot;size&quot;</span>, <span class="st">&quot;tip.pct&quot;</span>),
      <span class="dt">variable.name=</span><span class="st">&quot;characteristic&quot;</span>,
      <span class="dt">value.name=</span><span class="st">&quot;response&quot;</span>)</code></pre>
@@ -920,7 +926,7 @@ tips.melted&lt;-<span class="kw">melt</span>(<span class="dt">data=</span>tips, 
 ## 5  5     total_bill    24.59
 ## 6  6     total_bill    25.29</code></pre>
 <p>Note also that one need not melt down all columns that aren't serving as ID columns. The melted data.frame will only contain the values of the measure variables you select. For instance:</p>
-<pre class="sourceCode r"><code class="sourceCode r">tips.melted&lt;-<span class="kw">melt</span>(<span class="dt">data=</span>tips, <span class="dt">id.vars=</span><span class="st">&quot;id&quot;</span>, 
+<pre class="sourceCode r"><code class="sourceCode r">tips.melted &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data=</span>tips, <span class="dt">id.vars=</span><span class="st">&quot;id&quot;</span>, 
      <span class="dt">measure.vars=</span><span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;day&quot;</span>))</code></pre>
 <pre><code>## Warning: attributes are not identical across measure variables; they will
 ## be dropped</code></pre>
@@ -951,7 +957,7 @@ tips.melted&lt;-<span class="kw">melt</span>(<span class="dt">data=</span>tips, 
 ## 5      24.59 3.61 Female     No Sun Dinner    4 14.680765  5
 ## 6      25.29 4.71   Male     No Sun Dinner    4 18.623962  6</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Cast a data.frame containing the individual column and columns containing the expansion of &quot;age9&quot; on the basis of its unique values</span>
-tips.cast&lt;-<span class="kw">dcast</span>(<span class="dt">data=</span>tips, <span class="dt">formula=</span>id~sex, <span class="dt">value.var=</span><span class="st">&quot;tip.pct&quot;</span>)
+tips.cast &lt;-<span class="st"> </span><span class="kw">dcast</span>(<span class="dt">data=</span>tips, <span class="dt">formula=</span>id~sex, <span class="dt">value.var=</span><span class="st">&quot;tip.pct&quot;</span>)
 <span class="kw">head</span>(<span class="dt">x =</span> tips.cast)</code></pre>
 <pre><code>##   id    Female     Male
 ## 1  1  5.944673       NA
@@ -961,7 +967,7 @@ tips.cast&lt;-<span class="kw">dcast</span>(<span class="dt">data=</span>tips, <
 ## 5  5 14.680765       NA
 ## 6  6        NA 18.62396</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Previously melted data</span>
-tips.melted&lt;-<span class="kw">melt</span>(<span class="dt">data =</span> tips, <span class="dt">id.vars =</span> <span class="st">&quot;id&quot;</span>)</code></pre>
+tips.melted &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data =</span> tips, <span class="dt">id.vars =</span> <span class="st">&quot;id&quot;</span>)</code></pre>
 <pre><code>## Warning: attributes are not identical across measure variables; they will
 ## be dropped</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="dt">x =</span> tips.melted)</code></pre>
@@ -973,7 +979,7 @@ tips.melted&lt;-<span class="kw">melt</span>(<span class="dt">data =</span> tips
 ## 5  5 total_bill 24.59
 ## 6  6 total_bill 25.29</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Cast a new data.frame from melted data.frame containing the individual column and expanding the &quot;variable&quot; column</span>
-tips.cast&lt;-<span class="kw">dcast</span>(<span class="dt">data=</span>tips.melted, <span class="dt">formula=</span>id~variable, <span class="dt">value.var=</span><span class="st">&quot;value&quot;</span>)
+tips.cast &lt;-<span class="st"> </span><span class="kw">dcast</span>(<span class="dt">data=</span>tips.melted, <span class="dt">formula=</span>id~variable, <span class="dt">value.var=</span><span class="st">&quot;value&quot;</span>)
 <span class="kw">head</span>(<span class="dt">x =</span> tips.cast)</code></pre>
 <pre><code>##   id total_bill  tip    sex smoker day   time size          tip.pct
 ## 1  1      16.99 1.01 Female     No Sun Dinner    2 5.94467333725721
@@ -1009,7 +1015,7 @@ tips.cast&lt;-<span class="kw">dcast</span>(<span class="dt">data=</span>tips.me
 <li><p>Example: suppose we want to regress the tip percent on the total bill and the size of the party, as well as the gender and smoker status of the tipper. The glm call would be something like this:</p></li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Regress tip percent on total bill and party size</span>
-reg&lt;-<span class="kw">glm</span>(<span class="dt">formula=</span>tip.pct~total_bill+size+sex+smoker, 
+reg &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="dt">formula=</span>tip.pct~total_bill+size+sex+smoker, 
                 <span class="dt">family=</span>gaussian, <span class="dt">data=</span>tips)</code></pre>
 <ul>
 <li>When we store this regression in an object, we get access to several items of interest</li>
@@ -1070,7 +1076,7 @@ reg$aic</code></pre>
 <li>Can also extract useful things from the summary object</li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Store summary method results</span>
-sum.reg&lt;-<span class="kw">summary</span>(reg)
+sum.reg &lt;-<span class="st"> </span><span class="kw">summary</span>(reg)
 <span class="co"># View summary method results objects</span>
 <span class="kw">objects</span>(sum.reg)</code></pre>
 <pre><code>##  [1] &quot;aic&quot;            &quot;aliased&quot;        &quot;call&quot;           &quot;coefficients&quot;  

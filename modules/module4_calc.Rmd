@@ -47,6 +47,8 @@ air$DepHour <- substring(tmp, 1, 2)
 head(air$DepHour)
 ```
 
+Question: Note the code above runs and the syntax is perfectly good R syntax, but in terms of what it does, there is a bug in it. See if you can see what it is.
+
 # Linear algebra 
 
 R can do essentially any linear algebra you need. It uses system-level packages called BLAS (basic linear algebra subroutines) and LAPACK (linear algebra package). Note that these calculations will be essentially as fast as if you wrote C code because R just calls C and Fortran routines to do the calculations.
@@ -258,7 +260,7 @@ Notice the 'long' vs. 'wide' formats. You'll see more about that sort of thing i
 
 # Discretization
 
-You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by education level:
+You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by departure delay severity:
 ```{r fig.width=9}
 air$delayStatus <- cut(air$DepDelay, breaks = c(-Inf, -5, 5, 15, 30, 60, 180, Inf))
 levels(air$delayStatus) <- c('early','on-time','slight',
@@ -339,13 +341,13 @@ What's the deal with the `all.x` and `all.y` ?  We can tell R whether we want to
 
 4) Merge the info from data/carriers.csv with the airline dataset so that we have the full names of the airlines as a new column in the data frame.
 
-4) Discretize distance into some bins and create a Dist_binned variable. Count the number of flights in each bin.
+5) Discretize distance into some bins and create a Dist_binned variable. Count the number of flights in each bin.
 
-5) Create a boxplot of delay by binned distance.
+6) Create a boxplot of delay by binned distance.
 
-6) Sort the dataset and find the shortest flight. Now consider the use of `which.min()` and why using that should be much quicker with large datasets.
+7) Sort the dataset and find the shortest flight. Now consider the use of `which.min()` and why using that should be much quicker with large datasets.
  
-7)  Suppose we have two categorical variables and we conduct a hypothesis test of independence. The chi-square statistic is: 
+8)  Suppose we have two categorical variables and we conduct a hypothesis test of independence. The chi-square statistic is: 
 
 $$
 \chi^2 = \sum_{i=1}^{n}\sum_{j=1}^{m} \frac{(y_{ij} - e_{ij})^2}{e_{ij}}, 
@@ -361,14 +363,14 @@ nrow = 3, ncol = 4)
 
 Compute the statistic without *any* loops as follows:
 
-1. First, assume you have the *e* matrix. How do you compute the statistic without loops as a function of `y` and `e`?
-2. How can you construct the *e* matrix? Hint: the numerator of *e* is just an *outer product* for which the `outer()` function can be used.
+a. First, assume you have the *e* matrix. How do you compute the statistic without loops as a function of `y` and `e`?
+b. How can you construct the *e* matrix? Hint: the numerator of *e* is just an *outer product* for which the `outer()` function can be used.
 
 ### Advanced 
 
-8) For each combination of UniqueCarrier, Month, and DayOfWeek, find the 95th percentile of delay. 
+9) For each combination of UniqueCarrier, Month, and DayOfWeek, find the 95th percentile of delay. 
 
-9) This requires a bit of setup. Run the following code:
+10) This requires a bit of setup. Run the following code:
 ```{r, eval=FALSE}
 h <- air$DepTime %/% 100
 m <- air$DepTime %% 100

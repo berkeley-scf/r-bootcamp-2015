@@ -55,7 +55,7 @@ chi2_df1000 &lt;-<span class="st"> </span><span class="kw">sum</span>(chi2vals)
 <pre class="sourceCode r"><code class="sourceCode r">vals &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="fl">1e6</span>)
 <span class="kw">system.time</span>(trunc &lt;-<span class="st"> </span><span class="kw">ifelse</span>(vals &gt;<span class="st"> </span><span class="dv">0</span>, vals, <span class="dv">0</span>))</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.134   0.004   0.138</code></pre>
+##   0.127   0.012   0.139</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(vals &lt;-<span class="st"> </span>vals *<span class="st"> </span>(vals &gt;<span class="st"> </span><span class="dv">0</span>))</code></pre>
 <pre><code>##    user  system elapsed 
 ##   0.008   0.000   0.008</code></pre>
@@ -66,6 +66,7 @@ chi2_df1000 &lt;-<span class="st"> </span><span class="kw">sum</span>(chi2vals)
 air$DepHour &lt;-<span class="st"> </span><span class="kw">substring</span>(tmp, <span class="dv">1</span>, <span class="dv">2</span>)
 <span class="kw">head</span>(air$DepHour)</code></pre>
 <pre><code>## [1] &quot;12&quot; &quot;12&quot; &quot;12&quot; NA   &quot;12&quot; &quot;12&quot;</code></pre>
+<p>Question: Note the code above runs and the syntax is perfectly good R syntax, but in terms of what it does, there is a bug in it. See if you can see what it is.</p>
 </div>
 <div id="linear-algebra" class="slide section level1">
 <h1>Linear algebra</h1>
@@ -179,7 +180,7 @@ for(i in <span class="dv">1</span>:n)
       vals[i] &lt;-<span class="st"> </span>i
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.056   0.000   0.055</code></pre>
+##   0.044   0.000   0.044</code></pre>
 <p>Here's how to pre-allocate an empty list:</p>
 <pre class="sourceCode r"><code class="sourceCode r">vals &lt;-<span class="st"> </span><span class="kw">list</span>(); <span class="kw">length</span>(vals) &lt;-<span class="st"> </span>n
 <span class="kw">head</span>(vals)</code></pre>
@@ -496,7 +497,7 @@ subsets &lt;-<span class="st"> </span><span class="kw">split</span>(airSmall, ai
 </div>
 <div id="discretization" class="slide section level1">
 <h1>Discretization</h1>
-<p>You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by education level:</p>
+<p>You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by departure delay severity:</p>
 <pre class="sourceCode r"><code class="sourceCode r">air$delayStatus &lt;-<span class="st"> </span><span class="kw">cut</span>(air$DepDelay, <span class="dt">breaks =</span> <span class="kw">c</span>(-<span class="ot">Inf</span>, -<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">60</span>, <span class="dv">180</span>, <span class="ot">Inf</span>))
 <span class="kw">levels</span>(air$delayStatus) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'early'</span>,<span class="st">'on-time'</span>,<span class="st">'slight'</span>,
                         <span class="st">'short'</span>,<span class="st">'medium'</span>,<span class="st">'long'</span>,<span class="st">'hair-pulling'</span>)
@@ -742,12 +743,12 @@ air2 &lt;-<span class="st"> </span><span class="kw">merge</span>(air, numFlights
 <pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">10</span>, <span class="dv">12</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>), 
 <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</code></pre>
 <p>Compute the statistic without <em>any</em> loops as follows:</p>
-<ol style="list-style-type: decimal">
+<ol style="list-style-type: lower-alpha">
 <li>First, assume you have the <em>e</em> matrix. How do you compute the statistic without loops as a function of <code>y</code> and <code>e</code>?</li>
 <li>How can you construct the <em>e</em> matrix? Hint: the numerator of <em>e</em> is just an <em>outer product</em> for which the <code>outer()</code> function can be used.</li>
 </ol>
 <h3 id="advanced">Advanced</h3>
-<ol start="8" style="list-style-type: decimal">
+<ol start="9" style="list-style-type: decimal">
 <li><p>For each combination of UniqueCarrier, Month, and DayOfWeek, find the 95th percentile of delay.</p></li>
 <li><p>This requires a bit of setup. Run the following code:</p></li>
 </ol>

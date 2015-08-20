@@ -229,7 +229,7 @@ system.time(trunc &lt;- ifelse(vals &gt; 0, vals, 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.137   0.000   0.137
+##   0.132   0.000   0.132
 </code></pre>
 
 <pre><code class="r">system.time(vals &lt;- vals * (vals &gt; 0))
@@ -252,6 +252,8 @@ head(air$DepHour)
 
 <pre><code>## [1] &quot;12&quot; &quot;12&quot; &quot;12&quot; NA   &quot;12&quot; &quot;12&quot;
 </code></pre>
+
+<p>Question: Note the code above runs and the syntax is perfectly good R syntax, but in terms of what it does, there is a bug in it. See if you can see what it is.</p>
 
 <h1>Linear algebra</h1>
 
@@ -420,7 +422,7 @@ for(i in 1:n)
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.039   0.000   0.040
+##   0.038   0.000   0.038
 </code></pre>
 
 <p>Here&#39;s how to pre-allocate an empty list: </p>
@@ -821,7 +823,7 @@ xtabs(DepDelay ~ ., data = agg)
 
 <h1>Discretization</h1>
 
-<p>You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by education level:</p>
+<p>You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by departure delay severity:</p>
 
 <pre><code class="r">air$delayStatus &lt;- cut(air$DepDelay, breaks = c(-Inf, -5, 5, 15, 30, 60, 180, Inf))
 levels(air$delayStatus) &lt;- c(&#39;early&#39;,&#39;on-time&#39;,&#39;slight&#39;,
@@ -1096,13 +1098,13 @@ dim(air)
 
 <p>4) Merge the info from data/carriers.csv with the airline dataset so that we have the full names of the airlines as a new column in the data frame.</p>
 
-<p>4) Discretize distance into some bins and create a Dist_binned variable. Count the number of flights in each bin.</p>
+<p>5) Discretize distance into some bins and create a Dist_binned variable. Count the number of flights in each bin.</p>
 
-<p>5) Create a boxplot of delay by binned distance.</p>
+<p>6) Create a boxplot of delay by binned distance.</p>
 
-<p>6) Sort the dataset and find the shortest flight. Now consider the use of <code>which.min()</code> and why using that should be much quicker with large datasets.</p>
+<p>7) Sort the dataset and find the shortest flight. Now consider the use of <code>which.min()</code> and why using that should be much quicker with large datasets.</p>
 
-<p>7)  Suppose we have two categorical variables and we conduct a hypothesis test of independence. The chi-square statistic is: </p>
+<p>8)  Suppose we have two categorical variables and we conduct a hypothesis test of independence. The chi-square statistic is: </p>
 
 <p>\[
 \chi^2 = \sum_{i=1}^{n}\sum_{j=1}^{m} \frac{(y_{ij} - e_{ij})^2}{e_{ij}}, 
@@ -1118,16 +1120,14 @@ nrow = 3, ncol = 4)
 
 <p>Compute the statistic without <em>any</em> loops as follows:</p>
 
-<ol>
-<li>First, assume you have the <em>e</em> matrix. How do you compute the statistic without loops as a function of <code>y</code> and <code>e</code>?</li>
-<li>How can you construct the <em>e</em> matrix? Hint: the numerator of <em>e</em> is just an <em>outer product</em> for which the <code>outer()</code> function can be used.</li>
-</ol>
+<p>a. First, assume you have the <em>e</em> matrix. How do you compute the statistic without loops as a function of <code>y</code> and <code>e</code>?
+b. How can you construct the <em>e</em> matrix? Hint: the numerator of <em>e</em> is just an <em>outer product</em> for which the <code>outer()</code> function can be used.</p>
 
 <h3>Advanced</h3>
 
-<p>8) For each combination of UniqueCarrier, Month, and DayOfWeek, find the 95th percentile of delay. </p>
+<p>9) For each combination of UniqueCarrier, Month, and DayOfWeek, find the 95th percentile of delay. </p>
 
-<p>9) This requires a bit of setup. Run the following code:</p>
+<p>10) This requires a bit of setup. Run the following code:</p>
 
 <pre><code class="r">h &lt;- air$DepTime %/% 100
 m &lt;- air$DepTime %% 100

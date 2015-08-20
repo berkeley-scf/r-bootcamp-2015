@@ -393,7 +393,7 @@ lm(y ~ x)
 </code></pre>
 
 <pre><code>## y ~ x
-## &lt;environment: 0x3466808&gt;
+## &lt;environment: 0x2b21808&gt;
 </code></pre>
 
 <pre><code class="r">stats::lm(y ~ x)
@@ -548,7 +548,7 @@ print(xtable(table(air$UniqueCarrier, air$Cancelled)), type = &quot;html&quot;)
 </code></pre>
 
 <pre><code>## &lt;!-- html table generated in R 3.2.1 by xtable 1.7-4 package --&gt;
-## &lt;!-- Wed Aug 19 14:04:26 2015 --&gt;
+## &lt;!-- Thu Aug 20 08:56:44 2015 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; 0 &lt;/th&gt; &lt;th&gt; 1 &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; AA &lt;/td&gt; &lt;td align=&quot;right&quot;&gt; 49222 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt; 1033 &lt;/td&gt; &lt;/tr&gt;
@@ -667,15 +667,15 @@ git push
 
 <h3>Using the ideas</h3>
 
-<p>2) Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as <em>Downloads</em>. Use <code>setwd()</code> to set your working directory to be that directory. Read the file in using <code>read.csv()</code>.  Now use <code>setwd()</code> to point to a different directory such as <em>Desktop</em>. Write the data frame out to a file without any row names and without quotes on the character strings.</p>
+<p>3) Put the data/cpds.csv file in some other directory on your computer (or the VM if using the VM), such as <em>Downloads</em>. Use <code>setwd()</code> to set your working directory to be that directory. Read the file in using <code>read.csv()</code>.  Now use <code>setwd()</code> to point to a different directory such as <em>Desktop</em>. Write the data frame out to a file without any row names and without quotes on the character strings.</p>
 
-<p>3) Make a plot with the airline data. Save it as a PDF in <em>Desktop</em>. Now see what happens if you set the <em>width</em> and <em>height</em> arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.</p>
+<p>4) Make a plot with the airline data. Save it as a PDF in <em>Desktop</em>. Now see what happens if you set the <em>width</em> and <em>height</em> arguments to be very small and see how it affects the resulting PDF. Do the same but setting width and height to be very large.</p>
 
-<p>4) Figure out where (what directory) the <em>graphics</em> package is stored on your machine. Is is the same as where the <em>fields</em> package is stored?</p>
+<p>5) Figure out where (what directory) the <em>graphics</em> package is stored on your machine. Is is the same as where the <em>fields</em> package is stored?</p>
 
 <h3>Advanced</h3>
 
-<p>5) Load the <em>spam</em> package. Note the message about <code>backsolve()</code> being masked from package:base. Now if you enter <code>backsolve</code>, you&#39;ll see the code associated with the version of <code>backsolve()</code> provided by the <em>spam</em> package. Now enter <code>base::backsolve</code> and you&#39;ll see the code for the version of <code>backsolve()</code> provided by base R. Explain why typing <code>backsolve</code> shows the <em>spam</em> version rather than the <em>base</em> version. </p>
+<p>6) Load the <em>spam</em> package. Note the message about <code>backsolve()</code> being masked from package:base. Now if you enter <code>backsolve</code>, you&#39;ll see the code associated with the version of <code>backsolve()</code> provided by the <em>spam</em> package. Now enter <code>base::backsolve</code> and you&#39;ll see the code for the version of <code>backsolve()</code> provided by base R. Explain why typing <code>backsolve</code> shows the <em>spam</em> version rather than the <em>base</em> version. </p>
 
 </body>
 

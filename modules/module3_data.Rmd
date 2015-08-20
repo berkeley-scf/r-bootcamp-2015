@@ -398,18 +398,18 @@ The *read.table()* family of functions just skims the surface of things...
 
 ### Using the ideas
 
-5) Create a character string using `paste()` that tells the user how many rows there are in the data frame - do this programmatically such that it would work for any data frame regardless of how many rows it has. The result should look like this: "There are 56,234,234 rows in the dataset"
+6) Create a character string using `paste()` that tells the user how many rows there are in the data frame - do this programmatically such that it would work for any data frame regardless of how many rows it has. The result should look like this: "There are 56,234,234 rows in the dataset"
 
-6) If you didn't do it this way already, extract the last row from the airline dataset without typing the number '539895'.
+7) If you didn't do it this way already, extract the last row from the airline dataset without typing the number '539895'.
 
-7) Create a boolean vector indicating if flight on the carrier WN (Southwest) and distance is less than 1000 miles and calculate the proportion of all the flights these represent.
+8) Create a boolean vector indicating if flight on the carrier WN (Southwest) and distance is less than 1000 miles and calculate the proportion of all the flights these represent.
 
-8) Use that vector to create a new data frame that is a subset of the original data frame.
+9) Use that vector to create a new data frame that is a subset of the original data frame.
 
-11) Consider the attributes of the *air* dataset. What kind of R object is the set of attributes?
+10) Consider the attributes of the *air* dataset. What kind of R object is the set of attributes?
 
 ### Advanced
 
-12) Make the destination variable a factor variable and reorder the levels by the number of arrivals from SFO at the destinations. Now create a boxplot of departure delay by destination for January, 2005.
+11) Make the destination variable a factor variable and reorder the levels by the number of arrivals from SFO at the destinations. Now create a boxplot of departure delay by destination for January, 2005.
 
-13) Create row names for the data frame based on concatenating the Year, Month, DayofMonth, UniqueCarrier and FlightNum fields.
+12) Create row names for the data frame based on concatenating the Year, Month, DayofMonth, UniqueCarrier and FlightNum fields.

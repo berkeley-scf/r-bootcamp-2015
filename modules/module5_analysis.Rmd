@@ -17,23 +17,23 @@ if(!('modules' %in% unlist(strsplit(getwd(), split = '/')))) setwd('modules')
 
 - For some, it might just be basic calculations
 ```{r}
-63.24*pi # Multiply 63.24 by pi
-exp(x=4.39) # Raise e to the power of 4.39
-log(x=1.7) # Take the log of 1.7
-tan(x=58) # Compute the tangent of 58
+63.24 * pi # Multiply 63.24 by pi
+exp(x = 4.39) # Raise e to the power of 4.39
+log(x = 1.7) # Take the log of 1.7
+tan(x = 58) # Compute the tangent of 58
 ```
 
 - For others, it might be large or complex mathematical operations
 ```{r}
 # Take one million samples from the standard normal distribution
-data.sample<-rnorm(n=1000000, mean=0, sd=1) 
+data.sample <- rnorm(n=1000000, mean=0, sd=1) 
 
 # Build a 1000 x 1000 matrix from the sample data
-big.matrix<-matrix(data=data.sample, ncol=1000) 
+big.matrix <- matrix(data=data.sample, ncol=1000) 
 
-dim(x=big.matrix) # Confirm that "big.matrix" is 1000 x 1000
-big.matrix.inverse<-solve(a=big.matrix) # Compute the inverse of "big.matrix"
-system.time(expr=solve(a=big.matrix)) # Compute time required to invert "big.matrix"
+dim(x = big.matrix) # Confirm that "big.matrix" is 1000 x 1000
+big.matrix.inverse <- solve(a=big.matrix) # Compute the inverse of "big.matrix"
+system.time(expr = solve(a=big.matrix)) # Compute time required to invert "big.matrix"
 ```
 
 # Useful Stuff: Applied Research Edition
@@ -76,33 +76,33 @@ str(object = tips)
 
 ```{r}
 # Sample 100 times from the standard normal distribution 
-sample.data<-rnorm(n=100, mean=0, sd=1)
+sample.data <- rnorm(n=100, mean=0, sd=1)
 
 # Attempt to calculate the sample mean (absence of NAs)
-mean(x=sample.data)
+mean(x = sample.data)
 
 # Add some missing values to the sample
-sample.data[c(1,4,16,64)]<-NA
+sample.data[c(1,4,16,64)] <- NA
 
 # Attempt to calculate the sample mean (presence of NAs)
-mean(x=sample.data) # Action for NAs is not specified
-mean(x=sample.data, na.rm = TRUE) # Action for NAs is not specified
+mean(x = sample.data) # Action for NAs is not specified
+mean(x = sample.data, na.rm = TRUE) # Action for NAs is not specified
 ```
 
 2) These functions are also sensitive to the presence of factor variables; remove the factor levels to avoid errors (usually use one of as.vector(), as.character(), or as.numeric())
 
 ```{r}
 # Get a random sample of zeroes and ones 
-sample.data<-sample(x = c(0,1), size = 100, replace = T)
+sample.data <- sample(x = c(0,1), size = 100, replace = T)
 
 # Add factor levels to the sample
-sample.data<-factor(x = sample.data)
+sample.data <- factor(x = sample.data)
 
 # Attempt to calculate the sample mean (with factor levels)
 mean(x = sample.data)
 
 # Remove factor levels
-sample.data<-as.numeric(x = sample.data)
+sample.data <- as.numeric(x = sample.data)
 
 # Check that there are no more factor levels in the sample data
 is.factor(x=sample.data)
@@ -139,7 +139,7 @@ summary(object=tips)
 - For this, the table function is very helpful
 ```{r}
 # Isolate the gender column
-gender<-tips$sex
+gender <- tips$sex
 
 # Get a vector of counts for unique values, divide by total count
 table(gender)
@@ -147,7 +147,7 @@ table(gender)/length(gender)
 table(gender)/length(gender)*100
 
 # Isolate the gender and smoker columns
-gender.smoker<-tips[,c("sex", "smoker")]
+gender.smoker <- tips[,c("sex", "smoker")]
 
 # Get a vector of counts for unique values, divide by total count
 table(gender.smoker)
@@ -219,6 +219,9 @@ c) Input from, and output to, data frames, matricies, and lists
 d) Progress bars for lengthy computation
 e) Informative error messages
 
+- Note that *dplyr* is the next iteration of *plyr* that focuses on fast data frame manipulations. We won't cover it here, but recommend you take a look at it.
+
+
 ```{r}
 # Install the "plyr" package (only necessary one time)
 # install.packages("plyr") # Not Run
@@ -248,7 +251,7 @@ Consider the case where we want to calculate tipping behavior across gender, smo
 
 ```{r}
 # Calculate tip amount as percent of total bill
-tips$tip.pct<-tips$tip/tips$total_bill*100
+tips$tip.pct <- tips$tip/tips$total_bill*100
 
 # Using the appropriate plyr function (ddply), compute average tip percentages
 ddply(.data=tips, .variables=.(gender, smoker, day), .fun=summarize, mean.tip.pct=mean(x = tip.pct))
@@ -264,7 +267,7 @@ Consider the case where we want to calculate vote choice statistics across race 
 
 ```{r}
 # Split the data.frame into a list on the basis of gender, smoker status, and day-of-the-week
-tips.split<-split(x=tips, f = list(tips$sex, tips$smoker, tips$day))
+tips.split <- split(x=tips, f = list(tips$sex, tips$smoker, tips$day))
 head(x = tips.split, n = 3)
 
 # Compute summary statistics (note: no .variables argument)
@@ -286,7 +289,7 @@ llply(.data=tips.split, .fun=summarize, mean.tip.pct=mean(x = tip.pct))
 
 ```{r}
 # Add a column containing the average tip of the gender of the individual on that day
-tips.transformed<-ddply(.data=tips, .variables=.(sex, day), .fun=transform, sex.day.avg=mean(x=tip.pct))
+tips.transformed <- ddply(.data=tips, .variables=.(sex, day), .fun=transform, sex.day.avg=mean(x=tip.pct))
 head(x = tips.transformed, n = 15)
 ```
 
@@ -294,7 +297,7 @@ Note that **transform** can't do transformations that involve the results of *ot
 
 ```{r}
 # Attempt to add new columns that draw on other (but still new) columns
-tips.transformed<-ddply(.data=tips, .variables=.(sex, day), .fun=transform, 
+tips.transformed <- ddply(.data=tips, .variables=.(sex, day), .fun=transform, 
                         sex.day.avg=mean(x=tip.pct),
                         sex.day.avg.deviation=tip.pct-sex.day.avg)
 ```
@@ -303,7 +306,7 @@ For this, we need **mutate**: just like transform, but it executes the commands 
 
 ```{r}
 # Attempt to add new columns that draw on other (but still new) columns
-tips.transformed<-ddply(.data=tips, .variables=.(sex, day), .fun=mutate, 
+tips.transformed <- ddply(.data=tips, .variables=.(sex, day), .fun=mutate, 
                         sex.day.avg=mean(x=tip.pct),
                         sex.day.avg.deviation=tip.pct-sex.day.avg)
 head(x = tips.transformed, n = 15)
@@ -313,7 +316,7 @@ Another very useful function is **arrange**, which orders a data frame on the ba
 
 ```{r}
 # Compute average tips across gender, smoker status, and day of the week
-tips.summary<-ddply(.data=tips, .variables=.(gender, smoker, day), .fun=summarize, mean.tip.pct=mean(x = tip.pct))
+tips.summary <- ddply(.data=tips, .variables=.(gender, smoker, day), .fun=summarize, mean.tip.pct=mean(x = tip.pct))
 
 # Arrange summarized data from highest average tip to lowest average tip
 arrange(df = tips.summary, mean.tip.pct)
@@ -349,11 +352,13 @@ library(reshape2)
 melt(data=, id.vars=, measure.vars=, variable.name=, value.name=)
 ```
 
+- often data come in wide format and we need it in long format; for example, regression and plotting functions often need long format input
+
 To see how this works in practice, suppose we wanted to convert this data from its current wide format to an entirely long format.  How to proceed?
 
 **First**, select which columns you want to keep (i.e. not melt).  In this case, we're interested in having individual tips as the unit of analysis.  Unfortunately, there is no column containing an individual identification number in this data, so we'll just add one as "id":
 ```{r}
-tips$id<-1:nrow(tips)
+tips$id <- 1:nrow(tips)
 head(tips)
 ```
 
@@ -361,17 +366,17 @@ head(tips)
 
 With these two pieces of information, we're ready to melt down the data.frame:
 ```{r}
-tips.melted<-melt(data=tips, id.vars="id", 
+tips.melted <- melt(data=tips, id.vars="id", 
      measure.vars=c("total_bill", "tip", "sex", "smoker", "day", "time", "size", "tip.pct"))
 head(x = tips.melted)
 # If you want to melt ALL columns that aren't ID variables, you can also omit the "measure.vars" argument
-tips.melted<-melt(data=tips, id.vars="id")
+tips.melted <- melt(data=tips, id.vars="id")
 head(x = tips.melted)
 ```
 
 Note that melt collapses all of the measure variables into two columns: one containing the column/measurement name, the other containing the column/measurement value for that row.  By default, these columns are named "variable" and "value", though they can be customized using the "variable.name" and "value.name" arguments.  For example:
 ```{r}
-tips.melted<-melt(data=tips, id.vars="id", 
+tips.melted <- melt(data=tips, id.vars="id", 
      measure.vars=c("total_bill", "tip", "sex", "smoker", "day", "time", "size", "tip.pct"),
      variable.name="characteristic",
      value.name="response")
@@ -380,7 +385,7 @@ head(x = tips.melted)
 
 Note also that one need not melt down all columns that aren't serving as ID columns.  The melted data.frame will only contain the values of the measure variables you select.  For instance:
 ```{r}
-tips.melted<-melt(data=tips, id.vars="id", 
+tips.melted <- melt(data=tips, id.vars="id", 
      measure.vars=c("sex", "day"))
 head(x = tips.melted)
 ```
@@ -400,13 +405,13 @@ Some example usages:
 # Original data
 head(x = tips)
 # Cast a data.frame containing the individual column and columns containing the expansion of "age9" on the basis of its unique values
-tips.cast<-dcast(data=tips, formula=id~sex, value.var="tip.pct")
+tips.cast <- dcast(data=tips, formula=id~sex, value.var="tip.pct")
 head(x = tips.cast)
 # Previously melted data
-tips.melted<-melt(data = tips, id.vars = "id")
+tips.melted <- melt(data = tips, id.vars = "id")
 head(x = tips.melted)
 # Cast a new data.frame from melted data.frame containing the individual column and expanding the "variable" column
-tips.cast<-dcast(data=tips.melted, formula=id~variable, value.var="value")
+tips.cast <- dcast(data=tips.melted, formula=id~variable, value.var="value")
 head(x = tips.cast)
 ```
 
@@ -440,7 +445,7 @@ glm(formula=y~x1+x2+x3+..., family=familyname(link="linkname"), data=)
 
 ```{r}
 # Regress tip percent on total bill and party size
-reg<-glm(formula=tip.pct~total_bill+size+sex+smoker, 
+reg <- glm(formula=tip.pct~total_bill+size+sex+smoker, 
                 family=gaussian, data=tips)
 ```
 
@@ -466,7 +471,7 @@ summary(reg)
 
 ```{r}
 # Store summary method results
-sum.reg<-summary(reg)
+sum.reg <- summary(reg)
 # View summary method results objects
 objects(sum.reg)
 # View table of coefficients

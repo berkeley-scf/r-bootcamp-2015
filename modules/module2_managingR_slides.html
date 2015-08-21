@@ -165,7 +165,7 @@ z &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a 
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>); y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>)
 <span class="kw">lm</span>(y ~<span class="st"> </span>x)</code></pre>
 <pre><code>## y ~ x
-## &lt;environment: 0x1e9b140&gt;</code></pre>
+## &lt;environment: 0x2e14140&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">stats::<span class="kw">lm</span>(y ~<span class="st"> </span>x)</code></pre>
 <pre><code>## 
 ## Call:
@@ -173,7 +173,7 @@ z &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a 
 ## 
 ## Coefficients:
 ## (Intercept)            x  
-##      0.2140       0.5176</code></pre>
+##     -0.4523      -0.3185</code></pre>
 <p>Can you explain what is going on? Consider the results of <code>search()</code>.</p>
 <h3 id="looking-inside-a-package">Looking inside a package</h3>
 <p>Packages are available as &quot;Package source&quot;, namely the raw code and help files, and &quot;binaries&quot;, where stuff is packaged up for R to use efficiently.</p>
@@ -215,7 +215,7 @@ z &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a 
 <span class="kw">setwd</span>(<span class="kw">file.path</span>(<span class="st">'~'</span>, <span class="st">'Desktop'</span>, <span class="st">'r-bootcamp-2015'</span>)) <span class="co"># change the working directory</span>
 <span class="kw">setwd</span>(<span class="kw">file.path</span>(<span class="st">'/'</span>, <span class="st">'Users'</span>, <span class="st">'paciorek'</span>, <span class="st">'Desktop'</span>, <span class="st">'tmp'</span>)) <span class="co"># absolute path</span>
 <span class="kw">getwd</span>()
-<span class="kw">setwd</span>(<span class="kw">file.path</span>(<span class="st">'..'</span>, <span class="st">'r-bootcamp-2015'</span>)) <span class="co"># relative path</span></code></pre>
+<span class="kw">setwd</span>(<span class="kw">file.path</span>(<span class="st">'..'</span>, <span class="st">'r-bootcamp-2015'</span>, <span class="st">'modules'</span>)) <span class="co"># relative path</span></code></pre>
 <p>Many errors and much confusion result from you and R not being on the same page in terms of where in the directory structure you are.</p>
 </div>
 <div id="reading-text-files-into-r" class="slide section level1">
@@ -280,7 +280,7 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <pre><code>## Loading required package: xtable</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">xtable</span>(<span class="kw">table</span>(air$UniqueCarrier, air$Cancelled)), <span class="dt">type =</span> <span class="st">&quot;html&quot;</span>)</code></pre>
 <pre><code>## &lt;!-- html table generated in R 3.2.1 by xtable 1.7-4 package --&gt;
-## &lt;!-- Thu Aug 20 08:56:31 2015 --&gt;
+## &lt;!-- Fri Aug 21 10:59:32 2015 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; 0 &lt;/th&gt; &lt;th&gt; 1 &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; AA &lt;/td&gt; &lt;td align=&quot;right&quot;&gt; 49222 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt; 1033 &lt;/td&gt; &lt;/tr&gt;

@@ -166,7 +166,7 @@ setwd('../r-bootcamp-2015') # relative path
 setwd(file.path('~', 'Desktop', 'r-bootcamp-2015')) # change the working directory
 setwd(file.path('/', 'Users', 'paciorek', 'Desktop', 'tmp')) # absolute path
 getwd()
-setwd(file.path('..', 'r-bootcamp-2015')) # relative path
+setwd(file.path('..', 'r-bootcamp-2015', 'modules')) # relative path
 ```
 Many errors and much confusion result from you and R not being on the same page in terms of where in the directory structure you are.
 

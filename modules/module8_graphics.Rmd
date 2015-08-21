@@ -2,6 +2,8 @@
 % August 2015, UC Berkeley
 % Chris Krogslund (ckrogslund@berkeley.edu)
 
+% note to C. Paciorek: make of this is crashing in R 3.2.1 on smeagol but not R 3.2.0 on arwen
+
 ```{r chunksetup, include=FALSE} 
 # include any code here you don't want to show up in the document,
 # e.g. package and dataset loading
@@ -25,10 +27,10 @@ data <- read.csv("../data/cpds.csv")
 * Recall that R is an object-oriented programming language
 
 ```{r}
-tips<-reshape2::tips # Load dataset on tipping behavior included with reshape2 package
+tips <- reshape2::tips # Load dataset on tipping behavior included with reshape2 package
 attributes(tips) # Check attributes of the tips dataset (names, row.names, class)
 # Create an object of class "lm" (linear model), regressing tip on some covariates
-tips.reg<-lm(formula=tip~total_bill+sex+smoker+day+time+size, data=tips)
+tips.reg <- lm(formula=tip~total_bill + sex + smoker + day + time + size, data=tips)
 attributes(tips.reg) # Check attributes of the tips.reg object (names, class)
 ```
 
@@ -42,9 +44,9 @@ plot(tips.reg, which=1:2) # Calls plotting method for class of tips.reg objects 
 * lattice and ggplot2 generally **don't** exhibit this sort of behavior
 ```{r, fig.cap=" "}
 xyplot(tips) # Attempt in lattice to automatically plot objects of class "data.frame"
-ggplot(data=tips)+geom_point() # Attempt in ggplot to automatically plot objects of class "data.frame"
+ggplot(data=tips) + geom_point() # Attempt in ggplot to automatically plot objects of class "data.frame"
 xyplot(tips.reg) # Attempt in lattice to automatically plot objects of class "lm"
-ggplot(data=tips.reg)+geom_point() # Attempt in ggplot to automatically plot objects of class "lm"
+ggplot(data=tips.reg) + geom_point() # Attempt in ggplot to automatically plot objects of class "lm"
 ```
 
 * Easiest to cover **lattice** and **ggplot2** in tandem 
@@ -106,7 +108,7 @@ z~y*x         # Show the 3D relationship between x, y, and z
 The general call for ggplot2 graphics looks something like this:
   
 ```{r, eval=FALSE}
-ggplot(data=, aes(x=,y=, [options]))+geom_xxxx()+...+...+...
+ggplot(data=, aes(x=,y=, [options])) + geom_xxxx() + ... + ... + ...
 ```
 
 Note that ggplot2 graphs in layers in a *continuing call* (hence the endless +...+...+...), which really makes the extra layer part of the call
@@ -117,8 +119,8 @@ Note that ggplot2 graphs in layers in a *continuing call* (hence the endless +..
 You can see the layering effect by comparing the same graph with different colors for each layer
 
 ```{r, fig.cap=" ", warning=FALSE}
-ggplot(data=data, aes(x=year, y=realgdpgr))+geom_point(color="black")+geom_point(aes(x=year, y=unemp), color="red")
-ggplot(data=data, aes(x=year, y=realgdpgr))+geom_point(color="red")+geom_point(aes(x=year, y=unemp), color="black")
+ggplot(data=data, aes(x=year, y=realgdpgr)) + geom_point(color="black") + geom_point(aes(x=year, y=unemp), color="red")
+ggplot(data=data, aes(x=year, y=realgdpgr)) + geom_point(color="red") + geom_point(aes(x=year, y=unemp), color="black")
 ```
 
 # Comparing lattice and ggplot
@@ -137,43 +139,43 @@ ggplot(data=data, aes(x=year, y=realgdpgr))+geom_point(color="red")+geom_point(a
 # lattice v. ggplot2: Densities
 
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data, aes(x=vturn)) + geom_density() # ggplot2
 densityplot(~vturn, data=data) # lattice
-ggplot(data=data, aes(x=vturn))+geom_density() # ggplot2
 ```
 
 # lattice v. ggplot2: X-Y scatter plots
 
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point() # ggplot2
 xyplot(outlays~year, data=data) # lattice
-ggplot(data=data, aes(x=year, y=outlays))+geom_point() # ggplot2
 ```
 
 # lattice v. ggplot2: X-Y line plots
 
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays)) + geom_line() # ggplot2 
 xyplot(outlays~year, data=data[data$country=="USA",], type="l") # lattice
-ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays))+geom_line() # ggplot2 
 ```
 
 # lattice v. ggplot2: bar plots 
 ```{r, fig.cap=" ", warning=FALSE, message=FALSE}
 # Create data.frame of average growth rates by country over time
-growth<-ddply(.data=data, .variables=.(country), summarize, mean=mean(realgdpgr, na.rm=T))
+growth <- ddply(.data=data, .variables=.(country), summarize, mean=mean(realgdpgr, na.rm=T))
 
+ggplot(data=growth, aes(x=country, y=mean)) + geom_bar(stat="identity") # ggplot2
 barchart(mean~country, data=growth) # lattice
-ggplot(data=growth, aes(x=country, y=mean))+geom_bar(stat="identity") # ggplot2
 ```
 
 # lattice v. ggplot2: box plots 
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data, aes(x=country, y=outlays)) + geom_boxplot() # ggplot2
 bwplot(outlays~country, data=data) # lattice
-ggplot(data=data, aes(x=country, y=outlays))+geom_boxplot() # ggplot2
 ```
 
 # lattice v. ggplot2: "trellis" plots 
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point() + facet_wrap(~country) # ggplot2
 xyplot(outlays~year|country, data=data) # lattice
-ggplot(data=data, aes(x=year, y=outlays))+geom_point()+facet_wrap(~country) # ggplot2
 ```
 
 # lattice v. ggplot2: countour plots
@@ -183,93 +185,103 @@ volcano[1:10, 1:10] # Examine volcano dataset (first 10 rows and columns)
 volcano3d <- melt(volcano) # Use reshape2 package to melt the data
 head(volcano3d) # Examine volcano3d dataset (head)
 names(volcano3d) <- c("xvar", "yvar", "zvar") # Rename volcano3d columns
-contourplot(zvar~xvar+yvar, data=volcano3d) # lattice
-ggplot(data=volcano3d, aes(x=xvar, y=yvar, z = zvar))+geom_contour() # ggplot2
+
+ggplot(data=volcano3d, aes(x=xvar, y=yvar, z = zvar)) + geom_contour() # ggplot2
+contourplot(zvar~xvar + yvar, data=volcano3d) # lattice
 ```
 
 # lattice v. ggplot2: tile/image/level plots
 ```{r, fig.cap=" ", warning=FALSE}
-levelplot(zvar~xvar+yvar, data=volcano3d) # lattice
-ggplot(data=volcano3d, aes(x=xvar, y=yvar, z = zvar))+geom_tile(aes(fill=zvar)) # ggplot2
+ggplot(data=volcano3d, aes(x=xvar, y=yvar, z = zvar)) + geom_tile(aes(fill=zvar)) # ggplot2
+levelplot(zvar~xvar + yvar, data=volcano3d) # lattice
 ```
 
 # lattice: 3D plots
 ```{r, fig.cap=" ", warning=FALSE}
 # Create a subset of the dataset containing only data for France
-france.data<-data[data$country=="France",]
+france.data <- data[data$country=="France",]
 cloud(outlays~year*realgdpgr, data=france.data)
 # Create a subset of the dataset containing only data for Greece, Portugal, Ireland, and Spain
-pigs.data<-data[data$country %in% c("Greece", "Portugal", "Ireland", "Spain"),]
+pigs.data <- data[data$country %in% c("Greece", "Portugal", "Ireland", "Spain"),]
 cloud(outlays~year*realgdpgr|country, data=pigs.data)
 ```
 
 # ggplot2: Panel plots
 ```{r, fig.cap=" ", warning=FALSE}
-ggplot(data=pigs.data, aes(x=year, y=realgdpgr, color=country))+geom_line()
+ggplot(data=pigs.data, aes(x=year, y=realgdpgr, color=country)) + geom_line()
 ```
 
 # lattice v. ggplot2: options [labeling]
 
 ```{r, fig.cap=" ", warning=FALSE}
-xyplot(outlays~year, data=data, xlab="Year", ylab="Government Outlays", main="Cool Graph") # lattice
-ggplot(data=data, aes(x=year, y=outlays))+geom_point()+xlab(label="Voter Turnout (%)")+ylab(label="Government Outlays")+ggtitle(label="Cool Graph") # ggplot2
+ggplot(data=data, aes(x=year, y=outlays))  +  geom_point() + 
+xlab(label="Voter Turnout (%)") + ylab(label="Government Outlays") + 
+ggtitle(label="Cool Graph") # ggplot2
+xyplot(outlays~year, data=data, xlab="Year", ylab="Government Outlays", main
+ ="Cool Graph") # lattice
 ```
 
 # lattice v. ggplot2: options [axis + size scaling]
 
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point() # ggplot2
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(size=3) # ggplot2
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(size=1) # ggplot2
 xyplot(outlays~year, data=data) # lattice
 xyplot(outlays~year, data=data, cex=2) # lattice
 xyplot(outlays~year, data=data, cex=.5) # lattice
-ggplot(data=data, aes(x=year, y=outlays))+geom_point() # ggplot2
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(size=3) # ggplot2
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(size=1) # ggplot2
 ```
 
 # lattice v. ggplot2: options [graphical parameters]
 
 * Colors
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(color=colors()[145]) # ggplot2
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(color="red") # ggplot2
 xyplot(outlays~year, data=data, col=colors()[145]) #lattice
 xyplot(outlays~year, data=data, col="red") #lattice
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(color=colors()[145]) # ggplot2
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(color="red") # ggplot2
 ```
 
 * Point Styles and Widths
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(shape=3) # ggplot2
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(shape=15) # ggplot2
 xyplot(outlays~year, data=data, pch=3) # lattice
 xyplot(outlays~year, data=data, pch=15) # lattice
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(shape=3) # ggplot2
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(shape=15) # ggplot2
 ```
 
 * Point Styles and Widths
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(shape=3) # ggplot2
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(shape=15) # ggplot2
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(shape="w") # ggplot2
+ggplot(data=data, aes(x=year, y=outlays)) + geom_point(shape="$", size=5) # ggplot2
 xyplot(outlays~year, data=data, pch=3) # lattice
 xyplot(outlays~year, data=data, pch=15) # lattice
 xyplot(outlays~year, data=data, pch="w") # lattice
 xyplot(outlays~year, data=data, pch="$", cex=2) # lattice
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(shape=3) # ggplot2
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(shape=15) # ggplot2
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(shape="w") # ggplot2
-ggplot(data=data, aes(x=year, y=outlays))+geom_point(shape="$", size=5) # ggplot2
 ```
 
 * Line Styles and Widths
 ```{r, fig.cap=" ", warning=FALSE}
+ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays)) + 
+geom_line(linetype=1) # ggplot2
+ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays)) + 
+geom_line(linetype=2) # ggplot2
+ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays)) + 
+geom_line(linetype=3) # ggplot2
+ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays)) + 
+geom_line(linetype=3, size=1) # ggplot2
+ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays)) + 
+geom_line(linetype=3, size=1.5) # ggplot2
+ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays)) + 
+geom_line(linetype=3, size=2) # ggplot2
 xyplot(outlays~year, data=data[data$country=="USA",], type="l", lty=1) # lattice
 xyplot(outlays~year, data=data[data$country=="USA",], type="l", lty=2) # lattice
 xyplot(outlays~year, data=data[data$country=="USA",], type="l", lty=3) # lattice
 xyplot(outlays~year, data=data[data$country=="USA",], type="l", lty=3, lwd=2) # lattice
 xyplot(outlays~year, data=data[data$country=="USA",], type="l", lty=3, lwd=3) # lattice
 xyplot(outlays~year, data=data[data$country=="USA",], type="l", lty=3, lwd=4) # lattice
-ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays))+geom_line(linetype=1) # ggplot2
-ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays))+geom_line(linetype=2) # ggplot2
-ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays))+geom_line(linetype=3) # ggplot2
-ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays))+geom_line(linetype=3, size=1) # ggplot2
-ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays))+geom_line(linetype=3, size=1.5) # ggplot2
-ggplot(data=data[data$country=="USA",], aes(x=year, y=outlays))+geom_line(linetype=3, size=2) # ggplot2
 ```
 
 # ggplot2 and the Grammar of Graphics
@@ -306,47 +318,56 @@ ggplot2 is optimized for showing variation on all four aesthetic types
 
 ```{r, fig.cap=" ", warning=FALSE}
 # Differences in kind using color
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_line(aes(color=country))
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_line(aes(color=country))
 ```
 
 Note what happens when we specify the color parameter outside of the aesthetic operator. ggplot2 views these specifications as invalid graphical parameters. 
 
 ```{r, fig.cap=" ", warning=FALSE}
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_line(color=country)
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_line(color="country")
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_line(color="red")
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_line(color=country)
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_line(color="country")
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_line(color="red")
 ```
 
 ```{r, fig.cap=" ", warning=FALSE}
 # Differences in kind using line types
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_line(aes(linetype=country))
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_line(aes(linetype=country))
 # Differences in kind using point shapes
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point(aes(shape=country))
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point(aes(shape=country))
 # Differences in degree using color
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point(aes(color=realgdpgr))
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point(aes(color=realgdpgr))
 # Differences in degree using point size
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point(aes(size=realgdpgr))
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point(aes(size=realgdpgr))
 # Multiple non-cartesian aesthetics (differences in kind using color, degree using point size)
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point(aes(color=country,size=realgdpgr))
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + 
+  geom_point(aes(color=country,size=realgdpgr))
 ```
 
 # Fitted lines and curves with ggplot2
 ```{r, fig.cap=" ", warning=FALSE, message=FALSE}
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point()
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point()
 # Add linear model (lm) smoother
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point()+geom_smooth(method="lm")
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point() + 
+  geom_smooth(method="lm")
 # Add local linear model (loess) smoother, span of 0.75 
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point()+geom_smooth(method="loess", span=.75)
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point() + 
+  geom_smooth(method="loess", span=.75)
 # Add local linear model (loess) smoother, span of 0.25 
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point()+geom_smooth(method="loess", span=.25)
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point() + 
+  geom_smooth(method="loess", span=.25)
 # Add linear model (lm) smoother, no standard error shading 
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point()+geom_smooth(method="lm", se=F)
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point() + 
+  geom_smooth(method="lm", se=F)
 # Add local linear model (loess) smoother, no standard error shading 
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point()+geom_smooth(method="loess", se=F)
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point() + 
+  geom_smooth(method="loess", se=F)
 # Add a local linear (loess) smoother for each country
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point(aes(color=country))+geom_smooth(aes(color=country))
+ggplot(data=pigs.data, aes(x=year, y=outlays)) + geom_point(aes(color=country)) + 
+  geom_smooth(aes(color=country))
 # Add a local linear (loess) smoother for each country, no standard error shading
-ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point(aes(color=country, size=realgdpgr))+geom_smooth(aes(color=country), se=F)
+ggplot(data=pigs.data, aes(x=year, y=outlays)) +
+  geom_point(aes(color=country, size=realgdpgr)) + 
+  geom_smooth(aes(color=country), se=F)
 ```
 
 # lattice v. ggplot2: tables
@@ -356,9 +377,12 @@ ggplot(data=pigs.data, aes(x=year, y=outlays))+geom_point(aes(color=country, siz
 # Initialize gridExtra library
 library(gridExtra)
 # Create 3 plots to combine in a table
-plot1<-ggplot(data=pigs.data, aes(x=year, y=outlays, color=))+geom_line(aes(color=country))
-plot2<-ggplot(data=pigs.data, aes(x=year, y=outlays, linetype=))+geom_line(aes(linetype=country))
-plot3<-ggplot(data=pigs.data, aes(x=year, y=outlays, shape=))+geom_point(aes(shape=country))
+plot1 <- ggplot(data=pigs.data, aes(x=year, y=outlays, color=)) + 
+  geom_line(aes(color=country))
+plot2 <- ggplot(data=pigs.data, aes(x=year, y=outlays, linetype=)) + 
+  geom_line(aes(linetype=country))
+plot3 <- ggplot(data=pigs.data, aes(x=year, y=outlays, shape=)) + 
+  geom_point(aes(shape=country))
 # Call grid.arrange
 grid.arrange(plot1, plot2, plot3, nrow=3, ncol=1)
 ```

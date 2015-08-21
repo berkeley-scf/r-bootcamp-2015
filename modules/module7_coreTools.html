@@ -227,9 +227,10 @@ thresh &lt;- function(x, val, upper = TRUE) {
        return(x)
 }
 
-# reduce outlier influence
+
 DestSubset &lt;- c(&#39;LAX&#39;,&#39;SEA&#39;,&#39;PHX&#39;,&#39;DEN&#39;,&#39;MSP&#39;,&#39;JFK&#39;,&#39;ATL&#39;,&#39;DFW&#39;,&#39;IAH&#39;, &#39;ORD&#39;) 
 airSmall &lt;- subset(air, Dest %in% DestSubset)
+# reduce outlier influence
 airSmall$DepDelayCens &lt;- thresh(airSmall$DepDelay, 180)
 airSmall$SchedDepCont &lt;- airSmall$CRSDepTime %/% 100 + (airSmall$CRSDepTime %% 100) / 60
 mod_LAX &lt;- gam(DepDelayCens ~ s(Month, k = 8) + s(SchedDepCont, k = 25), 
@@ -406,12 +407,12 @@ lines(x, dt(x, df = 1), col = &#39;red&#39;)
 </code></pre>
 
 <pre><code>##      [,1]
-## [1,]    9
-## [2,]   12
-## [3,]   22
-## [4,]   31
-## [5,]   19
-## [6,]    7
+## [1,]    5
+## [2,]   11
+## [3,]   27
+## [4,]   23
+## [5,]   26
+## [6,]    8
 </code></pre>
 
 <pre><code class="r">x &lt;- seq(0, 10, length = 100)
@@ -428,8 +429,8 @@ lines(x, dchisq(x, df = 2), col = &#39;red&#39;)
 <pre><code class="r">sample(1:nrow(air), 20, replace = FALSE)
 </code></pre>
 
-<pre><code>##  [1]  92240 359572 413764 313249 411973 243302 122177 185226 298628  79043
-## [11] 435008 301200 316564 404938 146897 129175 253416 228164 194221 313799
+<pre><code>##  [1] 319055 109901 268848 117281 107868 250392 345320  25627 137192 145812
+## [11] 519076 503283  58067 471287  45055 108068 346417 368465 381150 341427
 </code></pre>
 
 <p>Here&#39;s an example of some code that would be part of coding up a bootstrap.</p>
@@ -446,7 +447,7 @@ smp &lt;- sample(seq_len(nrow(air)), replace = TRUE)
 mean(air$DepDelay[smp], na.rm = TRUE)
 </code></pre>
 
-<pre><code>## [1] 11.20948
+<pre><code>## [1] 11.11788
 </code></pre>
 
 <p>It&#39;s a good idea to use <code>seq_along()</code> and <code>seq_len()</code> and not syntax like <code>1:length(earnings)</code> in <code>sample()</code> because the outcome of <code>length()</code> might in some cases be unexpected (e.g., if you&#39;re taking subsets of a dataset). Similar reasoning holds when setting up for loops: e.g., </p>

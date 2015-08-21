@@ -15,11 +15,11 @@ For some of the topics here, my goal is not to teach you how to fish, but merely
 # Object-oriented programming (OOP) in R
 
 
-Confusingly, R has three different systems for OOP, and none of them are as elegant and powerful as in Python or other languages more focused on OOP. That said, they get the job done for a lot of tasks.
+Confusingly, R has three (well, four) different systems for OOP, and none of them are as elegant and powerful as in Python or other languages more focused on OOP. That said, they get the job done for a lot of tasks.
 
 * S3: informal system used for `lm()`, `glm()`, and many other core features in R in the *stats* package
 * S4: more formal system, used with *lme4* 
-* Reference Classes: new system allowing for passing objects by reference
+* Reference Classes and R6: new systems allowing for passing objects by reference
 
 # Basics of object-oriented programming (OOP)
 
@@ -363,7 +363,7 @@ We'll focus on shared memory computation here.
 
 # How do I know how many cores a computer has?
 
-* Linux - count the processors listed in */proc/cpuinfo*
+* Linux - count the processors listed in */proc/cpuinfo* or use `nproc`
 * Mac - in a terminal: `system_profiler | grep -i 'Cores'`
 * Windows - count the number of graphs shown for CPU Usage (or CPU Usage History) under "Task Manager->Performance", or [try this program](http://www.cpuid.com/cpuz.php) 
  
@@ -407,8 +407,8 @@ You should see that your R process is using more than 100% of CPU. Inconceivable
 
 You can talk with your systems administrator about linking R to a fast BLAS or you can look into it yourself for your personal machine; see the [R Installation and Administration manual](http://www.cran.r-project.org/manuals.html).
 
-Note that in some cases, in particular for small matrix operations, using multiple threads may actually slow down computation, so you may want to experiment, particularly with Linux. You can force the linear algebra to use only a single core by doing (assuming you're using the bash shell) `export OMP_NUM_THREADS=1` in the terminal window *before* starting R in the same terminal.
-
+Note that in some cases, in particular for small matrix operations, using multiple threads may actually slow down computation, so you may want to experiment, particularly with Linux. You can force the linear algebra to use only a single core by doing (assuming you're using the bash shell) `export OMP_NUM_THREADS=1` in the terminal window *before* starting R in the same terminal. Or see the *RhpcBLASctl* package to do it from within R.
+ 
 Finally, note that threaded BLAS and either `foreach` or parallel versions of `apply()` can conflict and cause R to hang, so you're likely to want to set the number of threads to 1 as above if you're doing explicit parallelization. 
 
 # What is an embarrassingly parallel (EP) problem?
@@ -486,6 +486,8 @@ out <- parLapply(cluster, unique(air$Dest), fitFun)
 out[1:5]
 ```
 
+Note there may be an error in the HTML output from the above code, but it should work when running it directly.
+
 ```{r cache=TRUE}
 require(parallel)
 nCores <- 4
@@ -522,7 +524,7 @@ The syntax for using L'Ecuyer is available in [my parallel computing workshop no
 
 # A brief note on distributed computing for advanced users
 
-If you have access to multiple machines within a networked environment, such as the compute servers in the Statistics Department, there are a couple straightforward ways to parallelize EP jobs across machines.
+If you have access to multiple machines within a networked environment, such as the compute servers in the Statistics Department or the campus-wide Savio cluster or machines on Amazon's EC2 service, there are a couple straightforward ways to parallelize EP jobs across machines.
 
 1. Use `foreach` with *doMPI* as the back-end. You'll need *MPI* and *Rmpi* installed on all machines. 
 2. Use sockets to make a cluster in R and then use `parLapply()`, `parSapply()`, `mclapply()`, etc.

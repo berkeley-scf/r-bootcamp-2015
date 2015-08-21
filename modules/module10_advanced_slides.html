@@ -44,11 +44,11 @@ August 2015, UC Berkeley
 </div>
 <div id="object-oriented-programming-oop-in-r" class="slide section level1">
 <h1>Object-oriented programming (OOP) in R</h1>
-<p>Confusingly, R has three different systems for OOP, and none of them are as elegant and powerful as in Python or other languages more focused on OOP. That said, they get the job done for a lot of tasks.</p>
+<p>Confusingly, R has three (well, four) different systems for OOP, and none of them are as elegant and powerful as in Python or other languages more focused on OOP. That said, they get the job done for a lot of tasks.</p>
 <ul>
 <li>S3: informal system used for <code>lm()</code>, <code>glm()</code>, and many other core features in R in the <em>stats</em> package</li>
 <li>S4: more formal system, used with <em>lme4</em></li>
-<li>Reference Classes: new system allowing for passing objects by reference</li>
+<li>Reference Classes and R6: new systems allowing for passing objects by reference</li>
 </ul>
 </div>
 <div id="basics-of-object-oriented-programming-oop" class="slide section level1">
@@ -114,7 +114,7 @@ mod2$residuals[<span class="dv">1</span>:<span class="dv">20</span>] <span class
 <pre class="sourceCode r"><code class="sourceCode r">predict</code></pre>
 <pre><code>## function (object, ...) 
 ## UseMethod(&quot;predict&quot;)
-## &lt;bytecode: 0x1b6cf68&gt;
+## &lt;bytecode: 0x1a85208&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predict.glm</span></code></pre>
 <p>When <code>predict()</code> is called on a GLM object, it first calls the generic <code>predict()</code>, which then recognizes that the first argument is of the class <em>glm</em> and immediately calls the right class-specific method, <code>predict.glm()</code> in this case.</p>
@@ -368,14 +368,14 @@ for(i in <span class="dv">1</span>:nVals) {
    results[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(tmp)
 }
 results</code></pre>
-<pre><code>## [1] -0.1866538  0.7454090  0.5507262</code></pre>
+<pre><code>## [1] -0.1003228  0.9798280  0.4515898</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">varName</code></pre>
 <pre><code>## [1] &quot;x3&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">tmp</code></pre>
-<pre><code>##  [1] 0.02162889 0.26585765 0.84479740 0.52507339 0.58683087 0.87289312
-##  [7] 0.93159607 0.95094042 0.01684450 0.39002789 0.93538595 0.83885160
-## [13] 0.31939179 0.49190746 0.75603696 0.52045143 0.32151370 0.60992283
-## [19] 0.07039077 0.74418050</code></pre>
+<pre><code>##  [1] 0.24947374 0.28910688 0.41286110 0.56944004 0.44311564 0.51615870
+##  [7] 0.68842383 0.74835377 0.11041798 0.08865854 0.11826860 0.39011369
+## [13] 0.36033031 0.88927185 0.48749890 0.74903474 0.03902189 0.94690395
+## [19] 0.88619102 0.04915167</code></pre>
 <p>Or suppose you needed to create &quot;x1&quot;, &quot;x2&quot;, &quot;x3&quot;, automatically.</p>
 <pre class="sourceCode r"><code class="sourceCode r">nVals &lt;-<span class="st"> </span><span class="dv">3</span>
 results &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, nVals)
@@ -384,8 +384,8 @@ for(i in <span class="dv">1</span>:nVals) {
    <span class="kw">assign</span>(varName, <span class="kw">rnorm</span>(<span class="dv">10</span>))
 }
 x2</code></pre>
-<pre><code>##  [1] -0.21223329  0.49979470 -0.04973543  1.40617799 -0.27582306
-##  [6] -1.11874860 -0.03142396  0.19388465 -0.07940830 -0.74047041</code></pre>
+<pre><code>##  [1]  0.6152825 -0.7540012  2.2758856  1.5094264 -1.0232514 -0.5193117
+##  [7]  0.8412708  0.4236575 -0.6373000  0.3570612</code></pre>
 <p>Can you think of any uses of this ability for R to self-generate?</p>
 </div>
 <div id="file-encodings" class="slide section level1">
@@ -472,7 +472,7 @@ breiman</code></pre>
 <div id="how-do-i-know-how-many-cores-a-computer-has" class="slide section level1">
 <h1>How do I know how many cores a computer has?</h1>
 <ul>
-<li>Linux - count the processors listed in <em>/proc/cpuinfo</em></li>
+<li>Linux - count the processors listed in <em>/proc/cpuinfo</em> or use <code>nproc</code></li>
 <li>Mac - in a terminal: <code>system_profiler | grep -i 'Cores'</code></li>
 <li>Windows - count the number of graphs shown for CPU Usage (or CPU Usage History) under &quot;Task Manager-&gt;Performance&quot;, or <a href="http://www.cpuid.com/cpuz.php">try this program</a></li>
 </ul>
@@ -513,7 +513,7 @@ U &lt;-<span class="st"> </span><span class="kw">chol</span>(<span class="kw">cr
 <div id="more-details-on-the-blas" class="slide section level1">
 <h1>More details on the BLAS</h1>
 <p>You can talk with your systems administrator about linking R to a fast BLAS or you can look into it yourself for your personal machine; see the <a href="http://www.cran.r-project.org/manuals.html">R Installation and Administration manual</a>.</p>
-<p>Note that in some cases, in particular for small matrix operations, using multiple threads may actually slow down computation, so you may want to experiment, particularly with Linux. You can force the linear algebra to use only a single core by doing (assuming you're using the bash shell) <code>export OMP_NUM_THREADS=1</code> in the terminal window <em>before</em> starting R in the same terminal.</p>
+<p>Note that in some cases, in particular for small matrix operations, using multiple threads may actually slow down computation, so you may want to experiment, particularly with Linux. You can force the linear algebra to use only a single core by doing (assuming you're using the bash shell) <code>export OMP_NUM_THREADS=1</code> in the terminal window <em>before</em> starting R in the same terminal. Or see the <em>RhpcBLASctl</em> package to do it from within R.</p>
 <p>Finally, note that threaded BLAS and either <code>foreach</code> or parallel versions of <code>apply()</code> can conflict and cause R to hang, so you're likely to want to set the number of threads to 1 as above if you're doing explicit parallelization.</p>
 </div>
 <div id="what-is-an-embarrassingly-parallel-ep-problem" class="slide section level1">
@@ -712,6 +712,7 @@ out[<span class="dv">1</span>:<span class="dv">5</span>]</code></pre>
 ## 8.00 5.68  total = 21.69 
 ## 
 ## GCV score: 1367.66</code></pre>
+<p>Note there may be an error in the HTML output from the above code, but it should work when running it directly.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(parallel)
 nCores &lt;-<span class="st"> </span><span class="dv">4</span>
 out2 &lt;-<span class="st"> </span><span class="kw">mclapply</span>(<span class="kw">unique</span>(air$Dest), fitFun, <span class="dt">mc.cores =</span> nCores)
@@ -809,7 +810,7 @@ out2[<span class="dv">1</span>:<span class="dv">5</span>]</code></pre>
 </div>
 <div id="a-brief-note-on-distributed-computing-for-advanced-users" class="slide section level1">
 <h1>A brief note on distributed computing for advanced users</h1>
-<p>If you have access to multiple machines within a networked environment, such as the compute servers in the Statistics Department, there are a couple straightforward ways to parallelize EP jobs across machines.</p>
+<p>If you have access to multiple machines within a networked environment, such as the compute servers in the Statistics Department or the campus-wide Savio cluster or machines on Amazon's EC2 service, there are a couple straightforward ways to parallelize EP jobs across machines.</p>
 <ol style="list-style-type: decimal">
 <li>Use <code>foreach</code> with <em>doMPI</em> as the back-end. You'll need <em>MPI</em> and <em>Rmpi</em> installed on all machines.</li>
 <li>Use sockets to make a cluster in R and then use <code>parLapply()</code>, <code>parSapply()</code>, <code>mclapply()</code>, etc.</li>

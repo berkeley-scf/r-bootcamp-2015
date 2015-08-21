@@ -207,12 +207,12 @@ hr {
 
 <h1>Object-oriented programming (OOP) in R</h1>
 
-<p>Confusingly, R has three different systems for OOP, and none of them are as elegant and powerful as in Python or other languages more focused on OOP. That said, they get the job done for a lot of tasks.</p>
+<p>Confusingly, R has three (well, four) different systems for OOP, and none of them are as elegant and powerful as in Python or other languages more focused on OOP. That said, they get the job done for a lot of tasks.</p>
 
 <ul>
 <li>S3: informal system used for <code>lm()</code>, <code>glm()</code>, and many other core features in R in the <em>stats</em> package</li>
 <li>S4: more formal system, used with <em>lme4</em> </li>
-<li>Reference Classes: new system allowing for passing objects by reference</li>
+<li>Reference Classes and R6: new systems allowing for passing objects by reference</li>
 </ul>
 
 <h1>Basics of object-oriented programming (OOP)</h1>
@@ -295,30 +295,24 @@ mod2$residuals[1:20] # access field with list-like syntax
 </code></pre>
 
 <pre><code>##  [1] predict.ar*                predict.Arima*            
-##  [3] predict.arima0*            predict.bam               
-##  [5] predict.bs*                predict.bSpline*          
-##  [7] predict.fastTps            predict.gam               
-##  [9] predict.glm                predict.glmmPQL*          
-## [11] predict.gls*               predict.gnls*             
-## [13] predict.HoltWinters*       predict.interp.surface    
-## [15] predict.jam*               predict.Krig              
-## [17] predict.lda*               predict.lm                
-## [19] predict.lme*               predict.lmList*           
-## [21] predict.loess*             predict.lqs*              
-## [23] predict.mca*               predict.merMod*           
-## [25] predict.mKrig              predict.mlm*              
-## [27] predict.nbSpline*          predict.nlme*             
-## [29] predict.nls*               predict.npolySpline*      
-## [31] predict.ns*                predict.pbSpline*         
-## [33] predict.polr*              predict.poly*             
-## [35] predict.polySpline*        predict.ppolySpline*      
-## [37] predict.ppr*               predict.prcomp*           
-## [39] predict.princomp*          predict.qda*              
-## [41] predict.qsreg              predict.rlm*              
-## [43] predict.smooth.spline*     predict.smooth.spline.fit*
-## [45] predict.sreg               predict.StructTS*         
-## [47] predict.surface            predict.surface.default   
-## [49] predict.Tps               
+##  [3] predict.arima0*            predict.bs*               
+##  [5] predict.bSpline*           predict.glm               
+##  [7] predict.glmmPQL*           predict.gls*              
+##  [9] predict.gnls*              predict.HoltWinters*      
+## [11] predict.lda*               predict.lm                
+## [13] predict.lme*               predict.lmList*           
+## [15] predict.loess*             predict.lqs*              
+## [17] predict.mca*               predict.merMod*           
+## [19] predict.mlm*               predict.nbSpline*         
+## [21] predict.nlme*              predict.nls*              
+## [23] predict.npolySpline*       predict.ns*               
+## [25] predict.pbSpline*          predict.polr*             
+## [27] predict.poly*              predict.polySpline*       
+## [29] predict.ppolySpline*       predict.ppr*              
+## [31] predict.prcomp*            predict.princomp*         
+## [33] predict.qda*               predict.rlm*              
+## [35] predict.smooth.spline*     predict.smooth.spline.fit*
+## [37] predict.StructTS*         
 ## see &#39;?methods&#39; for accessing help and source code
 </code></pre>
 
@@ -327,7 +321,7 @@ mod2$residuals[1:20] # access field with list-like syntax
 
 <pre><code>## function (object, ...) 
 ## UseMethod(&quot;predict&quot;)
-## &lt;bytecode: 0x1b6cf68&gt;
+## &lt;bytecode: 0x1a85208&gt;
 ## &lt;environment: namespace:stats&gt;
 </code></pre>
 
@@ -875,7 +869,7 @@ breiman
 <h1>How do I know how many cores a computer has?</h1>
 
 <ul>
-<li>Linux - count the processors listed in <em>/proc/cpuinfo</em></li>
+<li>Linux - count the processors listed in <em>/proc/cpuinfo</em> or use <code>nproc</code></li>
 <li>Mac - in a terminal: <code>system_profiler | grep -i &#39;Cores&#39;</code></li>
 <li>Windows - count the number of graphs shown for CPU Usage (or CPU Usage History) under &ldquo;Task Manager-&gt;Performance&rdquo;, or <a href="http://www.cpuid.com/cpuz.php">try this program</a> </li>
 </ul>
@@ -927,7 +921,7 @@ U &lt;- chol(crossprod(x))
 
 <p>You can talk with your systems administrator about linking R to a fast BLAS or you can look into it yourself for your personal machine; see the <a href="http://www.cran.r-project.org/manuals.html">R Installation and Administration manual</a>.</p>
 
-<p>Note that in some cases, in particular for small matrix operations, using multiple threads may actually slow down computation, so you may want to experiment, particularly with Linux. You can force the linear algebra to use only a single core by doing (assuming you&#39;re using the bash shell) <code>export OMP_NUM_THREADS=1</code> in the terminal window <em>before</em> starting R in the same terminal.</p>
+<p>Note that in some cases, in particular for small matrix operations, using multiple threads may actually slow down computation, so you may want to experiment, particularly with Linux. You can force the linear algebra to use only a single core by doing (assuming you&#39;re using the bash shell) <code>export OMP_NUM_THREADS=1</code> in the terminal window <em>before</em> starting R in the same terminal. Or see the <em>RhpcBLASctl</em> package to do it from within R.</p>
 
 <p>Finally, note that threaded BLAS and either <code>foreach</code> or parallel versions of <code>apply()</code> can conflict and cause R to hang, so you&#39;re likely to want to set the number of threads to 1 as above if you&#39;re doing explicit parallelization. </p>
 
@@ -1161,6 +1155,8 @@ out[1:5]
 ## GCV score: 1367.66
 </code></pre>
 
+<p>Note there may be an error in the HTML output from the above code, but it should work when running it directly.</p>
+
 <pre><code class="r">require(parallel)
 nCores &lt;- 4
 out2 &lt;- mclapply(unique(air$Dest), fitFun, mc.cores = nCores)
@@ -1276,7 +1272,7 @@ rnorm(5)
 
 <h1>A brief note on distributed computing for advanced users</h1>
 
-<p>If you have access to multiple machines within a networked environment, such as the compute servers in the Statistics Department, there are a couple straightforward ways to parallelize EP jobs across machines.</p>
+<p>If you have access to multiple machines within a networked environment, such as the compute servers in the Statistics Department or the campus-wide Savio cluster or machines on Amazon&#39;s EC2 service, there are a couple straightforward ways to parallelize EP jobs across machines.</p>
 
 <ol>
 <li>Use <code>foreach</code> with <em>doMPI</em> as the back-end. You&#39;ll need <em>MPI</em> and <em>Rmpi</em> installed on all machines. </li>

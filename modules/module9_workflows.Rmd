@@ -48,28 +48,18 @@ if you're coding in R); then make a second version that employs efficiency
 tricks and check that both produce the same output.
 
 # Common syntax errors and bugs
-- Parenthesis mis-matches
-- `[...]` vs. `[[...]]`
-- `==` vs. `=` 
-- Comparing real numbers exactly using `==` is dangerous. Suppose you generate `x = 0.333333` in some fashion with some code and then check: `x == 1/3`. This will produce FALSE.
-- Vectors vs. single values: 
-  + `||` vs. `|` and `&&` vs `&`
-  + You expect a single value but your code gives you a vector
-  + You want to compare an entire vector but your code just compares the
-first value (e.g., in an `if` statement) -- consider using `identical()`
-or `all.equal()`
-- Silent type conversion when you don't want it, or lack of coercion
-where you're expecting it
-- Using the wrong function or variable name
-- Giving unnamed arguments to a function in the wrong order 
-- Forgetting to define a variable in the environment of a function and
-having the function, via R's scoping rules, get that variable as a global
-variable from one of the enclosing environments. At best the types
-are not compatible and you get an error; at worst, you use a garbage
-value and the bug is hard to trace. In some cases your code may work
-fine when you develop the code (if the variable exists in the enclosing
-environment), but then may not work when you restart R if the variable
-no longer exists or is different.
+  - Parenthesis mis-matches
+  - `[...]` vs. `[[...]]`
+  - `==` vs. `=` 
+  - Comparing real numbers exactly using `==` is dangerous. Suppose you generate `x = 0.333333` in some fashion with some code and then check: `x == 1/3`. This will produce FALSE.
+  - Vectors vs. single values: 
+    + `||` vs. `|` and `&&` vs `&`
+    + You expect a single value but your code gives you a vector
+    + You want to compare an entire vector but your code just compares the first value (e.g., in an `if` statement) -- consider using `identical()` or `all.equal()`
+  - Silent type conversion when you don't want it, or lack of coercion where you're expecting it
+ - Using the wrong function or variable name
+ - Giving unnamed arguments to a function in the wrong order 
+ - Forgetting to define a variable in the environment of a function and having the function, via R's scoping rules, get that variable as a global variable from one of the enclosing environments. At best the types are not compatible and you get an error; at worst, you use a garbage value and the bug is hard to trace. In some cases your code may work fine when you develop the code (if the variable exists in the enclosing environment), but then may not work when you restart R if the variable no longer exists or is different.
 
 ```{r}
 library(codetools)
@@ -277,36 +267,37 @@ help file for any standard R function for how this is done in that context).
 
 # Good coding practices: syntax
 
-- Header information: put metainfo on the code into the first few lines
+For an example that demonstrates some of these ideas, see *goodCode.R*.
+And for a counterexample, see *badCode.R*.
+
+  - Header information: put metainfo on the code into the first few lines
 of the file as comments. Include who, when, what, how the code fits
 within a larger program (if appropriate), possibly the versions of
 R and key packages that you wrote this for
-- Indentation: do this systematically (your editor can help here). This
+  - Indentation: do this systematically (your editor can help here). This
 helps you and others to read and understand the code and can help
 in detecting errors in your code because it can expose lack of symmetry.
-- Whitespace: use a lot of it. Some places where it is good to have
+  - Whitespace: use a lot of it. Some places where it is good to have
 it are (1) around operators (assignment and arithmetic), (2) between
 function arguments and list elements, (3) between matrix/array indices,
 in particular for missing indices. 
-- Use blank lines to separate blocks of code and comments to say what
+  - Use blank lines to separate blocks of code and comments to say what
 the block does
-- Split long lines at meaningful places.
-- Use parentheses for clarity even if not needed for order of operations.
+  - Split long lines at meaningful places.
+  - Use parentheses for clarity even if not needed for order of operations.
 For example, `a/y*x` will work but is not easy to read and
 you can easily induce a bug if you forget the order of operations.
-- Documentation - add lots of comments (but don't belabor the obvious).
-Remember that in a few months, you may not follow your own code any
-better than a stranger. Some key things to document: 
-  + summarizing a block of code, 
-  + explaining a very complicated piece of code 
-  + explaining arbitrary constant values.
-- break code into separate files (<2000-3000
+  - Documentation - add lots of comments (but don't belabor the obvious). Remember that in a few months, you may not follow your own code any better than a stranger. Some key things to document: 
+    - summarizing a block of code, 
+    - explaining a very complicated piece of code 
+    - explaining arbitrary constant values.
+  - break code into separate files (<2000-3000
 lines per file) with meaningful file names and related functions grouped
 within a file.
-- Choose a consistent naming style for objects and functions: e.g. *numIts* (lowerCamelCase) vs. *NumIts* (UpperCamelCase) vs. *num.its* vs. *num\_its*
-  + I'd suggest avoiding periods in names since periods are used for object-oriented programming in R and many other languages
-- Try to have the names be informative without being overly long.
-- Try to avoid using the names of standard R functions for your objects, but R will generally be fairly smart about things.
+  - Choose a consistent naming style for objects and functions: e.g. *numIts* (lowerCamelCase) vs. *NumIts* (UpperCamelCase) vs. *num.its* vs. *num\_its*
+    + I'd suggest avoiding periods in names since periods are used for object-oriented programming in R and many other languages
+  - Try to have the names be informative without being overly long.
+  - Try to avoid using the names of standard R functions for your objects, but R will generally be fairly smart about things.
 ```{r}
 c <- 7
 c(3,5)
@@ -334,17 +325,20 @@ Here are some useful articles talking about reproducibility.
 
 # Some ideas for improving reproducibility
 
-* Never change a dataset manually, including in pre-processing and post-processing. Always have a script that operates on the data (or results/output). 
-* Always have version numbers for datasets.
-* Note when and where you download, and ideally download via a script as well (e.g., *wget* and *curl* are UNIX tools for automated downloading).
-* Produce figures (e.g., from R) via a script and not by point-and-click.
-* When making figures, use `save()` or `save.image()` to save all the inputs needed to recreate a figure, with the code for making the figure in a script file.
-* If feasible, include your code for doing analyses and making figures in the relevant document reporting the work by using R Markdown or *Latex* with *knitr* or *Sweave*. 
-* Always set the random number seed so someone else can duplicate your exact numbers.
-* Use version control tools such as Git! 
+  * Never change a dataset manually, including in pre-processing and post-processing. Always have a script that operates on the data (or results/output). 
+  * Always have version numbers for datasets.
+  * Note when and where you download, and ideally download via a script as well (e.g., *wget* and *curl* are UNIX tools for automated downloading).
+  * Produce figures (e.g., from R) via a script and not by point-and-click.
+  * When making figures, use `save()` or `save.image()` to save all the inputs needed to recreate a figure, with the code for making the figure in a script file.
+  * If feasible, include your code for doing analyses and making figures in the relevant document reporting the work by using one of the following tools
+    * *R Markdown*
+    * *Latex* with *knitr* 
+    * *Jupyter* (formerly *IPython Notebook*)
+  * Always set the random number seed so someone else can duplicate your exact numbers.
+  * Use version control tools such as Git! 
 
 # Breakout
 
 Please fill out the feedback survey.
 
-http://bit.ly/rbootcamp
+http://bit.ly/rbootcamp2015

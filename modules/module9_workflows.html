@@ -253,22 +253,15 @@ tricks and check that both produce the same output.</li>
 <ul>
 <li><code>||</code> vs. <code>|</code> and <code>&amp;&amp;</code> vs <code>&amp;</code></li>
 <li>You expect a single value but your code gives you a vector</li>
-<li>You want to compare an entire vector but your code just compares the
-first value (e.g., in an <code>if</code> statement) &ndash; consider using <code>identical()</code>
-or <code>all.equal()</code></li>
+<li>You want to compare an entire vector but your code just compares the first value (e.g., in an <code>if</code> statement) &ndash; consider using <code>identical()</code> or <code>all.equal()</code></li>
 </ul></li>
-<li>Silent type conversion when you don&#39;t want it, or lack of coercion
-where you&#39;re expecting it</li>
+<li>Silent type conversion when you don&#39;t want it, or lack of coercion where you&#39;re expecting it
+
+<ul>
 <li>Using the wrong function or variable name</li>
 <li>Giving unnamed arguments to a function in the wrong order </li>
-<li>Forgetting to define a variable in the environment of a function and
-having the function, via R&#39;s scoping rules, get that variable as a global
-variable from one of the enclosing environments. At best the types
-are not compatible and you get an error; at worst, you use a garbage
-value and the bug is hard to trace. In some cases your code may work
-fine when you develop the code (if the variable exists in the enclosing
-environment), but then may not work when you restart R if the variable
-no longer exists or is different.</li>
+<li>Forgetting to define a variable in the environment of a function and having the function, via R&#39;s scoping rules, get that variable as a global variable from one of the enclosing environments. At best the types are not compatible and you get an error; at worst, you use a garbage value and the bug is hard to trace. In some cases your code may work fine when you develop the code (if the variable exists in the enclosing environment), but then may not work when you restart R if the variable no longer exists or is different.</li>
+</ul></li>
 </ul>
 
 <pre><code class="r">library(codetools)
@@ -464,7 +457,7 @@ object.size(x)
 <pre><code>## 80000040 bytes
 </code></pre>
 
-<pre><code class="r">1e7*8/1e6
+<pre><code class="r">1e7*8/1e6  # direct calculation of Mb
 </code></pre>
 
 <pre><code>## [1] 80
@@ -481,8 +474,8 @@ gc()
 </code></pre>
 
 <pre><code>##             used  (Mb) gc trigger   (Mb)  max used   (Mb)
-## Ncells    181877   9.8     752384   40.2    799855   42.8
-## Vcells 109737984 837.3  165990434 1266.5 138174118 1054.2
+## Ncells    181872   9.8     752384   40.2    799850   42.8
+## Vcells 109737998 837.3  165990454 1266.5 138174068 1054.2
 </code></pre>
 
 <pre><code class="r">rm(x)
@@ -490,8 +483,8 @@ gc()
 </code></pre>
 
 <pre><code>##           used (Mb) gc trigger   (Mb)  max used   (Mb)
-## Ncells  181874  9.8     752384   40.2    799855   42.8
-## Vcells 9737991 74.3  132792347 1013.2 138174118 1054.2
+## Ncells  181869  9.8     752384   40.2    799850   42.8
+## Vcells 9738005 74.3  132792363 1013.2 138174068 1054.2
 </code></pre>
 
 <h1>Scripting</h1>
@@ -548,6 +541,9 @@ help file for any standard R function for how this is done in that context).</li
 
 <h1>Good coding practices: syntax</h1>
 
+<p>For an example that demonstrates some of these ideas, see <em>goodCode.R</em>.
+And for a counterexample, see <em>badCode.R</em>.</p>
+
 <ul>
 <li>Header information: put metainfo on the code into the first few lines
 of the file as comments. Include who, when, what, how the code fits
@@ -565,10 +561,8 @@ the block does</li>
 <li>Split long lines at meaningful places.</li>
 <li>Use parentheses for clarity even if not needed for order of operations.
 For example, <code>a/y*x</code> will work but is not easy to read and
-you can easily induce a bug if you forget the order of ops.</li>
-<li>Documentation - add lots of comments (but don&#39;t belabor the obvious).
-Remember that in a few months, you may not follow your own code any
-better than a stranger. Some key things to document: 
+you can easily induce a bug if you forget the order of operations.</li>
+<li>Documentation - add lots of comments (but don&#39;t belabor the obvious). Remember that in a few months, you may not follow your own code any better than a stranger. Some key things to document: 
 
 <ul>
 <li>summarizing a block of code, </li>
@@ -638,7 +632,13 @@ complete set of instructions which generated the figures.</p>
 <li>Note when and where you download, and ideally download via a script as well (e.g., <em>wget</em> and <em>curl</em> are UNIX tools for automated downloading).</li>
 <li>Produce figures (e.g., from R) via a script and not by point-and-click.</li>
 <li>When making figures, use <code>save()</code> or <code>save.image()</code> to save all the inputs needed to recreate a figure, with the code for making the figure in a script file.</li>
-<li>If feasible, include your code for doing analyses and making figures in the relevant document reporting the work by using R Markdown or <em>Latex</em> with <em>knitr</em> or <em>Sweave</em>. </li>
+<li>If feasible, include your code for doing analyses and making figures in the relevant document reporting the work by using one of the following tools
+
+<ul>
+<li><em>R Markdown</em></li>
+<li><em>Latex</em> with <em>knitr</em> </li>
+<li><em>Jupyter</em> (formerly <em>IPython Notebook</em>)</li>
+</ul></li>
 <li>Always set the random number seed so someone else can duplicate your exact numbers.</li>
 <li>Use version control tools such as Git! </li>
 </ul>
@@ -647,7 +647,7 @@ complete set of instructions which generated the figures.</p>
 
 <p>Please fill out the feedback survey.</p>
 
-<p><a href="http://bit.ly/rbootcamp">http://bit.ly/rbootcamp</a></p>
+<p><a href="http://bit.ly/rbootcamp2015">http://bit.ly/rbootcamp2015</a></p>
 
 </body>
 

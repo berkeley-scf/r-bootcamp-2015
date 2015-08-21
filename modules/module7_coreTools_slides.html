@@ -227,8 +227,8 @@ mod_multiple &lt;-<span class="st"> </span><span class="kw">gam</span>(DepDelayC
 smp &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(air)), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
 <span class="kw">mean</span>(air$DepDelay[smp], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] 11.11788</code></pre>
-<p>It's a good idea to use <code>seq_along()</code> and <code>seq_len()</code> and not syntax like <code>1:length(earnings)</code> in <code>sample()</code> because the outcome of <code>length()</code> might in some cases be unexpected (e.g., if you're taking subsets of a dataset). Similar reasoning holds when setting up for loops: e.g.,</p>
-<pre class="sourceCode r"><code class="sourceCode r">for(i in <span class="kw">seq_len</span>(<span class="kw">nrow</span>(earnings))) {
+<p>It's a good idea to use <code>seq_along()</code> and <code>seq_len()</code> and not syntax like <code>1:length(air)</code> in <code>sample()</code> because the outcome of <code>length()</code> might in some cases be unexpected (e.g., if you're taking subsets of a dataset). Similar reasoning holds when setting up for loops: e.g.,</p>
+<pre class="sourceCode r"><code class="sourceCode r">for(i in <span class="kw">seq_len</span>(<span class="kw">nrow</span>(air))) {
 <span class="co"># blah</span>
 }</code></pre>
 </div>
@@ -331,14 +331,8 @@ date1; date2</code></pre>
 </div>
 <div id="time-too" class="slide section level1">
 <h1>Time too!</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(chron)</code></pre>
-<pre><code>## 
-## Attaching package: 'chron'
-## 
-## The following object is masked from 'package:foreach':
-## 
-##     times</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span><span class="kw">chron</span>(<span class="st">&quot;12/25/2004&quot;</span>, <span class="st">&quot;10:37:59&quot;</span>) 
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(chron)
+d1 &lt;-<span class="st"> </span><span class="kw">chron</span>(<span class="st">&quot;12/25/2004&quot;</span>, <span class="st">&quot;10:37:59&quot;</span>) 
 <span class="co"># default format of m/d/Y and h:m:s</span>
 d2 &lt;-<span class="st"> </span><span class="kw">chron</span>(<span class="st">&quot;12/26/2004&quot;</span>, <span class="st">&quot;11:37:59&quot;</span>)
 

@@ -120,10 +120,10 @@ smp <- sample(seq_len(nrow(air)), replace = TRUE)
 mean(air$DepDelay[smp], na.rm = TRUE)
 ```
 
-It's a good idea to use `seq_along()` and `seq_len()` and not syntax like `1:length(earnings)` in `sample()` because the outcome of `length()` might in some cases be unexpected (e.g., if you're taking subsets of a dataset). Similar reasoning holds when setting up for loops: e.g., 
+It's a good idea to use `seq_along()` and `seq_len()` and not syntax like `1:length(air)` in `sample()` because the outcome of `length()` might in some cases be unexpected (e.g., if you're taking subsets of a dataset). Similar reasoning holds when setting up for loops: e.g., 
 
 ```{r eval=FALSE}
-for(i in seq_len(nrow(earnings))) {
+for(i in seq_len(nrow(air))) {
 # blah
 }
 ```

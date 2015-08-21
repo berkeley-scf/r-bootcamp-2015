@@ -450,9 +450,9 @@ mean(air$DepDelay[smp], na.rm = TRUE)
 <pre><code>## [1] 11.11788
 </code></pre>
 
-<p>It&#39;s a good idea to use <code>seq_along()</code> and <code>seq_len()</code> and not syntax like <code>1:length(earnings)</code> in <code>sample()</code> because the outcome of <code>length()</code> might in some cases be unexpected (e.g., if you&#39;re taking subsets of a dataset). Similar reasoning holds when setting up for loops: e.g., </p>
+<p>It&#39;s a good idea to use <code>seq_along()</code> and <code>seq_len()</code> and not syntax like <code>1:length(air)</code> in <code>sample()</code> because the outcome of <code>length()</code> might in some cases be unexpected (e.g., if you&#39;re taking subsets of a dataset). Similar reasoning holds when setting up for loops: e.g., </p>
 
-<pre><code class="r">for(i in seq_len(nrow(earnings))) {
+<pre><code class="r">for(i in seq_len(nrow(air))) {
 # blah
 }
 </code></pre>

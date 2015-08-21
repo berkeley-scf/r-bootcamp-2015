@@ -245,8 +245,8 @@ tricks and check that both produce the same output.</li>
 
 <ul>
 <li>Parenthesis mis-matches</li>
-<li><code>[...]</code> vs. <code>[[...]]</code>
-= <code>==</code> vs. <code>=</code> </li>
+<li><code>[...]</code> vs. <code>[[...]]</code></li>
+<li><code>==</code> vs. <code>=</code> </li>
 <li>Comparing real numbers exactly using <code>==</code> is dangerous. Suppose you generate <code>x = 0.333333</code> in some fashion with some code and then check: <code>x == 1/3</code>. This will produce FALSE.</li>
 <li>Vectors vs. single values: 
 
@@ -296,7 +296,7 @@ dim(mat); print(mat)
 <pre><code class="r">colSums(mat)
 </code></pre>
 
-<pre><code>## Error in base::colSums(x, na.rm = na.rm, dims = dims, ...): &#39;x&#39; must be an array of at least two dimensions
+<pre><code>## Error in colSums(mat): &#39;x&#39; must be an array of at least two dimensions
 </code></pre>
 
 <pre><code class="r">mat &lt;- matrix(1:4, 2, 2)[1, , drop = FALSE]
@@ -304,13 +304,6 @@ colSums(mat)
 </code></pre>
 
 <pre><code>## [1] 1 3
-</code></pre>
-
-<pre><code class="r">mat &lt;- matrix(1:4, 2, 2)[1, ]
-colSums(mat)  # whoops
-</code></pre>
-
-<pre><code>## Error in base::colSums(x, na.rm = na.rm, dims = dims, ...): &#39;x&#39; must be an array of at least two dimensions
 </code></pre>
 
 <h1>Debugging</h1>
@@ -344,7 +337,7 @@ buggyFun(air)
 ## [28] &quot;SecurityDelay&quot;     &quot;LateAircraftDelay&quot;
 </code></pre>
 
-<pre><code>## Error in base::rowSums(x, na.rm = na.rm, dims = dims, ...): &#39;x&#39; must be numeric
+<pre><code>## Error in rowSums(myDF): &#39;x&#39; must be numeric
 </code></pre>
 
 <pre><code class="r">if(FALSE) {
@@ -380,7 +373,7 @@ helps you think about what you want a piece of code to do, rather than just how
 it does it. This practice improves code quality by focusing your attention
 on use cases rather than getting lost in implementation details.</p>
 
-<p><em>RUnit</em> is a testing framework for R, which helps automate test setup, creation,
+<p>The <em>testthat</em> package is very helpful for setting up tests. Also, <em>RUnit</em> is a testing framework for R that helps automate test setup, creation,
 execution, and reporting.  For more information, see Bioconductor&#39;s <a href="http://www.bioconductor.org/developers/unitTesting-guidelines/">unit testing guidelines</a>.</p>
 
 <h1>Timing your code</h1>
@@ -462,7 +455,7 @@ summaryRprof(&quot;profile2.out&quot;)
 
 <p>You can assess memory use with <code>top</code> or <code>ps</code> in Linux/Mac or the Task Manager in Windows.</p>
 
-<p>Often it&#39;s a good idea to roughly estimate how much memory an object will take up even before creating it in R. You can do this with some simple arithmetic. Every real number takes 8 bytes (integers and logicals take less; character strings are complicated), so an object with, say, 1 million rows and 10 columns, all numbers, would take roughly 8*1000000*10 bytes or 800 Mb.</p>
+<p>Often it&#39;s a good idea to roughly estimate how much memory an object will take up even before creating it in R. You can do this with some simple arithmetic. Every real number takes 8 bytes (integers and logicals take less; character strings are complicated), so an object with, say, 1 million rows and 10 columns, all numbers, would take roughly 8 * 1000000 * 10 bytes or 800 Mb.</p>
 
 <pre><code class="r">x &lt;- rnorm(1e7)
 object.size(x)
@@ -488,17 +481,17 @@ gc()
 </code></pre>
 
 <pre><code>##             used  (Mb) gc trigger   (Mb)  max used   (Mb)
-## Ncells   1303918  69.7    2164898  115.7   1944947  103.9
-## Vcells 111208830 848.5  174943227 1334.8 139673471 1065.7
+## Ncells    181877   9.8     752384   40.2    799855   42.8
+## Vcells 109737984 837.3  165990434 1266.5 138174118 1054.2
 </code></pre>
 
 <pre><code class="r">rm(x)
 gc()
 </code></pre>
 
-<pre><code>##            used (Mb) gc trigger   (Mb)  max used   (Mb)
-## Ncells  1303933 69.7    2164898  115.7   1944947  103.9
-## Vcells 11208867 85.6  139954581 1067.8 139673471 1065.7
+<pre><code>##           used (Mb) gc trigger   (Mb)  max used   (Mb)
+## Ncells  181874  9.8     752384   40.2    799855   42.8
+## Vcells 9737991 74.3  132792347 1013.2 138174118 1054.2
 </code></pre>
 
 <h1>Scripting</h1>

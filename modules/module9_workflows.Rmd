@@ -50,7 +50,7 @@ tricks and check that both produce the same output.
 # Common syntax errors and bugs
 - Parenthesis mis-matches
 - `[...]` vs. `[[...]]`
-= `==` vs. `=` 
+- `==` vs. `=` 
 - Comparing real numbers exactly using `==` is dangerous. Suppose you generate `x = 0.333333` in some fashion with some code and then check: `x == 1/3`. This will produce FALSE.
 - Vectors vs. single values: 
   + `||` vs. `|` and `&&` vs `&`
@@ -85,9 +85,6 @@ dim(mat); print(mat)
 colSums(mat)
 mat <- matrix(1:4, 2, 2)[1, , drop = FALSE]
 colSums(mat)
-mat <- matrix(1:4, 2, 2)[1, ]
-colSums(mat)  # whoops
-
 ```
 
 # Debugging
@@ -142,7 +139,7 @@ helps you think about what you want a piece of code to do, rather than just how
 it does it. This practice improves code quality by focusing your attention
 on use cases rather than getting lost in implementation details.
 
-*RUnit* is a testing framework for R, which helps automate test setup, creation,
+The *testthat* package is very helpful for setting up tests. Also, *RUnit* is a testing framework for R that helps automate test setup, creation,
 execution, and reporting.  For more information, see Bioconductor's [unit testing guidelines](http://www.bioconductor.org/developers/unitTesting-guidelines/).
 
 # Timing your code
@@ -218,12 +215,12 @@ If in total, the jobs on a machine approach the physical RAM, the machine will s
 
 You can assess memory use with ``top`` or ``ps`` in Linux/Mac or the Task Manager in Windows.
 
-Often it's a good idea to roughly estimate how much memory an object will take up even before creating it in R. You can do this with some simple arithmetic. Every real number takes 8 bytes (integers and logicals take less; character strings are complicated), so an object with, say, 1 million rows and 10 columns, all numbers, would take roughly 8*1000000*10 bytes or 800 Mb.
+Often it's a good idea to roughly estimate how much memory an object will take up even before creating it in R. You can do this with some simple arithmetic. Every real number takes 8 bytes (integers and logicals take less; character strings are complicated), so an object with, say, 1 million rows and 10 columns, all numbers, would take roughly 8 * 1000000 * 10 bytes or 800 Mb.
 
 ```{r}
 x <- rnorm(1e7)
 object.size(x)
-1e7*8/1e6
+1e7*8/1e6  # direct calculation of Mb
 print(object.size(x), units = 'auto')
 x <- rnorm(1e8)
 gc()
@@ -296,7 +293,7 @@ the block does
 - Split long lines at meaningful places.
 - Use parentheses for clarity even if not needed for order of operations.
 For example, `a/y*x` will work but is not easy to read and
-you can easily induce a bug if you forget the order of ops.
+you can easily induce a bug if you forget the order of operations.
 - Documentation - add lots of comments (but don't belabor the obvious).
 Remember that in a few months, you may not follow your own code any
 better than a stranger. Some key things to document: 

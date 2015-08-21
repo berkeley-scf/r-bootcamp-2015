@@ -58,7 +58,8 @@ August 2015, UC Berkeley
 <h1>Common syntax errors and bugs</h1>
 <ul>
 <li>Parenthesis mis-matches</li>
-<li><code>[...]</code> vs. <code>[[...]]</code> = <code>==</code> vs. <code>=</code></li>
+<li><code>[...]</code> vs. <code>[[...]]</code></li>
+<li><code>==</code> vs. <code>=</code></li>
 <li>Comparing real numbers exactly using <code>==</code> is dangerous. Suppose you generate <code>x = 0.333333</code> in some fashion with some code and then check: <code>x == 1/3</code>. This will produce FALSE.</li>
 <li>Vectors vs. single values:</li>
 <li><code>||</code> vs. <code>|</code> and <code>&amp;&amp;</code> vs <code>&amp;</code></li>
@@ -85,9 +86,6 @@ f &lt;-<span class="st"> </span>function() {y &lt;-<span class="st"> </span><spa
 <pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>)[<span class="dv">1</span>, , drop =<span class="st"> </span><span class="ot">FALSE</span>]
 <span class="kw">colSums</span>(mat)</code></pre>
 <pre><code>## [1] 1 3</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>)[<span class="dv">1</span>, ]
-<span class="kw">colSums</span>(mat)  <span class="co"># whoops</span></code></pre>
-<pre><code>## Error in colSums(mat): 'x' must be an array of at least two dimensions</code></pre>
 </div>
 <div id="debugging" class="slide section level1">
 <h1>Debugging</h1>
@@ -132,7 +130,7 @@ f &lt;-<span class="st"> </span>function() {y &lt;-<span class="st"> </span><spa
 <div id="testing" class="slide section level1">
 <h1>Testing</h1>
 <p>Testing should be performed on multiple levels and begun as early as possible in the development process. For programs that accept input either from a user or file, it is important that the code validates the input is what it expects to receive. Tests that ensure individual code elements (e.g., functions, classes, and class methods) behave correctly are called <em>unit tests</em>. Writing unit tests early in the process of implementing new functionality helps you think about what you want a piece of code to do, rather than just how it does it. This practice improves code quality by focusing your attention on use cases rather than getting lost in implementation details.</p>
-<p><em>RUnit</em> is a testing framework for R, which helps automate test setup, creation, execution, and reporting. For more information, see Bioconductor's <a href="http://www.bioconductor.org/developers/unitTesting-guidelines/">unit testing guidelines</a>.</p>
+<p>The <em>testthat</em> package is very helpful for setting up tests. Also, <em>RUnit</em> is a testing framework for R that helps automate test setup, creation, execution, and reporting. For more information, see Bioconductor's <a href="http://www.bioconductor.org/developers/unitTesting-guidelines/">unit testing guidelines</a>.</p>
 </div>
 <div id="timing-your-code" class="slide section level1">
 <h1>Timing your code</h1>
@@ -194,7 +192,7 @@ summaryRprof(&quot;profile2.out&quot;)</code></pre>
 <p>You should know how much memory (RAM) the computer you are using has and keep in mind how big your objects are and how much memory you code might use. All objects in R are stored in RAM unlike, e.g., SAS or a database.</p>
 <p>If in total, the jobs on a machine approach the physical RAM, the machine will start to use the hard disk as 'virtual memory'. This is called paging or swapping, and once this happens you're often toast.</p>
 <p>You can assess memory use with <code>top</code> or <code>ps</code> in Linux/Mac or the Task Manager in Windows.</p>
-<p>Often it's a good idea to roughly estimate how much memory an object will take up even before creating it in R. You can do this with some simple arithmetic. Every real number takes 8 bytes (integers and logicals take less; character strings are complicated), so an object with, say, 1 million rows and 10 columns, all numbers, would take roughly 8<em>1000000</em>10 bytes or 800 Mb.</p>
+<p>Often it's a good idea to roughly estimate how much memory an object will take up even before creating it in R. You can do this with some simple arithmetic. Every real number takes 8 bytes (integers and logicals take less; character strings are complicated), so an object with, say, 1 million rows and 10 columns, all numbers, would take roughly 8 * 1000000 * 10 bytes or 800 Mb.</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="fl">1e7</span>)
 <span class="kw">object.size</span>(x)</code></pre>
 <pre><code>## 80000040 bytes</code></pre>
@@ -205,13 +203,13 @@ summaryRprof(&quot;profile2.out&quot;)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="fl">1e8</span>)
 <span class="kw">gc</span>()</code></pre>
 <pre><code>##             used  (Mb) gc trigger   (Mb)  max used  (Mb)
-## Ncells   1301966  69.6    2164898  115.7   1693028  90.5
-## Vcells 111207263 848.5  174940955 1334.7 121218255 924.9</code></pre>
+## Ncells    180239   9.7     752384   40.2    799855  42.8
+## Vcells 109736880 837.3  172823369 1318.6 119748653 913.7</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(x)
 <span class="kw">gc</span>()</code></pre>
-<pre><code>##            used (Mb) gc trigger   (Mb)  max used  (Mb)
-## Ncells  1302122 69.6    2164898  115.7   1693028  90.5
-## Vcells 11207528 85.6  139952764 1067.8 121218255 924.9</code></pre>
+<pre><code>##           used (Mb) gc trigger   (Mb)  max used  (Mb)
+## Ncells  180398  9.7     752384   40.2    799855  42.8
+## Vcells 9737147 74.3  138258695 1054.9 119748653 913.7</code></pre>
 </div>
 <div id="scripting" class="slide section level1">
 <h1>Scripting</h1>

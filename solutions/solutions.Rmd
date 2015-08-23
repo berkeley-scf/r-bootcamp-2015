@@ -247,7 +247,7 @@ library(plyr)
 ddply(air, .variables = .(Dest), .fun = summarize, medianDelay = median(DepDelay, na.rm = TRUE))
 
 ## 2 ## 
-ddply(air, .variables = .(Dest, Month), .fun = summarize, medianDelay = median(DepDelay, na.rm = TRUE))
+ddply(air, .variables = .(Dest, Month), .fun = summarize, perc95 = quantile(DepDelay, probs = 0.95, na.rm = TRUE))
 ```
 
 ```{r, using_the_ideas5}

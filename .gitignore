@@ -3,3 +3,4 @@
 
 # intermediate markdown files
 *.md
+.Rproj.user
